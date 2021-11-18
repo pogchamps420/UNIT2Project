@@ -1,7 +1,3 @@
-# UNIT2Project
+# UNIT2 Project for ELEC2645
 
-sigma balls
-sugandese
-:)
-
-add a rickroll owo
+## We are making a CLI driven menu.
