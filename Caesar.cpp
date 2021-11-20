@@ -23,7 +23,7 @@ int main()
    switch(option)
    {
       case 1:
-         for(int i = 0; i < message.size(); i++)
+         for(int i = 0; i < message.size(); i++) {
             if(shift == "L") {
               message[i] = message[i] - n;
             }
@@ -32,13 +32,15 @@ int main()
             }
             else {
                std::cout << "Invalid shift option!\n";
+            }
+         }
 
          cout << "The encrypted message: " << message;
          break;
 
 
       case 2:
-        for(int i = 0; i < message.size(); i++)
+         for(int i = 0; i < message.size(); i++) {
             if(shift == "L") {
               message[i] = message[i] - n;
             }
@@ -47,6 +49,8 @@ int main()
             }
             else {
                std::cout << "Invalid shift option!\n";
+            }
+         }
 
          std::cout << "The decrypted message: " << message;
          break;
