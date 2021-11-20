@@ -33,7 +33,7 @@ int main()
             else {
                std::cout << "Invalid shift option!\n";
 
-         cout << "The encrypted message: " << message;
+         std::cout << "The encrypted message: " << message;
          break;
 
 
