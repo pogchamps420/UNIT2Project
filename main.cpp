@@ -1,5 +1,24 @@
 #include <iostream>
+#include <vector>
+#include "menuprinter.h"
 
+
+
+int main()
+{
+    std::vector<MenuItem> exampleMenuItems {
+        MenuItem('a', "Option A"),
+        MenuItem('b', "Option B"),
+        MenuItem('c', "Option C")
+    };
+
+    Menu exampleMenu("Example main menu", exampleMenuItems);
+
+    exampleMenu.PrintMenu();
+    std::cout << "\nDEBUG: User chose option: " << exampleMenu.GetInput() << '\n';
+}
+
+/*
 // define
 void menu_option_1();
 void menu_option_2();
@@ -124,3 +143,5 @@ void menu_option_5() // option description
    } while (exit != "x" && exit != "X");
    Menu(); 
 }
+
+*/
