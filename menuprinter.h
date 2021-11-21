@@ -54,9 +54,6 @@ private:
 	//Set containing all available user choices
 	std::unordered_set<char> _availableItems;
 
-
-	//Method checking if user selected an available option
-	//bool OptionExists(char chosenIdentifier);
 };
 
 #endif
