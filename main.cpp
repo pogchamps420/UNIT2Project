@@ -6,16 +6,37 @@
 
 int main()
 {
-    std::vector<MenuOption> exampleMenuOptions {
+    //Example usage of menuprinter
+
+    //Define user-selectable options
+    std::vector<MenuOption> exampleMenuOptions
+    {
         MenuOption('a', "Option A"),
         MenuOption('b', "Option B"),
         MenuOption('c', "Option C")
     };
 
-    Menu exampleMenu("Example main menu", exampleMenuOptions);
+    //Define items to be displayed, value can be either a string or an int
+    std::vector<MenuItem> exampleMenuItems
+    {
+        MenuItem("i1", "Item one", "string value"),
+        MenuItem("i2", "Item two", 420)
+    };
+
+    //Initialise menu
+    Menu exampleMenu("Example menu", exampleMenuOptions, exampleMenuItems);
+
+    //Display menu
+    exampleMenu.PrintMenu();
+
+    //Get and use user option selection
+    std::cout << "DEBUG: User chose option: " << exampleMenu.GetInput() << '\n';
+
+    std::cout << "\nEXAMPLE: changing item 'i1' to 69 and item 'i2' to bussy\n";
+    exampleMenu.ChangeItemValue("i1",69);
+    exampleMenu.ChangeItemValue("i2", "bussy");
 
     exampleMenu.PrintMenu();
-    std::cout << "\nDEBUG: User chose option: " << exampleMenu.GetInput() << '\n';
 }
 
 /*
