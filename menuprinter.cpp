@@ -4,18 +4,18 @@
 #include <string>
 #include <set>
 
-MenuItem::MenuItem(char identifier, std::string text) { this->identifier = identifier; this->text = text; }
+MenuOption::MenuOption(char identifier, std::string text) { this->identifier = identifier; this->text = text; }
 
 Menu::Menu() {};
 
-Menu::Menu(std::string name, std::vector<MenuItem> items)
+Menu::Menu(std::string name, std::vector<MenuOption> items)
 {
 	_name = name;
 
-	for (MenuItem currentItem : items)
+	for (MenuOption currentItem : items)
 	{
-		_items.push_back(currentItem);
-		_availableItems.insert(currentItem.identifier);
+		_options.push_back(currentItem);
+		_availableOptions.insert(currentItem.identifier);
 	}
 }
 
@@ -24,7 +24,7 @@ void Menu::PrintMenu()
 	std::cout << "-----------------------\n";
 	std::cout << _name << '\n';
 	std::cout << "-----------------------\n";
-	for (MenuItem displayItem : _items)
+	for (MenuOption displayItem : _options)
 	{
 		std::cout << displayItem.identifier << ": " << displayItem.text << '\n';
 	}
@@ -36,7 +36,7 @@ char Menu::GetInput()
 	char inputChar;
 	std::cout << "Choose an option from above list: ";
 	std::cin >> inputChar;
-	if (_availableItems.find(inputChar) == _availableItems.end())
+	if (_availableOptions.find(inputChar) == _availableOptions.end())
 	{
 		std::cout << "ERROR: option '"<< inputChar <<"' not available\n";
 		return GetInput();

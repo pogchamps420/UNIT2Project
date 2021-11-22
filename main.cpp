@@ -6,13 +6,13 @@
 
 int main()
 {
-    std::vector<MenuItem> exampleMenuItems {
-        MenuItem('a', "Option A"),
-        MenuItem('b', "Option B"),
-        MenuItem('c', "Option C")
+    std::vector<MenuOption> exampleMenuOptions {
+        MenuOption('a', "Option A"),
+        MenuOption('b', "Option B"),
+        MenuOption('c', "Option C")
     };
 
-    Menu exampleMenu("Example main menu", exampleMenuItems);
+    Menu exampleMenu("Example main menu", exampleMenuOptions);
 
     exampleMenu.PrintMenu();
     std::cout << "\nDEBUG: User chose option: " << exampleMenu.GetInput() << '\n';
