@@ -24,7 +24,7 @@ int main()
    std::cout << "Type L for Left Shift or R for Right Shift:\n";
    std::cin >> shift;
    
-   std::cout << "What would you like to do? :\n"; 
+   std::cout << "What would you like to do?\n"; 
    std::cout << "1 = Encryption.\n";
    std::cout << "2 = Decryption.\n";
    std::cin >> option;
