@@ -12,17 +12,17 @@ The method is named after Julius Caesar, who used it in his private corresponden
 int main()
 {
    int option, n; // The user picks if they want encryption/decryption and the shift amount
-   string message; // Message to be processed
-   string shift; // Shift amount for the caesar cipher
+   std::string message; // Message to be processed
+   std::string shift; // Shift amount for the caesar cipher
 
    std::cout << "Please enter a phrase to be encoded or decoded:\n";
-   getline(std::cin, message);
+   std::getline(std::cin, message);
 
    std::cout << "Please specify the shift amount:\n";
-   std::cin << n;
+   std::cin >> n;
 
    std::cout << "Type L for Left Shift or R for Right Shift:\n";
-   std::cin << shift;
+   std::cin >> shift;
    
    std::cout << "What would you like to do? :\n"; 
    std::cout << "1 = Encryption.\n";
