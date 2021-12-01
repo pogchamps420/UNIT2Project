@@ -6,43 +6,39 @@
 #include <vector>
 #include <string>
 
-struct MenuOption
-{	
-	/*
-	Example menu option:
-
-	a: option a
-
-	identifier = 'a', text = "option a"
-	*/
-
-	MenuOption(char identifier, std::string text);
-
-	//Character used to choose the item
-	char identifier; 
-
-	//Text displayed next to identifier
-	std::string text;
-};
-
-struct MenuItem
+//Parent class for menu items and options
+class MenuElement
 {
-	/*
-	Example menu item:
-
-	item x: value
-
-	name = "item x", value = "value"
-	*/
-	//Default constructor
-	MenuItem();
-	MenuItem(std::string name, std::string description, std::string value);
-	//Constructor overload for handling integers as values
-	MenuItem(std::string name, std::string description, int value);
-
+public:
 	std::string name;
 	std::string description;
+
+	MenuElement();
+	MenuElement(std::string name, std::string description);
+};
+
+class MenuItem : public MenuElement
+{
+public:
 	std::string value;
+
+	MenuItem();
+	MenuItem(std::string name, std::string description);
+	MenuItem(std::string name, std::string description, std::string value);
+	MenuItem(std::string name, std::string description, int value);
+};
+
+class MenuOption : public MenuElement
+{
+public:
+	bool visibility;
+	char identifier;
+	
+	MenuOption();
+	MenuOption(std::string name, std::string description, char identifier);
+	MenuOption(std::string name, std::string description, char identifier,  bool visibility);
+
+	void ChangeVisibility(bool visibility);
 };
 
 class Menu
@@ -54,28 +50,23 @@ public:
 	//Method printing the menu layout to the console
 	void PrintMenu();
 	//Method asking the user to choose a menu item and returning its identifier if it's among available options
-	char GetInput();
-	//Method adding or changing a menu item
-	void AddOverwriteItem(MenuItem item);
-	//Method getting a menu item
-	MenuItem GetItem(std::string name);
-	//Method changing a menu item's value to an int
-	void ChangeItemValue(std::string name, int newValue);
-	//Method changing a menu item's value to a string
-	void ChangeItemValue(std::string name, std::string newValue);
+	std::string GetInput();
+	char ChooseOption();
+
+	void ChangeOptionAvailability(std::string optionName, bool availability);
 
 private:
 	//Menu name
 	std::string _name;
 
 	//Vector storing all menu options
-	std::vector<MenuOption> _options;
+	std::map<std::string, MenuOption> _options;
 	//Vector storing all menu items
 	std::map<std::string, MenuItem> _items;
 
 	//Chose to use std::unordered_set instead of std::set, as the operation time complexity is O(1) instead of O(log(n))
 	//Set containing all available user choices
-	std::unordered_set<char> _availableOptions;
+	std::unordered_set<std::string> _availableOptions;
 };
 
 #endif
