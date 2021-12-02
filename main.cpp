@@ -30,7 +30,6 @@ int main()
     mainMenu.PrintMenu();
 
     char chosenOption = mainMenu.ChooseOption();
-
     switch (chosenOption)
     {
     default:

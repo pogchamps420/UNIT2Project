@@ -19,24 +19,52 @@ MenuElement::MenuElement(std::string name, std::string description)
 
 //Definitions for the MenuItem class
 
-MenuItem::MenuItem() : MenuElement() {} //Default constructor
-//Constructor overloads
-
-MenuItem::MenuItem(std::string name, std::string description) : MenuElement(name, description) { this->value = ""; }
-MenuItem::MenuItem(std::string name, std::string description, std::string value) : MenuElement(name, description) { this->value = value; }
-MenuItem::MenuItem(std::string name, std::string description, int value) : MenuItem(name, description) { this->value = std::to_string(value); }
+MenuItem::MenuItem() : MenuElement() //Default constructor
+{
+	this->value = "";
+}
+MenuItem::MenuItem(std::string name, std::string description) : MenuElement(name, description)
+{
+	this->value = "";
+}
+MenuItem::MenuItem(std::string name, std::string description, std::string value) : MenuElement(name, description)
+{
+	this->value = value;
+}
+MenuItem::MenuItem(std::string name, std::string description, int value) : MenuItem(name, description)
+{
+	this->value = std::to_string(value);
+}
 
 
 //Definitions for the MenuOption class
 
-MenuOption::MenuOption() : MenuElement() { this->visibility = true; this->identifier = '\0'; }
-MenuOption::MenuOption(std::string name, std::string description, char identifier) : MenuElement(name, description) { this->visibility = true; this->identifier = identifier; }
-MenuOption::MenuOption(std::string name, std::string description, char identifier, bool visibility) : MenuElement(name, description) { this->visibility = visibility; this->identifier = identifier; }
-void MenuOption::ChangeVisibility(bool visibility) { this->visibility = visibility; }
+MenuOption::MenuOption() : MenuElement() //Default constructor
+{
+	this->visibility = true;
+	this->identifier = '\0';
+}
+MenuOption::MenuOption(std::string name, std::string description, char identifier) : MenuElement(name, description)
+{
+	this->visibility = true;
+	this->identifier = identifier;
+}
+MenuOption::MenuOption(std::string name, std::string description, char identifier, bool visibility) : MenuElement(name, description)
+{
+	this->visibility = visibility;
+	this->identifier = identifier;
+}
+void MenuOption::ChangeVisibility(bool visibility)
+{
+	this->visibility = visibility;
+}
 
 //Definitions for the Menu class
 
-Menu::Menu() {};
+Menu::Menu() //Default constructor
+{
+	_name = "";
+}
 Menu::Menu(std::string name, std::vector<MenuOption> options, std::vector<MenuItem> items)
 {
 	_name = name;
@@ -54,9 +82,13 @@ Menu::Menu(std::string name, std::vector<MenuOption> options, std::vector<MenuIt
 
 void Menu::PrintMenu()
 {
+	//Displaying the menu's name
+
 	std::cout << "-----------------------\n";
 	std::cout << _name << '\n';
 	std::cout << "-----------------------\n";
+	
+	//Displaying all items
 
 	std::map<std::string, MenuItem>::iterator itemIterator = _items.begin();
 	while(itemIterator != _items.end())
@@ -65,6 +97,8 @@ void Menu::PrintMenu()
 		itemIterator++;
 	}
 	std::cout << "-----------------------\n";
+
+	//Displaying all visible options
 
 	std::map<std::string, MenuOption>::iterator optionIterator = _options.begin();
 	while(optionIterator != _options.end())
@@ -81,9 +115,13 @@ char Menu::ChooseOption()
 	std::string inputString;
 	std::cout << "Choose an option from above list: ";
 	std::cin >> inputString;
+
+	//Checking if the option is selectable
 	if (_availableOptions.find(inputString) == _availableOptions.end())
 	{
 		std::cout << "ERROR: option '"<< inputString <<"' not available\n";
+
+		//Prompt the user to enter the option again
 		return ChooseOption();
 	}
 	else
@@ -92,4 +130,13 @@ char Menu::ChooseOption()
 
 void Menu::ChangeOptionAvailability(std::string optionName, bool availability)
 {
+	if (_options[optionName].visibility != availability)
+	{
+		_options[optionName].ChangeVisibility(availability);
+
+		if (availability)
+			_availableOptions.erase(optionName);
+		else
+			_availableOptions.insert(optionName);
+	}
 }

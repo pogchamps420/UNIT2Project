@@ -17,9 +17,11 @@ public:
 	MenuElement(std::string name, std::string description);
 };
 
+//Class used to contain data displayable in a menu
 class MenuItem : public MenuElement
 {
 public:
+	//Value displayed next to the descripion
 	std::string value;
 
 	MenuItem();
@@ -28,10 +30,13 @@ public:
 	MenuItem(std::string name, std::string description, int value);
 };
 
+//Class used to contain information for selectable options in a menu
 class MenuOption : public MenuElement
 {
 public:
+	//Determines whether the option is to be displayed and selectable 
 	bool visibility;
+	//Unique char identifier used to refer to the option
 	char identifier;
 	
 	MenuOption();
@@ -50,9 +55,8 @@ public:
 	//Method printing the menu layout to the console
 	void PrintMenu();
 	//Method asking the user to choose a menu item and returning its identifier if it's among available options
-	std::string GetInput();
 	char ChooseOption();
-
+	//Method changing the visibility of the option in the menu and its selectability
 	void ChangeOptionAvailability(std::string optionName, bool availability);
 
 private:
