@@ -1,10 +1,6 @@
 #include <iostream>
 #include <vector>
 #include "menuprinter.h"
-#include "formula.h"
-#include "module.h"
-#include "user.h"
-#include "initiate.h"
 
 
 
@@ -37,9 +33,6 @@ int main()
 
     switch (chosenOption)
     {
-        case 1:
-            TiseTestingGrounds();
-            break;
     default:
         break;
     }
@@ -47,39 +40,4 @@ int main()
     //Adhoc fix for debug window closing immediately after entering input
     char temp;
     std::cin >> temp;
-}
-
-void TiseTestingGrounds()
-{
-    //ypyoyoyoyo
-    std::cout << "welcome\nok\nlets do this\n\n" << std::endl;
-
-    //set up test proflie
-    Initiate setup;
-    setup.set_profile(0);
-
-    //get all the stuff from the profile into main
-    User tester = setup.get_user();
-
-    //tests
-    std::cout << tester.get_surname() << std::endl;
-    std::list<std::string> testmods = tester.get_modules();
-    for (std::string mod : testmods)
-    {
-        std::cout << mod << std::endl;
-        // trying to show formulas for specific modules ***********************************************
-        /*
-        Module mmm;
-        std::list<std::string> Formulas = tester.get_formulas();
-        for (std::string Formula : Formulas)
-        {
-            std::cout << mod << "\n :	" << Formula << std::endl;
-        }
-        */
-    }
-
-
-    //do stuff
-
-    //actual calculator
 }
