@@ -17,7 +17,8 @@ Menu::Menu(std::string name, std::vector<MenuOption> options, std::vector<MenuIt
 	for (MenuOption currentOption : options)
 	{
 		_options[currentOption.name] = currentOption;
-		_availableOptions.insert(currentOption.name);
+		if(currentOption.visibility)
+			_availableOptions.insert(currentOption.name);
 	}
 	for (MenuItem currentItem : items)
 	{
