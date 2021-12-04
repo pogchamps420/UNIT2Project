@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
-#include "menuprinter.h"
+#include "menu.h"
+#include "menuelement.h"
 #include "formula.h"
 #include "module.h"
 #include "user.h"
@@ -33,7 +34,6 @@ int main()
     mainMenu.PrintMenu();
 
     char chosenOption = mainMenu.ChooseOption();
-
     switch (chosenOption)
     {
         case 1:
