@@ -6,7 +6,10 @@
 #include "module.h"
 #include "user.h"
 #include "initiate.h"
-
+namespace T
+{
+    void TiseTestingGround();
+}
 
 int main()
 {
@@ -17,7 +20,8 @@ int main()
     {
         MenuOption("O1", "Option A", 'a'),
         MenuOption("O2", "Option B", 'b'),
-        MenuOption("O3", "Option C", 'c')
+        MenuOption("O3", "Option C", 'c'),
+        MenuOption("0", "Tise", 'T')
     };
 
     //Define items to be displayed, value can be either a string or an int
@@ -36,8 +40,8 @@ int main()
     char chosenOption = mainMenu.ChooseOption();
     switch (chosenOption)
     {
-        case 1:
-            TiseTestingGround();
+        case 'T':
+            T::TiseTestingGround();
             break;
     default:
         break;
@@ -48,16 +52,19 @@ int main()
     std::cin >> temp;
 }
 
-void TiseTestingGround()
+void T::TiseTestingGround()
 {
+    std::cout << "\n\nwelcome\nok\nlets do this\n\n" << std::endl;
+
+
+    /*          FOR LATER
     //ypyoyoyoyo
     std::cout << "welcome\nok\nlets do this\n\n" << std::endl;
 
     //set up test proflie
     Initiate setup;
     setup.set_profile(0);
-
-    //get all the stuff from the profile into main
+     //get all the stuff from the profile into main
     User tester = setup.get_user();
 
     //tests
@@ -74,11 +81,11 @@ void TiseTestingGround()
         {
             std::cout << mod << "\n :	" << Formula << std::endl;
         }
-        */
+        //
     }
 
 
     //do stuff
-
     //actual calculator
+    */
 }

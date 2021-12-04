@@ -6,7 +6,7 @@
 #include <list>
 
 struct TheFormula {
-	int a, b;
+	int a = 0, b = 0;
 	std::string f;
 };
 
