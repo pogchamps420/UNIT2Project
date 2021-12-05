@@ -38,7 +38,7 @@ void Menu::PrintMenu()
 	std::map<std::string, MenuItem>::iterator itemIterator = _items.begin();
 	while (itemIterator != _items.end())
 	{
-		std::cout << itemIterator->second.description << ": " << itemIterator->second.value << '\n';
+		std::cout << itemIterator->second.name << ": " << itemIterator->second.description << ": " << itemIterator->second.value << '\n';
 		itemIterator++;
 	}
 	std::cout << "-----------------------\n";

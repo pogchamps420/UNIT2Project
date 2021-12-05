@@ -10,8 +10,10 @@
 namespace T
 {
     void TiseTestingGround();
-    void PowerDissipation(T::PD PDiss, Menu PDMenu, std::vector<MenuItem> PDMenuItems);
-    Menu ChangeValues(PD Pdiss, Menu PDMenu, std::vector<MenuItem> PDMenuItems);
+    void PowerDissipation(T::PD PDiss, Menu PDMenu);
+    Menu ChangeValues(PD Pdiss, Menu PDMenu);
+    Menu PDISS(PD Pdiss, Menu Menu);
+    Menu PS(PD PDiss, Menu PDMenu);
 }
 
 int main()
@@ -113,7 +115,7 @@ void T::TiseTestingGround()
     switch (Option)
     {
     case 'p':
-        T::PowerDissipation(PDiss, PDMenu, PDMenuItems);
+        T::PowerDissipation(PDiss, PDMenu);
         break;
     case 'x':
         T::TiseTestingGround();
@@ -156,7 +158,7 @@ void T::TiseTestingGround()
     //actual calculator
     */
 }
-void T::PowerDissipation(PD PDiss, Menu PDMenu, std::vector<MenuItem> PDMenuItems)
+void T::PowerDissipation(PD PDiss, Menu PDMenu)
 {
     PDMenu.PrintMenu();
 
@@ -164,33 +166,37 @@ void T::PowerDissipation(PD PDiss, Menu PDMenu, std::vector<MenuItem> PDMenuItem
     switch (Option)
     {
         case 'a':
-            PDMenu = ChangeValues(PDiss, PDMenu, PDMenuItems);
+            PDMenu = ChangeValues(PDiss, PDMenu);
             break;
         case 'c':
             PDiss.ClearValues();
-            PowerDissipation(PDiss, PDMenu, PDMenuItems);
+            PowerDissipation(PDiss, PDMenu);
             break;
         case 's':
+            PDMenu.ChangeItemValue(std::to_string(16), PDiss.CalcPs());
             std::cout << "\nSwitching Power Loss: " << PDiss.CalcPs() << "\n\n";
-            PowerDissipation(PDiss, PDMenu, PDMenuItems);
+            PowerDissipation(PDiss, PDMenu);
             break;
         case 'o':
+            PDMenu.ChangeItemValue(std::to_string(17), PDiss.CalcPon());
             std::cout << "\nConduction Power Loss: " << PDiss.CalcPon() << "\n";
-            PowerDissipation(PDiss, PDMenu, PDMenuItems);
+            PowerDissipation(PDiss, PDMenu);
             break;
         case 'd':
+            PDMenu.ChangeItemValue(std::to_string(18), PDiss.CalcPdis());
+            std::cout << "\nDo you have Ps and Pon? y/n ";
             std::cout << "\nAverage Power Dissipation: " << PDiss.CalcPdis() << "\n";
-            PowerDissipation(PDiss, PDMenu, PDMenuItems);
+            PowerDissipation(PDiss, PDMenu);
             break;
         case 'x':
             main();
             break;
         default:
-            PowerDissipation(PDiss, PDMenu, PDMenuItems);
+            PowerDissipation(PDiss, PDMenu);
             break;
     }
 }
-Menu T::ChangeValues(PD Pdiss, Menu PDMenu, std::vector<MenuItem> PDMenuItems)
+Menu T::ChangeValues(PD Pdiss, Menu PDMenu)
 {
     std::cout << "\nEnter the number of the value you want to add/change: ";
     int option;
@@ -199,9 +205,111 @@ Menu T::ChangeValues(PD Pdiss, Menu PDMenu, std::vector<MenuItem> PDMenuItems)
     double value;
     std::cin >> value;
     Pdiss.Add(option, value);
-    PDMenu.EditItems(std::to_string(option), value, PDMenuItems);
+    PDMenu.ChangeItemValue(std::to_string(option), value);
 
     std::cout << "\nItem changed.\n";
-    PowerDissipation(Pdiss, PDMenu, PDMenuItems);
+    PowerDissipation(Pdiss, PDMenu);
     return PDMenu;
+}
+Menu T::PDISS(PD PDiss, Menu PDMenu)
+{
+    std::vector<MenuOption> MenuOptions
+    {
+        MenuOption("a", "Enter Ps", 'a'),
+        MenuOption("b", "Enter Pon", 'b'),
+        MenuOption("c", "Calculate Ps", 'c'),
+        MenuOption("d", "Calculate Pon", 'd'),
+        MenuOption("e", "Calculate Pdiss", 'e'),
+        MenuOption("x", "Back", 'x')
+    };
+    std::vector<MenuItem> MenuItems
+    {
+        MenuItem("a", "Ps", 0),
+        MenuItem("b", "Pon", 0),
+        MenuItem("c", "Pdiss", 0)
+    };
+    Menu Menu("Power Dissipation menu", MenuOptions, MenuItems);
+    Menu.PrintMenu();
+    char Option = Menu.ChooseOption();
+    switch (Option)
+    {
+    case 'a':
+        std::cout << "Ps: ";
+        int Ps;
+        std::cin >> Ps;
+        MenuItems['a'].value = Ps;
+        break;
+    case 'b':
+        std::cout << "Pon: ";
+        int Pon;
+        std::cin >> Pon;
+        MenuItems['b'].value = Pon;
+        break;
+    case 'c':
+        Menu = PS(PDiss, Menu);
+        int Ps;
+        std::cin >> Ps;
+        MenuItems['c'].value = Ps;
+        break;
+    }
+
+    PDMenu.ChangeItemValue(std::to_string(18), PDiss.CalcPdis());
+    std::cout << "\nDo you have Ps and Pon? y/n ";
+    std::cout << "\nAverage Power Dissipation: " << PDiss.CalcPdis() << "\n";
+    PowerDissipation(PDiss, PDMenu);
+    return;
+}
+Menu T::PS(PD PDiss, Menu PMenu)
+{
+    std::vector<MenuOption> MenuOptions
+    {
+        MenuOption("a", "Enter Wcon", 'a'),
+        MenuOption("b", "Enter Wcoff", 'b'),
+        MenuOption("c", "Enter fs", 'c'),
+        MenuOption("d", "Calculate Wcon", 'd'),
+        MenuOption("e", "Calculate Wcoff", 'e'),
+        MenuOption("f", "Calculate fs", 'f'),
+        MenuOption("g", "Calculate Ps", 'g'),
+        MenuOption("x", "Back", 'x')
+    };
+    std::vector<MenuItem> MenuItems
+    {
+        MenuItem("a", "Wcon", 0),
+        MenuItem("b", "Wcoff", 0),
+        MenuItem("c", "fs", 0),
+        MenuItem("d", "Ps", 0)
+    };
+    Menu Menu("Power Dissipation menu", MenuOptions, MenuItems);
+    bool loop = true;
+    while (loop) 
+    {
+        Menu.PrintMenu();
+        char Option = Menu.ChooseOption();
+        switch (Option)
+        {
+        case 'a':
+            std::cout << "Wcon: ";
+            int Wcon;
+            std::cin >> Wcon;
+            MenuItems['a'].value = Wcon;
+            break;
+        case 'b':
+            std::cout << "Wcoff: ";
+            int Wcoff;
+            std::cin >> Wcoff;
+            MenuItems['b'].value = Wcoff;
+            break;
+        case 'c':
+            std::cout << "fs: ";
+            int fs;
+            std::cin >> fs;
+            MenuItems['c'].value = fs;
+            break;
+        case 'g':
+            int wcon, wcoff, fs, Ps;
+            Ps = (wcon + wcoff) * fs;
+            MenuItems['d'].value = Ps;
+            break;
+        }
+    }
 }

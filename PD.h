@@ -1,7 +1,6 @@
 #pragma once
 #ifndef PD_H
 #define PD_H
-
 namespace T
 {
 	class PD
@@ -31,6 +30,8 @@ namespace T
 			PD();
 			PD(Values values);
 			PD(double Wcon, double Wcoff, double fs, double Won);
+
+
 
 			void AddValues(Values _values);
 			Values ShowValues();

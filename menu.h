@@ -23,7 +23,6 @@ public:
 	
 	// Tise added stuff
 	// Edit items in menu
-	void EditItems(std::string itemname, double value, std::vector<MenuItem> &Items);
 	void ChangeOptionDescription(std::string name, std::string newDescription);
 
 	void ChangeItemValue(std::string name, std::string newValue);
