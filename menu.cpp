@@ -86,14 +86,22 @@ void Menu::ChangeOptionAvailability(std::string optionName, bool availability)
 	}
 }
 
-void Menu::EditItems(std::string name, double value, std::vector<MenuItem> &Items)
+void Menu::ChangeItemDescription(std::string name, std::string newDescription)
 {
-	for (MenuItem currentitem : Items)
-	{
-		if (currentitem.name == name)
-		{
-			currentitem.value = std::to_string(value);
-			_items[currentitem.name] = currentitem;
-		}
-	}
+	_items[name].ChangeDescription(newDescription);
+}
+
+void Menu::ChangeItemValue(std::string name, std::string newValue)
+{
+	_items[name].ChangeValue(newValue);
+}
+
+void Menu::ChangeItemValue(std::string name, double newValue)
+{
+	_items[name].ChangeValue(std::to_string(newValue));
+}
+
+void Menu::ChangeOptionDescription(std::string name, std::string newDescription)
+{
+	_options[name].ChangeDescription(newDescription);
 }

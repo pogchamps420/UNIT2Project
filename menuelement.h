@@ -13,6 +13,8 @@ public:
 
 	MenuElement();
 	MenuElement(std::string name, std::string description);
+
+	void ChangeDescription(std::string newDescription);
 };
 
 //Class used to contain data displayable in a menu
@@ -26,6 +28,9 @@ public:
 	MenuItem(std::string name, std::string description);
 	MenuItem(std::string name, std::string description, std::string value);
 	MenuItem(std::string name, std::string description, double value);
+
+	void ChangeValue(std::string newValue);
+	void ChangeValue(double newValue);
 };
 
 //Class used to contain information for selectable options in a menu

@@ -12,6 +12,10 @@ MenuElement::MenuElement(std::string name, std::string description)
 	this->name = name;
 	this->description = description;
 }
+void MenuElement::ChangeDescription(std::string newDescription)
+{
+	description = newDescription;
+}
 
 //Definitions for the MenuItem class
 
@@ -27,11 +31,18 @@ MenuItem::MenuItem(std::string name, std::string description, std::string value)
 {
 	this->value = value;
 }
-MenuItem::MenuItem(std::string name, std::string description, double value) : MenuItem(name, description)
+MenuItem::MenuItem(std::string name, std::string description, double value) : MenuElement(name, description)
 {
 	this->value = std::to_string(value);
 }
-
+void MenuItem::ChangeValue(std::string newValue)
+{
+	this->value = newValue;
+}
+void MenuItem::ChangeValue(double newValue)
+{
+	this->value = std::to_string(newValue);
+}
 
 //Definitions for the MenuOption class
 
