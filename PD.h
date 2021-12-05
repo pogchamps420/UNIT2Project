@@ -45,7 +45,8 @@ namespace T
 			double CalcPdis();
 			void ClearValues();
 
-			void Add(int option, int value);
+			void Add(char option, double value);
+			double Get(char option);
 
 		private:
 			Values _values;

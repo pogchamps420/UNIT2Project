@@ -15,13 +15,13 @@ Menu::Menu(std::string name, std::vector<MenuOption> options, std::vector<MenuIt
 
 	for (MenuOption currentOption : options)
 	{
-		_options[currentOption.name] = currentOption;
-		if (currentOption.visibility)
-			_availableOptions.insert(currentOption.name);
+		_options[currentOption.identifier] = currentOption;
+		if (currentOption.GetVisibility())
+			_availableOptions.insert(currentOption.identifier);
 	}
 	for (MenuItem currentItem : items)
 	{
-		_items[currentItem.name] = currentItem;
+		_items[currentItem.identifier] = currentItem;
 	}
 }
 
@@ -35,21 +35,21 @@ void Menu::PrintMenu()
 
 	//Displaying all items
 
-	std::map<std::string, MenuItem>::iterator itemIterator = _items.begin();
+	std::map<char, MenuItem>::iterator itemIterator = _items.begin();
 	while (itemIterator != _items.end())
 	{
-		std::cout << itemIterator->second.name << ": " << itemIterator->second.description << ": " << itemIterator->second.value << '\n';
+		std::cout << itemIterator->second.identifier << " - " << itemIterator->second.description << ": " << itemIterator->second.GetValue() << '\n';
 		itemIterator++;
 	}
 	std::cout << "-----------------------\n";
 
 	//Displaying all visible options
 
-	std::map<std::string, MenuOption>::iterator optionIterator = _options.begin();
+	std::map<char, MenuOption>::iterator optionIterator = _options.begin();
 	while (optionIterator != _options.end())
 	{
-		if (optionIterator->second.visibility)
-			std::cout << optionIterator->second.name << ": " << optionIterator->second.description << '\n';
+		if (optionIterator->second.GetVisibility())
+			std::cout << optionIterator->second.identifier << ": " << optionIterator->second.description << '\n';
 		optionIterator++;
 	}
 	std::cout << "-----------------------\n";
@@ -57,51 +57,51 @@ void Menu::PrintMenu()
 
 char Menu::ChooseOption()
 {
-	std::string inputString;
+	char inputChar;
 	std::cout << "Choose an option from above list: ";
-	std::cin >> inputString;
+	std::cin >> inputChar;
 
 	//Checking if the option is selectable
-	if (_availableOptions.find(inputString) == _availableOptions.end())
+	if (_availableOptions.find(inputChar) == _availableOptions.end())
 	{
-		std::cout << "ERROR: option '" << inputString << "' not available\n";
+		std::cout << "ERROR: option '" << inputChar << "' not available\n";
 
 		//Prompt the user to enter the option again
 		return ChooseOption();
 	}
 	else
-   		return _options[inputString].identifier;
+		return _options[inputChar].identifier;
 }
 
-void Menu::ChangeOptionAvailability(std::string optionName, bool availability)
+void Menu::ChangeOptionAvailability(char identifier, bool availability)
 {
-	if (_options[optionName].visibility != availability)
+	if (_options[identifier].GetVisibility() != availability)
 	{
-		_options[optionName].ChangeVisibility(availability);
+		_options[identifier].ChangeVisibility(availability);
 
 		if (availability)
-			_availableOptions.erase(optionName);
+			_availableOptions.erase(identifier);
 		else
-			_availableOptions.insert(optionName);
+			_availableOptions.insert(identifier);
 	}
 }
 
-void Menu::ChangeItemDescription(std::string name, std::string newDescription)
+void Menu::ChangeItemDescription(char identifier, std::string newDescription)
 {
-	_items[name].ChangeDescription(newDescription);
+	_items[identifier].ChangeDescription(newDescription);
 }
 
-void Menu::ChangeItemValue(std::string name, std::string newValue)
+void Menu::ChangeItemValue(char identifier, double newValue)
 {
-	_items[name].ChangeValue(newValue);
+	_items[identifier].ChangeValue(newValue);
 }
 
-void Menu::ChangeItemValue(std::string name, double newValue)
+void Menu::ChangeOptionDescription(char identifier, std::string newDescription)
 {
-	_items[name].ChangeValue(std::to_string(newValue));
+	_options[identifier].ChangeDescription(newDescription);
 }
 
-void Menu::ChangeOptionDescription(std::string name, std::string newDescription)
+double Menu::GetItemValue(char identifier)
 {
-	_options[name].ChangeDescription(newDescription);
+	return _items[identifier].GetValue();
 }

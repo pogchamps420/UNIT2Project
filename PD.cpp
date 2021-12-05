@@ -66,65 +66,111 @@ void T::PD::ClearValues()
 	_values = newValues;
 }
 
-void T::PD::Add(int option, int value)
+void T::PD::Add(char option, double value)
 {
 	switch (option)
 	{
-		case 1:
+		case 'a':
 			_values.tri = value;
 			break;
-		case 2:
+		case 'b':
 			_values.tfv = value;
 			break;
-		case 3:
+		case 'c':
 			_values.tcon = value;
 			break;
-		case 4:
+		case 'd':
 			_values.trv = value;
 			break;
-		case 5:
+		case 'e':
 			_values.tfi = value;
 			break;
-		case 6:
+		case 'f':
 			_values.tcoff = value;
 			break;
-		case 7:
+		case 'g':
 			_values.Wcon = value;
 			break;
-		case 8:
+		case 'h':
 			_values.Wcoff = value;
 			break;
-		case 9:
+		case 'i':
 			_values.VDC = value;
 			break;
-		case 10:
+		case 'j':
 			_values.Io = value;
 			break;
-		case 11:
+		case 'k':
 			_values.fs = value;
+			_values.Ts = (float)1 / value;
 			break;
-		case 12:
+		case 'l':
 			_values.Ts = value;
+			_values.fs = (float)1 / value;
 			break;
-		case 13:
+		case 'm':
 			_values.Von = value;
 			break;
-		case 14:
+		case 'n':
 			_values.Won = value;
 			break;
-		case 15:
+		case 'o':
 			_values.Ton = value;
 			break;
-		case 16:
+		case 'p':
 			_values.Ps = value;
 			break;
-		case 17:
+		case 'q':
 			_values.Pon = value;
 			break;
-		case 18:
+		case 'r':
 			_values.Pdis = value;
 			break;
 		default:
 			break;
+	}
+}
+double T::PD::Get(char option)
+{
+	switch (option)
+	{
+	case 'a':
+		return _values.tri;
+	case 'b':
+		return _values.tfv;
+	case 'c':
+		return _values.tcon;
+	case 'd':
+		return _values.trv;
+	case 'e':
+		return _values.tfi;
+	case 'f':
+		return _values.tcoff;
+	case 'g':
+		return _values.Wcon;
+	case 'h':
+		return _values.Wcoff;
+	case 'i':
+		return _values.VDC;
+	case 'j':
+		return _values.Io;
+	case 'k':
+		return _values.fs;
+	case 'l':
+		return _values.Ts;
+	case 'm':
+		return _values.Von;
+	case 'n':
+		return _values.Won;
+	case 'o':
+		return _values.Ton;
+	case 'p':
+		return _values.Ps;
+	case 'q':
+		return _values.Pon;
+	case 'r':
+		return _values.Pdis;
+	default:
+		break;
 	}
 }
