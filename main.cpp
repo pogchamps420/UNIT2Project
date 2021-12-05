@@ -21,16 +21,16 @@ int main()
     //Define user-selectable options
     std::vector<MenuOption> mainMenuOptions
     {
-        MenuOption("O1", "Option A", 'a'),
-        MenuOption("O2", "Option B", 'b'),
-        MenuOption("O3", "Option C", 'c')
+        MenuOption('a', "Option A"),
+        MenuOption('b', "Option B"),
+        MenuOption('c', "Option C")
     };
 
     //Define items to be displayed, value can be either a string or an int
     std::vector<MenuItem> mainMenuItems
     {
-        MenuItem("i1", "Item one", "string value"),
-        MenuItem("i2", "Item two", 420)
+        MenuItem('a', "Item one", "string value"),
+        MenuItem('b', "Item two", 420)
     };
 
     //Initialise menu

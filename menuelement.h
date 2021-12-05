@@ -8,11 +8,11 @@
 class MenuElement
 {
 public:
-	std::string name;
+	char identifier;
 	std::string description;
 
 	MenuElement();
-	MenuElement(std::string name, std::string description);
+	MenuElement(char identifier, std::string description);
 
 	void ChangeDescription(std::string newDescription);
 };
@@ -25,12 +25,12 @@ public:
 	std::string value;
 
 	MenuItem();
-	MenuItem(std::string name, std::string description);
-	MenuItem(std::string name, std::string description, std::string value);
-	MenuItem(std::string name, std::string description, int value);
+	MenuItem(char identifier, std::string description);
+	MenuItem(char identifier, std::string description, std::string value);
+	MenuItem(char identifier, std::string description, double value);
 
 	void ChangeValue(std::string newValue);
-	void ChangeValue(int newValue);
+	void ChangeValue(double newValue);
 };
 
 //Class used to contain information for selectable options in a menu
@@ -40,11 +40,10 @@ public:
 	//Determines whether the option is to be displayed and selectable 
 	bool visibility;
 	//Unique char identifier used to refer to the option
-	char identifier;
 
 	MenuOption();
-	MenuOption(std::string name, std::string description, char identifier);
-	MenuOption(std::string name, std::string description, char identifier, bool visibility);
+	MenuOption(char identifier, std::string description);
+	MenuOption(char identifier, std::string description, bool visibility);
 
 	void ChangeVisibility(bool visibility);
 };
