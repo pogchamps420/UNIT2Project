@@ -31,7 +31,14 @@ MenuItem::MenuItem(std::string name, std::string description, int value) : MenuI
 {
 	this->value = std::to_string(value);
 }
-
+void MenuItem::ChangeValue(std::string newValue)
+{
+	this->value = newValue;
+}
+void MenuItem::ChangeValue(int newValue)
+{
+	this->value = std::to_string(newValue);
+}
 
 //Definitions for the MenuOption class
 
