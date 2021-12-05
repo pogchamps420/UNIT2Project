@@ -12,6 +12,10 @@ MenuElement::MenuElement(std::string name, std::string description)
 	this->name = name;
 	this->description = description;
 }
+void MenuElement::ChangeDescription(std::string newDescription)
+{
+	description = newDescription;
+}
 
 //Definitions for the MenuItem class
 

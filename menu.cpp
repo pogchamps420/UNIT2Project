@@ -86,3 +86,23 @@ void Menu::ChangeOptionAvailability(std::string optionName, bool availability)
 			_availableOptions.insert(optionName);
 	}
 }
+
+void Menu::ChangeItemDescription(std::string name, std::string newDescription)
+{
+	_items[name].ChangeDescription(newDescription);
+}
+
+void Menu::ChangeItemValue(std::string name, std::string newValue)
+{
+	_items[name].ChangeValue(newValue);
+}
+
+void Menu::ChangeItemValue(std::string name, int newValue)
+{
+	_items[name].ChangeValue(std::to_string(newValue));
+}
+
+void Menu::ChangeOptionDescription(std::string name, std::string newDescription)
+{
+	_options[name].ChangeDescription(newDescription);
+}
