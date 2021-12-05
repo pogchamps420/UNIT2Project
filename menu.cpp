@@ -70,7 +70,7 @@ char Menu::ChooseOption()
 		return ChooseOption();
 	}
 	else
-		return _options[inputString].identifier;
+   		return _options[inputString].identifier;
 }
 
 void Menu::ChangeOptionAvailability(std::string optionName, bool availability)
