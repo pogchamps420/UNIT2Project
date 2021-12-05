@@ -3,7 +3,7 @@
 
 #include <vector>
 #include <iostream>
-#include <unordered_set>
+#include <algorithm>
 #include "componentmatch.h"
 
 namespace npv
@@ -13,8 +13,8 @@ namespace npv
 	public:
 
 		Eseries(int E);
-		ComponentMatch MatchSingle(float target, float givenValue, float (*Calc)(float, float));
-		ComponentMatch MatchPair(float target, float (*Calc)(float, float));
+		std::pair<float,float> FindNearest(float target);
+		std::vector<ComponentMatch> MatchPair(float target, float (*Calc)(float, float));
 
 	private:
 		bool CheckENumber(int E);
