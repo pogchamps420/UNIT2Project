@@ -20,6 +20,10 @@ public:
 	char ChooseOption();
 	//Method changing the visibility of the option in the menu and its selectability
 	void ChangeOptionAvailability(std::string optionName, bool availability);
+	
+	// Tise added stuff
+	// Edit items in menu
+	void EditItems(std::string itemname, double value, std::vector<MenuItem> &Items);
 
 private:
 	//Menu name

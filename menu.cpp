@@ -85,3 +85,15 @@ void Menu::ChangeOptionAvailability(std::string optionName, bool availability)
 			_availableOptions.insert(optionName);
 	}
 }
+
+void Menu::EditItems(std::string name, double value, std::vector<MenuItem> &Items)
+{
+	for (MenuItem currentitem : Items)
+	{
+		if (currentitem.name == name)
+		{
+			currentitem.value = std::to_string(value);
+			_items[currentitem.name] = currentitem;
+		}
+	}
+}

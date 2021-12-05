@@ -25,7 +25,7 @@ public:
 	MenuItem();
 	MenuItem(std::string name, std::string description);
 	MenuItem(std::string name, std::string description, std::string value);
-	MenuItem(std::string name, std::string description, int value);
+	MenuItem(std::string name, std::string description, double value);
 };
 
 //Class used to contain information for selectable options in a menu

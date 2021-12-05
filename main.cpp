@@ -10,8 +10,8 @@
 namespace T
 {
     void TiseTestingGround();
-    void PowerDissipation(T::PD PDiss);
-    void ChangeValues(PD Pdiss);
+    void PowerDissipation(T::PD PDiss, Menu PDMenu, std::vector<MenuItem> PDMenuItems);
+    Menu ChangeValues(PD Pdiss, Menu PDMenu, std::vector<MenuItem> PDMenuItems);
 }
 
 int main()
@@ -76,13 +76,44 @@ void T::TiseTestingGround()
     TMenu.PrintMenu();
 
     // initialise stuff
-    PD PDiss({ 0 });
+    PD PDiss({ 0 }); 
+    std::vector<MenuOption> PDMenuOptions
+    {
+        MenuOption("0", "Add Values", 'a'),
+        MenuOption("1", "Clear Values", 'c'),
+        MenuOption("1", "Switching Power Loss", 's'),
+        MenuOption("2", "Conduction Power Loss", 'o'),
+        MenuOption("3", "Average Power Dissipation", 'd'),
+        MenuOption("x", "Back", 'x')
+    };
+    std::vector<MenuItem> PDMenuItems
+    {
+        MenuItem("1", "1: tri", 0),
+        MenuItem("2", "2: tfv", 0),
+        MenuItem("3", "3: tcon", 0),
+        MenuItem("4", "4: trv", 0),
+        MenuItem("5", "5: tfi", 0),
+        MenuItem("6", "6: tcoff", 0),
+        MenuItem("7", "7: Wcon", 0),
+        MenuItem("8", "8: Wcoff", 0),
+        MenuItem("9", "9: VDC", 0),
+        MenuItem("10", "10: Io", 0),
+        MenuItem("11", "11: fs", 0),
+        MenuItem("12", "12: Ts", 0),
+        MenuItem("13", "13: Von", 0),
+        MenuItem("14", "14: Won", 0),
+        MenuItem("15", "15: Ton", 0),
+        MenuItem("16", "16: Ps", 0),
+        MenuItem("17", "17: Pon", 0),
+        MenuItem("18", "18: Pdis", 0),
+    };
+    Menu PDMenu("Power Dissipation menu", PDMenuOptions, PDMenuItems);
 
     char Option = TMenu.ChooseOption();
     switch (Option)
     {
     case 'p':
-        T::PowerDissipation(PDiss);
+        T::PowerDissipation(PDiss, PDMenu, PDMenuItems);
         break;
     case 'x':
         T::TiseTestingGround();
@@ -125,74 +156,41 @@ void T::TiseTestingGround()
     //actual calculator
     */
 }
-void T::PowerDissipation(PD PDiss)
+void T::PowerDissipation(PD PDiss, Menu PDMenu, std::vector<MenuItem> PDMenuItems)
 {
-
-    std::vector<MenuOption> PDMenuOptions
-    {
-        MenuOption("0", "Add Values", 'a'),
-        MenuOption("1", "Clear Values", 'c'),
-        MenuOption("1", "Switching Power Loss", 's'),
-        MenuOption("2", "Conduction Power Loss", 'o'),
-        MenuOption("3", "Average Power Dissipation", 'd'),
-        MenuOption("x", "Back", 'x')
-    };
-    std::vector<MenuItem> PDMenuItems
-    {
-        MenuItem("1", "1: tri", 0),
-        MenuItem("2", "2: tfv", 0),
-        MenuItem("3", "3: tcon", 0),
-        MenuItem("4", "4: trv", 0),
-        MenuItem("5", "5: tfi", 0),
-        MenuItem("6", "6: tcoff", 0),
-        MenuItem("7", "7: Wcon", 0),
-        MenuItem("8", "8: Wcoff", 0),
-        MenuItem("9", "9: VDC", 0),
-        MenuItem("10", "10: Io", 0),
-        MenuItem("11", "11: fs", 0),
-        MenuItem("12", "12: Ts", 0),
-        MenuItem("13", "13: Von", 0),
-        MenuItem("14", "14: Won", 0),
-        MenuItem("15", "15: Ton", 0),
-        MenuItem("16", "16: Ps", 0),
-        MenuItem("17", "17: Pon", 0),
-        MenuItem("18", "18: Pdis", 0),
-    };
-
-    Menu PDMenu("Main menu", PDMenuOptions, PDMenuItems);
     PDMenu.PrintMenu();
 
     char Option = PDMenu.ChooseOption();
     switch (Option)
     {
         case 'a':
-            ChangeValues(PDiss);
+            PDMenu = ChangeValues(PDiss, PDMenu, PDMenuItems);
             break;
         case 'c':
             PDiss.ClearValues();
-            PowerDissipation(PDiss);
+            PowerDissipation(PDiss, PDMenu, PDMenuItems);
             break;
         case 's':
-            std::cout << "\nSwitching Power Loss: " << PDiss.CalcPs() << "\n";
-            PowerDissipation(PDiss);
+            std::cout << "\nSwitching Power Loss: " << PDiss.CalcPs() << "\n\n";
+            PowerDissipation(PDiss, PDMenu, PDMenuItems);
             break;
         case 'o':
             std::cout << "\nConduction Power Loss: " << PDiss.CalcPon() << "\n";
-            PowerDissipation(PDiss);
+            PowerDissipation(PDiss, PDMenu, PDMenuItems);
             break;
         case 'd':
             std::cout << "\nAverage Power Dissipation: " << PDiss.CalcPdis() << "\n";
-            PowerDissipation(PDiss);
+            PowerDissipation(PDiss, PDMenu, PDMenuItems);
             break;
         case 'x':
             main();
             break;
         default:
-            PowerDissipation(PDiss);
+            PowerDissipation(PDiss, PDMenu, PDMenuItems);
             break;
     }
 }
-void T::ChangeValues(PD Pdiss)
+Menu T::ChangeValues(PD Pdiss, Menu PDMenu, std::vector<MenuItem> PDMenuItems)
 {
     std::cout << "\nEnter the number of the value you want to add/change: ";
     int option;
@@ -201,6 +199,9 @@ void T::ChangeValues(PD Pdiss)
     double value;
     std::cin >> value;
     Pdiss.Add(option, value);
+    PDMenu.EditItems(std::to_string(option), value, PDMenuItems);
+
     std::cout << "\nItem changed.\n";
-    PowerDissipation(Pdiss);
+    PowerDissipation(Pdiss, PDMenu, PDMenuItems);
+    return PDMenu;
 }

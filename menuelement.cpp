@@ -27,7 +27,7 @@ MenuItem::MenuItem(std::string name, std::string description, std::string value)
 {
 	this->value = value;
 }
-MenuItem::MenuItem(std::string name, std::string description, int value) : MenuItem(name, description)
+MenuItem::MenuItem(std::string name, std::string description, double value) : MenuItem(name, description)
 {
 	this->value = std::to_string(value);
 }
