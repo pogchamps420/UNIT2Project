@@ -29,7 +29,6 @@ int main()
     //Define items to be displayed, value can be either a string or an int
     std::vector<MenuItem> mainMenuItems
     {
-        MenuItem('a', "Item one", "string value"),
         MenuItem('b', "Item two", 420)
     };
 

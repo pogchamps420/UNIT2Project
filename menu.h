@@ -20,9 +20,11 @@ public:
 	char ChooseOption();
 	//Method changing the visibility of the option in the menu and its selectability
 	void ChangeOptionAvailability(char identifier, bool availability);
+
+	double GetItemValue(char identifier);
+
 	void ChangeOptionDescription(char identifier, std::string newDescription);
 
-	void ChangeItemValue(char identifier, std::string newValue);
 	void ChangeItemValue(char identifier, double newValue);
 	void ChangeItemDescription(char identifier, std::string newDescription);
 
