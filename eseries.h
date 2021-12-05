@@ -13,16 +13,16 @@ namespace npv
 	public:
 
 		Eseries(int E);
-		std::pair<float,float> FindNearest(float target);
-		std::vector<ComponentMatch> MatchPair(float target, float (*Calc)(float, float));
+		std::pair<double,double> FindNearest(double target);
+		std::vector<ComponentMatch> MatchPair(double target, double (*Calc)(double, double));
 
 	private:
 		bool CheckENumber(int E);
 		int _E;
-		std::vector<float> _values;
+		std::vector<double> _values;
 	
 	protected:
-		static const std::vector<float> E24Values;
+		static const std::vector<double> E24Values;
 	};
 
 }

@@ -9,7 +9,7 @@ namespace npv
 			_values.push_back(E24Values[i]);
 	}
 
-	const std::vector<float> Eseries::E24Values = { 1.0,1.1,1.2,1.3,1.5,1.6,1.8,2.8,2.2,2.4,2.7,3.0,3.3,3.6,3.9,4.3,4.7,5.1,5.6,6.2,6.8,7.5,8.2,9.1 };
+	const std::vector<double> Eseries::E24Values = { 1.0,1.1,1.2,1.3,1.5,1.6,1.8,2.8,2.2,2.4,2.7,3.0,3.3,3.6,3.9,4.3,4.7,5.1,5.6,6.2,6.8,7.5,8.2,9.1 };
 	
 	bool Eseries::CheckENumber(int E)
 	{
@@ -20,7 +20,7 @@ namespace npv
 		return false;
 	}
 
-	std::pair<float,float> Eseries::FindNearest(float target)
+	std::pair<double,double> Eseries::FindNearest(double target)
 	{
 		if (target / *_values.begin() >= 10)
 			return std::make_pair(FindNearest(target / 10).first * 10, FindNearest(target / 10).second * 10);
@@ -35,7 +35,7 @@ namespace npv
 	}
 
 
-	std::vector<ComponentMatch> Eseries::MatchPair(float target, float (*calc)(float, float))
+	std::vector<ComponentMatch> Eseries::MatchPair(double target, double (*calc)(double, double))
 	{
 		std::vector<ComponentMatch> matches = {};
 		return matches;
