@@ -29,7 +29,6 @@ namespace T
 		public:
 			PD();
 			PD(Values values);
-			PD(double Wcon, double Wcoff, double fs, double Won);
 
 
 

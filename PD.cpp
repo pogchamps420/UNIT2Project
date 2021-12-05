@@ -171,6 +171,6 @@ double T::PD::Get(char option)
 	case 'r':
 		return _values.Pdis;
 	default:
-		break;
+		return 0;
 	}
 }
