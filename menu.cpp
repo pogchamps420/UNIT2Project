@@ -1,5 +1,7 @@
 #include "menu.h"
 
+
+
 #include <iostream>
 #include <string>
 #include <set>
@@ -17,7 +19,8 @@ Menu::Menu(std::string name, std::vector<MenuOption> options, std::vector<MenuIt
 	for (MenuOption currentOption : options)
 	{
 		_options[currentOption.identifier] = currentOption;
-		if(currentOption.GetVisibility())
+		if (currentOption.GetVisibility())
+
 			_availableOptions.insert(currentOption.identifier);
 	}
 	for (MenuItem currentItem : items)
@@ -33,11 +36,11 @@ void Menu::PrintMenu()
 	std::cout << "-----------------------\n";
 	std::cout << _name << '\n';
 	std::cout << "-----------------------\n";
-	
+
 	//Displaying all items
 
 	std::map<char, MenuItem>::iterator itemIterator = _items.begin();
-	while(itemIterator != _items.end())
+	while (itemIterator != _items.end())
 	{
 		std::cout << itemIterator->second.identifier << " - " << itemIterator->second.description << ": " << itemIterator->second.GetValue() << '\n';
 		itemIterator++;
@@ -47,9 +50,9 @@ void Menu::PrintMenu()
 	//Displaying all visible options
 
 	std::map<char, MenuOption>::iterator optionIterator = _options.begin();
-	while(optionIterator != _options.end())
+	while (optionIterator != _options.end())
 	{
-		if(optionIterator->second.GetVisibility())
+		if (optionIterator->second.GetVisibility())
 			std::cout << optionIterator->second.identifier << ": " << optionIterator->second.description << '\n';
 		optionIterator++;
 	}
@@ -65,7 +68,7 @@ char Menu::ChooseOption()
 	//Checking if the option is selectable
 	if (_availableOptions.find(inputChar) == _availableOptions.end())
 	{
-		std::cout << "ERROR: option '"<< inputChar <<"' not available\n";
+		std::cout << "ERROR: option '" << inputChar << "' not available\n";
 
 		//Prompt the user to enter the option again
 		return ChooseOption();

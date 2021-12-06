@@ -24,7 +24,7 @@ public:
 	double GetItemValue(char identifier);
 
 	void ChangeOptionDescription(char identifier, std::string newDescription);
-
+  
 	void ChangeItemValue(char identifier, double newValue);
 	void ChangeItemDescription(char identifier, std::string newDescription);
 
