@@ -1,4 +1,5 @@
 #include "buckboost.h"
+#include "variables.h"
 #include <iostream>
 #include <algorithm>
 #include <cassert>
@@ -15,7 +16,7 @@ bool is_number(const std::string& word) {
     return !word.empty() && std::all_of(word.begin(), word.end(), ::isdigit);
 }
 
-int main() {
+namespace bbc {
 
     /*if (is_number("2")) {
         std::cout << "Nice" << std::endl;
