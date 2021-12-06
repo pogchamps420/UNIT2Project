@@ -1,6 +1,8 @@
 #pragma once
 #ifndef VARIABLES_H
 #define VARIABLES_H 
+//variables buck and boost have in common: Pi, Po
+//variables they differ on: Vout, Ii, Io, Vl, C, delta_vo, K, L
 namespace bbc
 {
 	class CONVERTERS
@@ -9,25 +11,33 @@ namespace bbc
 		{
 			double Vin;
 			double Vout;
+			double Vl;
+			double K;
+			double Ii;
+			double Io;
+			double Il;
+			double Fs;
+			double L;
+			double delta_vo;
+			double delta_i;
+			double Rl;
+			double Ro;
+			double C;
+			double Pi;
+			double Po;
+			double Ts;
+
 
 		};
 	public:
 		CONVERTERS();
 		CONVERTERS(Values values);
-		CONVERTERS(double Wcon, double Wcoff, double fs, double Won);
-
-
-
+		
 		void AddValues(Values _values);
 		Values ShowValues();
-		double CalcTcon();
-		double CalcTcoff();
-		double CalcWcon();
-		double CalcWcoff();
-		double CalcPs();
-		double CalcWon();
-		double CalcPon();
-		double CalcPdis();
+		double CalcPi();
+		double CalcPo();
+		double CalcRl();
 		void ClearValues();
 
 		void Add(char option, double value);
@@ -35,6 +45,36 @@ namespace bbc
 
 	private:
 		Values _values;
+	};
+
+	class BUCK: public CONVERTERS
+	{
+		double CalcVout();
+		double CalcK();
+		double CalcIi();
+		double CalcIo();
+		double CalcL();
+		//separate implementation for delta i
+		double Calcdelta_i();
+		//separate implementation for delta output voltage
+		double Calcdelta_vo();
+		//double CalcRl();
+		double CalcC();
+	};
+
+	class BOOST: public CONVERTERS
+	{
+		double CalcVout();
+		double CalcK();
+		double CalcIi();
+		double CalcIo();
+		double CalcL();
+		//separate implementation for delta i
+		double Calcdelta_i();
+		//separate implementation for delta output voltage
+		double Calcdelta_vo();
+		//double CalcRl();
+		double CalcC();
 	};
 }
 
