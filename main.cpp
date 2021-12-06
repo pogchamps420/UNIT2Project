@@ -7,6 +7,8 @@
 #include "user.h"
 #include "initiate.h"
 #include "PD.h"
+#include "eseries.h"
+#include "componentmatch.h"
 
 namespace T
 {
@@ -25,7 +27,14 @@ namespace T
 
 int main()
 {
-    //Example usage of menuprinter
+    
+    npv::Eseries E6(6);
+    std::cout << E6.FindNearest(0.5).first << ' ' << E6.FindNearest(0.5).second << '\n';
+    std::cout << E6.FindNearest(3.3).first << ' ' << E6.FindNearest(3.3).second << '\n';
+    std::cout << E6.FindNearest(4.0).first << ' ' << E6.FindNearest(4.0).second << '\n';
+    std::cout << E6.FindNearest(9.5).first << ' ' << E6.FindNearest(9.5).second << '\n';
+    std::cout << E6.FindNearest(10).first << ' ' << E6.FindNearest(10).second << '\n';
+    std::cout << E6.FindNearest(950).first << ' ' << E6.FindNearest(950).second << '\n';
 
     //Define user-selectable options
     std::vector<MenuOption> mainMenuOptions

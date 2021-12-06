@@ -1,4 +1,7 @@
 #include "menu.h"
+
+
+
 #include <iostream>
 #include <string>
 #include <set>
@@ -17,6 +20,7 @@ Menu::Menu(std::string name, std::vector<MenuOption> options, std::vector<MenuIt
 	{
 		_options[currentOption.identifier] = currentOption;
 		if (currentOption.GetVisibility())
+
 			_availableOptions.insert(currentOption.identifier);
 	}
 	for (MenuItem currentItem : items)

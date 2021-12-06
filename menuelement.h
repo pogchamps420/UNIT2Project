@@ -45,7 +45,6 @@ public:
 	MenuOption();
 	MenuOption(char identifier, std::string description);
 	MenuOption(char identifier, std::string description, bool visibility);
-
 	void ChangeVisibility(bool visibility);
 	bool GetVisibility();
 
@@ -54,3 +53,4 @@ private:
 };
 
 #endif
+
