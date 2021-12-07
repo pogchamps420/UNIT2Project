@@ -1,4 +1,5 @@
 #include "variables.h"
+#include <math.h>
 
 bbc::CONVERTERS::CONVERTERS()
 	: _values() {}
@@ -35,7 +36,7 @@ double bbc::BUCK::CalcK()
 double bbc::BOOST::CalcK()
 {
 	if (_values.K == 0) {
-		_values.K = (1 - (_values.Vin / _values.Vout))
+		_values.K = (1 - (_values.Vin / _values.Vout));
 	}
 	return _values.K;
 }
@@ -75,7 +76,7 @@ double bbc::BOOST::CalcIo()
 double bbc::BUCK::CalcL()
 {
 	if (_values.L == 0) {
-		_values.L = ((_values.Vin - _values.Vout) * _values.K) / (_values.Fs * delta_i));
+		_values.L = ((_values.Vin - _values.Vout) * _values.K) / (_values.Fs * _values.delta_i);
 	}
 	return _values.L;
 }
@@ -83,7 +84,7 @@ double bbc::BUCK::CalcL()
 double bbc::BOOST::CalcL()
 {
 	if (_values.L == 0) {
-		_values.L = ((_values.Vin  * _values.K) / (_values.Fs * delta_i));
+		_values.L = ((_values.Vin  * _values.K) / (_values.Fs * _values.delta_i));
 	}
 	return _values.L;
 }
@@ -247,10 +248,10 @@ double bbc::CONVERTERS::Get(char option)
 		return _values.Ro;
 		break;
 	case 'p':
-		_values.C = value;
+		return _values.C;
 		break;
 	case 'q':
-		_values.Pi = value;
+		return _values.Pi;
 		break;
 	default:
 		return 0;

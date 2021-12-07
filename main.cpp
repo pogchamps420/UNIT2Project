@@ -4,6 +4,8 @@
 #include "menuelement.h"
 #include "PD.h"
 #include "Tise.h"
+#include "buckboost.h"
+#include "variables.h"
 #include "eseries.h"
 #include "componentmatch.h"
 
@@ -23,7 +25,7 @@ int main()
     {
         MenuOption('1', "Option A"),
         MenuOption('2', "Option B"),
-        MenuOption('3', "Option C"),
+        MenuOption('3', "BBC"),
         MenuOption('0', "Tise")
     };
 
@@ -42,10 +44,15 @@ int main()
 
     char chosenOption = mainMenu.ChooseOption();
     T::Tise TMenu;
+    bbc::BUCKBOOST BMenu;
+
     switch (chosenOption)
     {
         case '0':
             TMenu.TiseMenu();
+            break;
+        case '3':
+            BMenu.InitMenu();
             break;
         default:
             break;

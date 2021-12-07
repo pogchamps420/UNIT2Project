@@ -5,7 +5,7 @@
 #include <iostream>
 #include "formula.h"
 #include "module.h"
-#include "user.h"
+//#include "user.h"
 
 class Initiate {
 public:
@@ -16,10 +16,10 @@ public:
 	void defaultprofile();
 	void testprofile();
 
-	User get_user();
+	//User get_user();
 
 private:
 	int _profile;
-	User _user;
+	//User _user;
 };
 #endif

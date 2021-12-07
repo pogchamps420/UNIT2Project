@@ -43,8 +43,10 @@ namespace bbc
 		void Add(char option, double value);
 		double Get(char option);
 
-	private:
 		Values _values;
+
+	private:
+		
 	};
 
 	class BUCK: public CONVERTERS

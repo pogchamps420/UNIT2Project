@@ -17,10 +17,11 @@ void Initiate::set_profile(int _profile)
 		break;
 	}
 }
-User Initiate::get_user()
+/*User Initiate::get_user()
 {
 	return _user;
 }
+*/
 void Initiate::defaultprofile()
 {
 	std::cout << "hi" << std::endl;
@@ -30,7 +31,7 @@ void Initiate::testprofile()
 	std::cout << "Profile: Test\n\n" << std::endl;
 
 	//create user
-	User testUser;
+	//User testUser;
 
 	//create modules
 	Module M0200;
@@ -42,7 +43,7 @@ void Initiate::testprofile()
 	Formula m2f0("formula6name", { 7,2,"a-b" });
 
 	//create/add modules
-	std::list<std::string> Mods = testUser.get_modules();
+	//std::list<std::string> Mods = testUser.get_modules();
 
 	//add formulas to modules
 	std::list<std::string> Formulas = M0200.get_formulas();
@@ -53,9 +54,9 @@ void Initiate::testprofile()
 	M0200.set_formulas(Formulas);
 
 	//commit modules
-	Mods.push_back(M0200.get_modulename());
-	testUser.set_modules(Mods);
+	//Mods.push_back(M0200.get_modulename());
+	//testUser.set_modules(Mods);
 
 	//set info to user
-	_user = testUser;
+	//_user = testUser;
 }
