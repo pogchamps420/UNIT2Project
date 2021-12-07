@@ -25,7 +25,7 @@ namespace bbc {
         std::vector<MenuOption> BMenuOptions
         {
             MenuOption('a', "Power Dissipation Calculator"),
-            MenuOption('x', "Option B"),
+            MenuOption('x', "Buck/Boost Converter Calculator"),
             MenuOption('x', "Main Menu")
         };
         std::vector<MenuItem> BMenuItems{};
@@ -34,17 +34,19 @@ namespace bbc {
         BMenu.PrintMenu();
 
         // initialise stuff for buck/boost converters
-
         bbc::CONVERTERS BBCStuff({ 0 });
+
         std::vector<MenuOption> BBCMenuOptions
         {
             MenuOption('a', "Inductor Voltage"),
             MenuOption('b', "Selection of Inductor"),
-            MenuOption('c', "Conduction Power Loss"),
-            MenuOption('d', "Change Values"),
-            MenuOption('e', "Clear Values"),
+            MenuOption('c', "Selection of Capacitor"),
+            MenuOption('d', "Duty Ratio/Cycle"),
+            MenuOption('e', "Change Values"),
+            MenuOption('f', "Clear Values"),
             MenuOption('x', "Back")
         };
+
         std::vector<MenuItem> BBCMenuItems
         {
             MenuItem('a', "Vin", 0),
@@ -65,9 +67,9 @@ namespace bbc {
             MenuItem('p', "C", 0),
             MenuItem('q', "Pi", 0),
         };
-        /* Menu PDMenu("Power Dissipation menu", PDMenuOptions, PDMenuItems);
+        Menu BBCMenu("Buck/Boost Converter menu", BMenuOptions, BMenuItems);
 
-
+        /*
         // Main Menu
         char Option = TMenu.ChooseOption();
         switch (Option)
@@ -82,6 +84,7 @@ namespace bbc {
             TiseMenu();
             break;
         }
+
 
     }
     void Tise::PowerDissipation(T::PD PDiss, Menu PDMenu)

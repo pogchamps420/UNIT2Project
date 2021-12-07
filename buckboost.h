@@ -16,8 +16,8 @@ namespace bbc
 			BUCKBOOST();
 
 			void InitMenu();
-			/*void PowerDissipation(PD PDiss, Menu PDMenu);
-			Menu ChangeValues(PD Pdiss, Menu PDMenu);
+			void PowerDissipation(CONVERTERS PDiss, Menu PDMenu);
+			/* Menu ChangeValues(PD Pdiss, Menu PDMenu);
 			Menu UpdatePDValues(PD Pdiss, Menu PDMenu);
 			void PDISS(PD Pdiss, Menu& PDMenu);
 			void PS(PD PDiss, Menu PDMenu, char parent);

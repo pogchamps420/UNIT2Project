@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
 #include "menu.h"
 #include "menuelement.h"
 #include "PD.h"
