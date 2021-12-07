@@ -22,50 +22,50 @@ namespace bbc {
     {
         std::cout << "poggers" << std::endl;
 
-        std::vector<MenuOption> BBCMenuOptions
+        std::vector<MenuOption> BMenuOptions
         {
             MenuOption('a', "Power Dissipation Calculator"),
             MenuOption('x', "Option B"),
             MenuOption('x', "Main Menu")
         };
-        std::vector<MenuItem> TMenuItems{};
+        std::vector<MenuItem> BMenuItems{};
 
-        Menu TMenu("Main menu", TMenuOptions, TMenuItems);
-        TMenu.PrintMenu();
+        Menu BMenu("Main menu", BMenuOptions, BMenuItems);
+        BMenu.PrintMenu();
 
-        // initialise stuff for Power Dissipation
-        T::PD PDiss({ 0 });
-        std::vector<MenuOption> PDMenuOptions
+        // initialise stuff for buck/boost converters
+
+        bbc::CONVERTERS BBCStuff({ 0 });
+        std::vector<MenuOption> BBCMenuOptions
         {
-            MenuOption('a', "Average Power Dissipation"),
-            MenuOption('b', "Switching Power Loss"),
+            MenuOption('a', "Inductor Voltage"),
+            MenuOption('b', "Selection of Inductor"),
             MenuOption('c', "Conduction Power Loss"),
             MenuOption('d', "Change Values"),
             MenuOption('e', "Clear Values"),
             MenuOption('x', "Back")
         };
-        std::vector<MenuItem> PDMenuItems
+        std::vector<MenuItem> BBCMenuItems
         {
-            MenuItem('a', "tri", 0),
-            MenuItem('b', "tfv", 0),
-            MenuItem('c', "tcon", 0),
-            MenuItem('d', "trv", 0),
-            MenuItem('e', "tfi", 0),
-            MenuItem('f', "tcoff", 0),
-            MenuItem('g', "Wcon", 0),
-            MenuItem('h', "Wcoff", 0),
-            MenuItem('i', "VDC", 0),
-            MenuItem('j', "Io", 0),
-            MenuItem('k', "fs", 0),
+            MenuItem('a', "Vin", 0),
+            MenuItem('b', "Vout", 0),
+            MenuItem('c', "Vl", 0),
+            MenuItem('d', "K", 0),
+            MenuItem('e', "Ii", 0),
+            MenuItem('f', "Io", 0),
+            MenuItem('g', "Il", 0),
+            MenuItem('h', "Po", 0),
+            MenuItem('i', "L", 0),
+            MenuItem('j', "delta_vo", 0),
+            MenuItem('k', "Fs", 0),
             MenuItem('l', "Ts", 0),
-            MenuItem('m', "Von", 0),
-            MenuItem('n', "Won", 0),
-            MenuItem('o', "Ton", 0),
-            MenuItem('p', "Ps", 0),
-            MenuItem('q', "Pon", 0),
-            MenuItem('r', "Pdis", 0)
+            MenuItem('m', "delta_i", 0),
+            MenuItem('n', "Rl", 0),
+            MenuItem('o', "Ro", 0),
+            MenuItem('p', "C", 0),
+            MenuItem('q', "Pi", 0),
         };
-        Menu PDMenu("Power Dissipation menu", PDMenuOptions, PDMenuItems);
+        /* Menu PDMenu("Power Dissipation menu", PDMenuOptions, PDMenuItems);
 
 
         // Main Menu
@@ -695,7 +695,7 @@ namespace bbc {
     }
 }
 }
-    
+    */
 
 
 
