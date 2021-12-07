@@ -10,8 +10,6 @@
 *  inductor selection, capacitor selection, peak to peak output voltage ripple and change in charge
 */
 
-//see if that mf is a constant
-
 bool is_number(const std::string& word) {
     return !word.empty() && std::all_of(word.begin(), word.end(), ::isdigit);
 }
@@ -26,10 +24,6 @@ namespace bbc {
     std::string expression;
     std::cin >> expression;
     std::string exponent("^");
-
-    // fuck fuck fuck ok we will implement the differentiation AND integration here
-    // why doesnt c++ have calculus in the math library lol
-    //let's just do switch/case...
 
     //we need to account for calculus with a constant and of variables with exponents..
     //first we should check if it is a constant using isdigit lmao
@@ -52,11 +46,14 @@ namespace bbc {
 
                 if (found) {
                     std::cout << "It's a power term";
+                    std::string coeff = expression.substr(0, found);
+                    std::cout << coeff;
                     // do the differentiation
 
                 }
                 else {
                     std::cout << "It's a term with a linear coefficient";
+
                     //just remove the variable from the term hehe
                 }
             }
