@@ -24,13 +24,21 @@ namespace npv
 	{
 		if (target / *_values.begin() >= 10)
 			return std::make_pair(FindNearest(target / 10).first * 10, FindNearest(target / 10).second * 10);
+
+		if (target / *(_values.end() - 1) <= 0.1)
+			return std::make_pair(FindNearest(target * 10).first / 10, FindNearest(target * 10).second / 10);
+		
 		auto higherIt = std::lower_bound(_values.begin(), _values.end(), target);
+		
 		if (higherIt == _values.end())
-			return std::make_pair(*(higherIt-1), 10 * FindNearest(target/10).first);
-		if (higherIt == _values.begin())
-			return std::make_pair(*higherIt, *higherIt);
+			return std::make_pair(*(higherIt-1), *(_values.begin()) * 10);
+	
 		if (*higherIt == target)
 			return std::make_pair(target, target);
+
+		if (higherIt == _values.begin())
+			return std::make_pair(*higherIt, *higherIt);
+
 		return std::make_pair(*(higherIt-1), *higherIt);
 	}
 
