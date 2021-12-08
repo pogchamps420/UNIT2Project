@@ -382,7 +382,8 @@ namespace bbc {
             MenuOption('c', "Enter output voltage ripple"),
             MenuOption('d', "Calculate output voltage ripple"),
             MenuOption('e', "Enter output voltage"),
-            MenuOption('f', "Calculate output voltage"),
+            MenuOption('f', "Calculate output voltage - Buck Converter"),
+            MenuOption('g', "Calculate output voltage - Boost Converter"),
             MenuOption('x', "Back")
         };
         std::vector<MenuItem> MenuItems
@@ -406,17 +407,51 @@ namespace bbc {
             switch (Option)
             {
             case 'a':
-                
+                double capacitance;
+                capacitance = BuckStuff.CalcC();
+                Menu.ChangeItemValue('a', inductance);
+                BBCMenu.ChangeItemValue('i', inductance);
+                std::cout << "\nInductance: " << Menu.GetItemValue('a') << "\n";
+                break;
             case 'b':
-                
+                double capacitance;
+                capacitance = BoostStuff.CalcC();
+                Menu.ChangeItemValue('a', inductance);
+                BBCMenu.ChangeItemValue('i', inductance);
+                std::cout << "\nInductance: " << Menu.GetItemValue('a') << "\n";
+                break;
             case 'c':
-                
+                std::cout << "Output Voltage Ripple: ";
+                double delta_vo;
+                std::cin >> delta_vo;
+                Menu.ChangeItemValue('b', delta_vo);
+                BBCMenu.ChangeItemValue('j', delta_vo);
+                BBCStuff.Add('j', delta_vo);
             case 'd':
-                
+                double Delta_vo;
+                Delta_vo = BBCStuff.Calculus();
+                Menu.ChangeItemValue('b', Delta_vo);
+                BBCMenu.ChangeItemValue('j', Delta_vo);
+                break;
             case 'e':
-                
+                std::cout << "Output Voltage: ";
+                double Vout;
+                std::cin >> Vout;
+                Menu.ChangeItemValue('c', Vout);
+                BBCMenu.ChangeItemValue('b', Vout);
+                BBCStuff.Add('b', Vout);
             case 'f':
-                
+                double VOut;
+                VOut = BuckStuff.CalcVout();
+                Menu.ChangeItemValue('b', Delta_vo);
+                BBCMenu.ChangeItemValue('j', Delta_vo);
+                break;
+            case 'g':
+                double VOut;
+                VOut = BoostStuff.CalcVout();
+                Menu.ChangeItemValue('b', Delta_vo);
+                BBCMenu.ChangeItemValue('j', Delta_vo);
+                break;
             case 'x':
                 loop = 0;
                 break;
