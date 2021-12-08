@@ -25,7 +25,7 @@ namespace bbc {
         std::vector<MenuOption> BMenuOptions
         {
             MenuOption('a', "Power Dissipation Calculator"),
-            MenuOption('x', "Buck/Boost Converter Calculator"),
+            MenuOption('b', "Buck/Boost Converter Calculator"),
             MenuOption('x', "Main Menu")
         };
         std::vector<MenuItem> BMenuItems{};
@@ -69,14 +69,16 @@ namespace bbc {
         };
         Menu BBCMenu("Buck/Boost Converter menu", BMenuOptions, BMenuItems);
 
-        /*
+        
         // Main Menu
-        char Option = TMenu.ChooseOption();
+        char Option = BMenu.ChooseOption();
         switch (Option)
         {
         case 'a':
             PowerDissipation(PDiss, PDMenu);
             break;
+        case 'b':
+            BuckBoostConverters(BBCStuff, BBCMenu);
         case 'x':
             return;
             break;
@@ -85,6 +87,44 @@ namespace bbc {
             break;
         }
 
+    }
+    void BUCKBOOST::BuckBoostConverters(bbc::CONVERTERS BuckBoostConverters, Menu BBCMenu)
+    {
+        BBCMenu = UpdateBBCValues(BuckBoostConverters, BBCMenu);
+        BBCMenu.PrintMenu();
+
+        char Option = BBCMenu.ChooseOption();
+        switch (Option)
+        {
+        case 'a':
+            PDISS(BBCStuff, BBCMenu);
+            BuckBoostConverters(BBCStuff, BBCMenu);
+            break;
+        case 'b':
+            PS(PDiss, PDMenu, 'a');
+            BuckBoostConverters(BBCStuff, BBCMenu);
+            break;
+        case 'c':
+            PON(PDiss, PDMenu, 'a');
+            BuckBoostConverters(BBCStuff, BBCMenu);
+            break;
+        case 'd':
+            PDMenu = ChangeValues(PDiss, PDMenu);
+            break;
+        case 'e':
+            PDiss.ClearValues();
+            BuckBoostConverters(BBCStuff, BBCMenu);
+            break;
+        case 'x':
+            TiseMenu();
+            break;
+        default:
+            BuckBoostConverters(BBCStuff, BBCMenu);
+            break;
+        }
+    }
+
+        /*
 
     }
     void Tise::PowerDissipation(T::PD PDiss, Menu PDMenu)
@@ -122,7 +162,9 @@ namespace bbc {
             break;
         }
     }
-    Menu Tise::ChangeValues(T::PD Pdiss, Menu PDMenu)
+
+
+    Menu CONVERTERS::ChangeValues(bbc::CONVERTERS Pdiss, Menu BBCMenu)
     {
         std::cout << "\nEnter the number of the value you want to add/change: ";
         char option;
@@ -134,8 +176,8 @@ namespace bbc {
         PDMenu.ChangeItemValue(option, value);
 
         std::cout << "\nItem changed.\n";
-        PowerDissipation(Pdiss, PDMenu);
-        return PDMenu;
+        BuckBoostConverters(BBCStuff, BBCMenu);
+        return BBCMenu;
     }
     Menu Tise::UpdatePDValues(T::PD Pdiss, Menu PDMenu)
     {
