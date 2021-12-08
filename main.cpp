@@ -21,10 +21,11 @@ int main()
     //Define user-selectable options
     std::vector<MenuOption> mainMenuOptions
     {
-        MenuOption('1', "Option A"),
-        MenuOption('2', "Option B"),
-        MenuOption('3', "Option C"),
-        MenuOption('0', "Tise")
+        MenuOption('2', "Option A"),
+        MenuOption('3', "Option B"),
+        MenuOption('4', "Option C"),
+        MenuOption('0', "Exit"),
+        MenuOption('1', "Tise")
     };
 
     //Define items to be displayed, value can be either a string or an int
@@ -37,21 +38,26 @@ int main()
     //Initialise menu
     Menu mainMenu("Main menu", mainMenuOptions, mainMenuItems);
 
-    //Display menu
-    mainMenu.PrintMenu();
 
-    char chosenOption = mainMenu.ChooseOption();
-    T::Tise TMenu;
-    switch (chosenOption)
+    // Loop system
+    bool loop = true;
+    while (loop)
     {
+        //Display menu
+        mainMenu.PrintMenu();
+
+        char chosenOption = mainMenu.ChooseOption();
+        T::Tise TMenu;
+        switch (chosenOption)
+        {
         case '0':
+            loop = false;
+            break;
+        case '1':
             TMenu.TiseMenu();
             break;
         default:
             break;
+        }
     }
-
-    //Adhoc fix for debug window closing immediately after entering input
-    char temp;
-    std::cin >> temp;
 }
