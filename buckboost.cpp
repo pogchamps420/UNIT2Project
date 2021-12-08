@@ -82,7 +82,7 @@ namespace bbc {
         switch (Option)
         {
         case 'a':
-            PowerDissipation(PDiss, PDMenu);
+            //PowerDissipation(PDiss, PDMenu);
             break;
         case 'b':
             BuckBoostConverters(BBCStuff, BBCMenu);
@@ -95,6 +95,7 @@ namespace bbc {
         }
 
     }
+
     void BUCKBOOST::BuckBoostConverters(bbc::CONVERTERS BuckBoostConverters, Menu BBCMenu)
     {
         BBCMenu = UpdateBBCValues(BuckBoostConverters, BBCMenu);
@@ -129,10 +130,7 @@ namespace bbc {
             BuckBoostConverters(BBCStuff, BBCMenu);
             break;
         }
-    }
-
         
-
     }
     
     Menu CONVERTERS::ChangeValues(bbc::CONVERTERS BuckBoost, Menu BBCMenu)
@@ -213,17 +211,17 @@ namespace bbc {
         std::vector<MenuItem> MenuItems
         {
             MenuItem('a', "Vl", 0),
-            MenuItem('b', "Vl", 0),
-            MenuItem('c', "L", 0),
-            MenuItem('d', "delta_i", 0)
+            //MenuItem('b', "Vl", 0),
+            MenuItem('b', "L", 0),
+            MenuItem('c', "delta_i", 0)
         };
         Menu Menu("Inductor Voltage", MenuOptions, MenuItems);
 
         //set up values
         Menu.ChangeItemValue('a', BBCMenu.GetItemValue('c'));
-        Menu.ChangeItemValue('b', BBCMenu.GetItemValue('c'));
-        Menu.ChangeItemValue('c', BBCMenu.GetItemValue('i'));
-        Menu.ChangeItemValue('d', BBCMenu.GetItemValue('m'));
+        //Menu.ChangeItemValue('b', BBCMenu.GetItemValue('c'));
+        Menu.ChangeItemValue('b', BBCMenu.GetItemValue('i'));
+        Menu.ChangeItemValue('c', BBCMenu.GetItemValue('m'));
 
         bool loop = 1;
         while (loop)
@@ -244,13 +242,13 @@ namespace bbc {
                 vl_switch_off = BBCStuff.CalcVlOFF();
                 Menu.ChangeItemValue('b', vl_switch_off);
                 BBCMenu.ChangeItemValue('c', vl_switch_off);
-                std::cout << "\nInductor Voltage: " << Menu.GetItemValue('b') << "\n";
+                std::cout << "\nInductor Voltage: " << Menu.GetItemValue('a') << "\n";
                 break;
             case 'c':
                 std::cout << "L: ";
                 double L;
                 std::cin >> L;
-                Menu.ChangeItemValue('c', L);
+                Menu.ChangeItemValue('b', L);
                 BBCMenu.ChangeItemValue('i', L);
                 BBCStuff.Add('i', L);
                 break;
@@ -258,21 +256,21 @@ namespace bbc {
                 std::cout << "Change in Current: ";
                 double delta_i;
                 std::cin >> delta_i;
-                Menu.ChangeItemValue('d', delta_i);
+                Menu.ChangeItemValue('c', delta_i);
                 BBCMenu.ChangeItemValue('m', delta_i);
                 BBCStuff.Add('m', delta_i);
                 break;
             case 'e':
                 double l;
                 l = BBCStuff.CalcL();
-                Menu.ChangeItemValue('c', l);
+                Menu.ChangeItemValue('b', l);
                 BBCMenu.ChangeItemValue('i', l);
                 break;
             case 'f':
                 double Delta_i;
                 Delta_i = BBCStuff.Calculus();
                 Delta_i = BBCMenu.GetItemValue('m');
-                Menu.ChangeItemValue('b', l);
+                Menu.ChangeItemValue('c', l);
                 BBCMenu.ChangeItemValue('m', l);
                 break;
             case 'x':
@@ -282,10 +280,64 @@ namespace bbc {
         }
         BuckBoostConverters(BBCStuff, BBCMenu);
     }
+
+    void BUCKBOOST::SEL_INDUCT(bbc::CONVERTERS BBCStuff, Menu& BBCMenu)
+    {
+        BBCMenu = UpdateBBCValues(BBCStuff, BBCMenu);
+        std::vector<MenuOption> MenuOptions
+        {
+            MenuOption('a', "Calculate Inductance"),
+            MenuOption('b', "Enter delta_i"),
+            MenuOption('c', "Calculate delta_i"),
+            MenuOption('d', "Enter switching frequency"),
+            MenuOption('e', "Calculate switching frequency"),
+            MenuOption('x', "Back")
+        };
+        std::vector<MenuItem> MenuItems
+        {
+            MenuItem('a', "L", 0),
+            MenuItem('b', "delta_i", 0),
+            MenuItem('c', "Fs", 0)
+        };
+        Menu Menu("Inductance", MenuOptions, MenuItems);
+
+        //set up values
+        Menu.ChangeItemValue('a', BBCMenu.GetItemValue('i'));
+        Menu.ChangeItemValue('b', BBCMenu.GetItemValue('m'));
+        Menu.ChangeItemValue('c', BBCMenu.GetItemValue('k'));
+
+        bool loop = 1;
+        while (loop)
+        {
+            Menu.PrintMenu();
+            char Option = Menu.ChooseOption();
+            switch (Option)
+            {
+            case 'a':
+                
+            case 'b':
+                std::cout << "Change in Current: ";
+                double delta_i;
+                std::cin >> delta_i;
+                Menu.ChangeItemValue('c', delta_i);
+                BBCMenu.ChangeItemValue('m', delta_i);
+                BBCStuff.Add('m', delta_i);
+                break;
+            case 'c':
+                
+            case 'd':
+                
+            case 'e':
+
+            case 'x':
+                loop = 0;
+                break;
+            }
+        }
+        BuckBoostConverters(BBCStuff, BBCMenu);
     }
 }
-}
-    */
+
 
 
 
