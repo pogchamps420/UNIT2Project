@@ -40,6 +40,8 @@ namespace bbc
 		double CalcRl();
 		double CalcVlON();
 		double CalcVlOFF();
+		//separate implementation for delta i and delta output voltage
+		void Calculus();
 		void ClearValues();
 
 		void Add(char option, double value);
@@ -58,11 +60,6 @@ namespace bbc
 		double CalcIi();
 		double CalcIo();
 		double CalcL();
-		//separate implementation for delta i
-		double Calcdelta_i();
-		//separate implementation for delta output voltage
-		double Calcdelta_vo();
-		//double CalcRl();
 		double CalcC();
 	};
 
@@ -73,11 +70,6 @@ namespace bbc
 		double CalcIi();
 		double CalcIo();
 		double CalcL();
-		//separate implementation for delta i
-		double Calcdelta_i();
-		//separate implementation for delta output voltage
-		double Calcdelta_vo();
-		//double CalcRl();
 		double CalcC();
 	};
 }

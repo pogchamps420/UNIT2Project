@@ -97,7 +97,7 @@ namespace bbc {
         switch (Option)
         {
         case 'a':
-            PDISS(BBCStuff, BBCMenu);
+            VOLT_INDUCT(BBCStuff, BBCMenu);
             BuckBoostConverters(BBCStuff, BBCMenu);
             break;
         case 'b':
@@ -128,7 +128,7 @@ namespace bbc {
 
     }
     
-    Menu CONVERTERS::ChangeValues(bbc::CONVERTERS Pdiss, Menu BBCMenu)
+    Menu CONVERTERS::ChangeValues(bbc::CONVERTERS BuckBoost, Menu BBCMenu)
     {
         std::cout << "\nEnter the number of the value you want to add/change: ";
         char option;
@@ -136,17 +136,18 @@ namespace bbc {
         std::cout << "\nEnter the value you want to use: ";
         double value;
         std::cin >> value;
-        Pdiss.Add(option, value);
-        PDMenu.ChangeItemValue(option, value);
+        BuckBoost.Add(option, value);
+        BBCMenu.ChangeItemValue(option, value);
 
         std::cout << "\nItem changed.\n";
         BuckBoostConverters(BBCStuff, BBCMenu);
         return BBCMenu;
     }
-    Menu Tise::UpdatePDValues(T::PD Pdiss, Menu PDMenu)
+
+    Menu CONVERTERS::UpdateBBCValues(bbc::CONVERTERS BuckBoost, Menu BBCMenu)
     {
-        Pdiss.CalcTcon();
-        PDMenu.ChangeItemValue('c', Pdiss.CalcTcon());
+        BuckBoost.CalcPi();
+        BBCMenu.ChangeItemValue('c', BuckBoost.CalcPi());
         Pdiss.CalcTcoff();
         PDMenu.ChangeItemValue('f', Pdiss.CalcTcoff());
         Pdiss.CalcWcon();
@@ -164,29 +165,34 @@ namespace bbc {
         return PDMenu;
     }
 
-    void Tise::PDISS(T::PD PDiss, Menu& PDMenu)
+    void BUCKBOOST::VOLT_INDUCT(bbc::CONVERTERS BBCStuff, Menu& BBCMenu)
     {
-        PDMenu = UpdatePDValues(PDiss, PDMenu);
+        BBCMenu = UpdateBBCValues(BBCStuff, BBCMenu);
         std::vector<MenuOption> MenuOptions
         {
-            MenuOption('a', "Calculate Pdiss"),
-            MenuOption('b', "Enter Ps"),
-            MenuOption('c', "Enter Pon"),
-            MenuOption('d', "Calculate Ps"),
-            MenuOption('e', "Calculate Pon"),
+            MenuOption('a', "Calculate Inductor Voltage - Switch ON"),
+            MenuOption('b', "Calculate Inductor Voltage - Switch OFF"),
+            MenuOption('c', "Enter L"),
+            MenuOption('d', "Enter delta_i"),
+            MenuOption('e', "Calculate L"),
+            MenuOption('f', "Calculate delta_i"),
             MenuOption('x', "Back")
         };
         std::vector<MenuItem> MenuItems
         {
-            MenuItem('a', "Ps", 0),
-            MenuItem('b', "Pon", 0),
-            MenuItem('c', "Pdiss", 0)
+            MenuItem('a', "Vl", 0),
+            MenuItem('b', "Vl", 0),
+            MenuItem('c', "L", 0),
+            MenuItem('d', "delta_i", 0)
         };
-        Menu Menu("Average Power Dissipation", MenuOptions, MenuItems);
+        Menu Menu("Inductor Voltage", MenuOptions, MenuItems);
+
         //set up values
-        Menu.ChangeItemValue('a', PDMenu.GetItemValue('p'));
-        Menu.ChangeItemValue('b', PDMenu.GetItemValue('q'));
-        Menu.ChangeItemValue('c', PDMenu.GetItemValue('r'));
+        Menu.ChangeItemValue('a', BBCMenu.GetItemValue('c'));
+        Menu.ChangeItemValue('b', BBCMenu.GetItemValue('c'));
+        Menu.ChangeItemValue('c', BBCMenu.GetItemValue('i'));
+        Menu.ChangeItemValue('d', BBCMenu.GetItemValue('m'));
+
         bool loop = 1;
         while (loop)
         {
@@ -195,50 +201,59 @@ namespace bbc {
             switch (Option)
             {
             case 'a':
-                double pdiss;
-                //pdiss = Menu.GetItemValue('a') + Menu.GetItemValue('b');
-                pdiss = PDiss.CalcPdis();
-                Menu.ChangeItemValue('c', pdiss);
-                PDMenu.ChangeItemValue('r', pdiss);
-                std::cout << "\nAverage Power Dissipation: " << Menu.GetItemValue('c') << "\n";
+                double volt_induct;
+                vl_switch_on = BBCStuff.CalcVlON();
+                Menu.ChangeItemValue('a', vl_switch_on);
+                BBCMenu.ChangeItemValue('c', vl_switch_on);
+                std::cout << "\nInductor Voltage: " << Menu.GetItemValue('a') << "\n";
                 break;
             case 'b':
-                std::cout << "Ps: ";
-                double Ps;
-                std::cin >> Ps;
-                Menu.ChangeItemValue('a', Ps);
-                PDMenu.ChangeItemValue('p', Ps);
-                PDiss.Add('p', Ps);
+                double volt_induct;
+                vl_switch_off = BBCStuff.CalcVlOFF();
+                Menu.ChangeItemValue('b', vl_switch_off);
+                BBCMenu.ChangeItemValue('c', vl_switch_off);
+                std::cout << "\nInductor Voltage: " << Menu.GetItemValue('b') << "\n";
                 break;
             case 'c':
-                std::cout << "Pon: ";
-                double Pon;
-                std::cin >> Pon;
-                Menu.ChangeItemValue('b', Pon);
-                PDMenu.ChangeItemValue('q', Pon);
-                PDiss.Add('q', Pon);
+                std::cout << "L: ";
+                double L;
+                std::cin >> L;
+                Menu.ChangeItemValue('c', L);
+                BBCMenu.ChangeItemValue('i', L);
+                BBCStuff.Add('i', L);
                 break;
             case 'd':
-                double ps;
-                PS(PDiss, PDMenu, 'b');
-                ps = PDMenu.GetItemValue('p');
-                Menu.ChangeItemValue('a', ps);
-                PDMenu.ChangeItemValue('p', ps);
+                std::cout << "Change in Current: ";
+                double delta_i;
+                std::cin >> delta_i;
+                Menu.ChangeItemValue('d', delta_i);
+                BBCMenu.ChangeItemValue('m', delta_i);
+                BBCStuff.Add('m', delta_i);
                 break;
             case 'e':
-                double pon;
-                PON(PDiss, PDMenu, 'b');
-                pon = PDMenu.GetItemValue('q');
-                Menu.ChangeItemValue('b', pon);
-                PDMenu.ChangeItemValue('q', pon);
+                double l;
+                l = BBCStuff.CalcL();
+                Menu.ChangeItemValue('c', l);
+                BBCMenu.ChangeItemValue('i', l);
+                break;
+            case 'f':
+                double Delta_i;
+                Delta_i = BBCStuff.Calculus();
+                Delta_i = BBCMenu.GetItemValue('m');
+                Menu.ChangeItemValue('b', l);
+                BBCMenu.ChangeItemValue('m', l);
                 break;
             case 'x':
                 loop = 0;
                 break;
             }
         }
-        PowerDissipation(PDiss, PDMenu);
+        BuckBoostConverters(BBCStuff, BBCMenu);
     }
+
+    
+    }
+
     //Pon + sub calcs
     void Tise::PON(T::PD PDiss, Menu PDMenu, char parent)
     {
