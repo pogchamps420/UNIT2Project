@@ -90,7 +90,7 @@ namespace bbc {
             return;
             break;
         default:
-            TiseMenu();
+            //TiseMenu();
             break;
         }
 
@@ -109,7 +109,7 @@ namespace bbc {
             BuckBoostConverters(BBCStuff, BBCMenu);
             break;
         case 'b':
-            //PS(PDiss, PDMenu, 'a');
+            SEL_INDUCT(BBCStuff, BBCMenu);
             BuckBoostConverters(BBCStuff, BBCMenu);
             break;
         case 'c':
@@ -219,7 +219,6 @@ namespace bbc {
 
         //set up values
         Menu.ChangeItemValue('a', BBCMenu.GetItemValue('c'));
-        //Menu.ChangeItemValue('b', BBCMenu.GetItemValue('c'));
         Menu.ChangeItemValue('b', BBCMenu.GetItemValue('i'));
         Menu.ChangeItemValue('c', BBCMenu.GetItemValue('m'));
 
@@ -356,11 +355,68 @@ namespace bbc {
                 break;
             case 'f':
                 double F_switch;
+                //add in input for Ts
                 F_switch = BBCStuff.CalcFs();
                 F_switch = BBCMenu.GetItemValue('k');
                 Menu.ChangeItemValue('c', F_switch);
                 BBCMenu.ChangeItemValue('k', F_switch);
                 break;
+            case 'x':
+                loop = 0;
+                break;
+            }
+        }
+        BuckBoostConverters(BBCStuff, BBCMenu);
+    }
+
+    void BUCKBOOST::SEL_CAP(bbc::CONVERTERS BBCStuff, Menu& BBCMenu)
+    {
+        BBCMenu = UpdateBBCValues(BBCStuff, BBCMenu);
+        //BuckMenu = UpdateBBCValues(BuckStuff, BuckMenu);
+        //BoostMenu = UpdateBBCValues(BoostStuff, BoostMenu);
+
+        std::vector<MenuOption> MenuOptions
+        {
+            MenuOption('a', "Calculate Capacitance - Buck Converter"),
+            MenuOption('b', "Calculate Capacitance - Boost Converter"),
+            MenuOption('c', "Enter output voltage ripple"),
+            MenuOption('d', "Calculate output voltage ripple"),
+            MenuOption('e', "Enter output voltage"),
+            MenuOption('f', "Calculate output voltage"),
+            MenuOption('x', "Back")
+        };
+        std::vector<MenuItem> MenuItems
+        {
+            MenuItem('a', "L", 0),
+            MenuItem('b', "delta_vo", 0),
+            MenuItem('c', "Vout", 0)
+        };
+        Menu Menu("Inductance", MenuOptions, MenuItems);
+
+        //set up values
+        Menu.ChangeItemValue('a', BBCMenu.GetItemValue('i'));
+        Menu.ChangeItemValue('b', BBCMenu.GetItemValue('j'));
+        Menu.ChangeItemValue('c', BBCMenu.GetItemValue('b'));
+
+        bool loop = 1;
+        while (loop)
+        {
+            Menu.PrintMenu();
+            char Option = Menu.ChooseOption();
+            switch (Option)
+            {
+            case 'a':
+                
+            case 'b':
+                
+            case 'c':
+                
+            case 'd':
+                
+            case 'e':
+                
+            case 'f':
+                
             case 'x':
                 loop = 0;
                 break;
