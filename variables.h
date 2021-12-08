@@ -55,6 +55,7 @@ namespace bbc
 
 	class BUCK: public CONVERTERS
 	{
+	public:
 		double CalcVout();
 		double CalcK();
 		double CalcIi();
@@ -65,6 +66,7 @@ namespace bbc
 
 	class BOOST: public CONVERTERS
 	{
+	public:
 		double CalcVout();
 		double CalcK();
 		double CalcIi();

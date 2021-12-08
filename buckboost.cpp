@@ -33,8 +33,15 @@ namespace bbc {
         Menu BMenu("Main menu", BMenuOptions, BMenuItems);
         BMenu.PrintMenu();
 
-        // initialise stuff for buck/boost converters
+        // initialise general stuff for buck/boost converters
         bbc::CONVERTERS BBCStuff({ 0 });
+
+        //initialise stuff for buck converters
+        bbc::BUCK BuckStuff({ 0 });
+
+        //initialise stuff for buck converters
+        bbc::BOOST BoostStuff({ 0 });
+
 
         std::vector<MenuOption> BBCMenuOptions
         {
@@ -147,22 +154,47 @@ namespace bbc {
     Menu CONVERTERS::UpdateBBCValues(bbc::CONVERTERS BuckBoost, Menu BBCMenu)
     {
         BuckBoost.CalcPi();
-        BBCMenu.ChangeItemValue('c', BuckBoost.CalcPi());
-        Pdiss.CalcTcoff();
-        PDMenu.ChangeItemValue('f', Pdiss.CalcTcoff());
-        Pdiss.CalcWcon();
-        PDMenu.ChangeItemValue('g', Pdiss.CalcWcon());
-        Pdiss.CalcWcoff();
-        PDMenu.ChangeItemValue('h', Pdiss.CalcWcoff());
-        Pdiss.CalcPs();
-        PDMenu.ChangeItemValue('p', Pdiss.CalcPs());
-        Pdiss.CalcWon();
-        PDMenu.ChangeItemValue('n', Pdiss.CalcWon());
-        Pdiss.CalcPon();
-        PDMenu.ChangeItemValue('q', Pdiss.CalcPon());
-        Pdiss.CalcPdis();
-        PDMenu.ChangeItemValue('r', Pdiss.CalcPdis());
-        return PDMenu;
+        BBCMenu.ChangeItemValue('q', BuckBoost.CalcPi());
+        BuckBoost.CalcPo();
+        BBCMenu.ChangeItemValue('h', BuckBoost.CalcPo());
+        BuckBoost.CalcRl();
+        BBCMenu.ChangeItemValue('n', BuckBoost.CalcRl());
+        BuckBoost.CalcVlON();
+        BBCMenu.ChangeItemValue('c', BuckBoost.CalcVlON());
+        BuckBoost.CalcVlOFF();
+        BBCMenu.ChangeItemValue('c', BuckBoost.CalcVlOFF());
+        BuckBoost.CalcVout();
+        return BBCMenu;
+    }
+
+    Menu BUCK::UpdateBBCValues(bbc::BUCK Buck, Menu BBCMenu)
+    {
+        Buck.CalcK();
+        BBCMenu.ChangeItemValue('d', Buck.CalcK());
+        Buck.CalcIi();
+        BBCMenu.ChangeItemValue('e', Buck.CalcIi());
+        Buck.CalcIo();
+        BBCMenu.ChangeItemValue('f', Buck.CalcIo());
+        Buck.CalcL();
+        BBCMenu.ChangeItemValue('i', Buck.CalcL());
+        Buck.CalcC();
+        BBCMenu.ChangeItemValue('p', Buck.CalcC());
+        return BBCMenu;
+    }
+
+    Menu BOOST::UpdateBBCValues(bbc::BOOST Boost, Menu BBCMenu)
+    {
+        Boost.CalcK();
+        BBCMenu.ChangeItemValue('d', Boost.CalcK());
+        Boost.CalcIi();
+        BBCMenu.ChangeItemValue('e', Boost.CalcIi());
+        Boost.CalcIo();
+        BBCMenu.ChangeItemValue('f', Boost.CalcIo());
+        Boost.CalcL();
+        BBCMenu.ChangeItemValue('i', Boost.CalcL());
+        Boost.CalcC();
+        BBCMenu.ChangeItemValue('p', Boost.CalcC());
+        return BBCMenu;
     }
 
     void BUCKBOOST::VOLT_INDUCT(bbc::CONVERTERS BBCStuff, Menu& BBCMenu)
