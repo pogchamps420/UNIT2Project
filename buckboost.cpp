@@ -284,13 +284,17 @@ namespace bbc {
     void BUCKBOOST::SEL_INDUCT(bbc::CONVERTERS BBCStuff, Menu& BBCMenu)
     {
         BBCMenu = UpdateBBCValues(BBCStuff, BBCMenu);
+        //BuckMenu = UpdateBBCValues(BuckStuff, BuckMenu);
+        //BoostMenu = UpdateBBCValues(BoostStuff, BoostMenu);
+
         std::vector<MenuOption> MenuOptions
         {
-            MenuOption('a', "Calculate Inductance"),
-            MenuOption('b', "Enter delta_i"),
-            MenuOption('c', "Calculate delta_i"),
-            MenuOption('d', "Enter switching frequency"),
-            MenuOption('e', "Calculate switching frequency"),
+            MenuOption('a', "Calculate Inductance - Buck Converter"),
+            MenuOption('b', "Calculate Inductance - Boost Converter"),
+            MenuOption('c', "Enter delta_i"),
+            MenuOption('d', "Calculate delta_i"),
+            MenuOption('e', "Enter switching frequency"),
+            MenuOption('f', "Calculate switching frequency"),
             MenuOption('x', "Back")
         };
         std::vector<MenuItem> MenuItems
@@ -314,8 +318,20 @@ namespace bbc {
             switch (Option)
             {
             case 'a':
-                
+                double inductance;
+                inductance = BuckStuff.CalcL();
+                Menu.ChangeItemValue('a', inductance);
+                BBCMenu.ChangeItemValue('i', inductance);
+                std::cout << "\nInductance: " << Menu.GetItemValue('a') << "\n";
+                break;
             case 'b':
+                double inductance;
+                inductance = BoostStuff.CalcL();
+                Menu.ChangeItemValue('a', inductance);
+                BBCMenu.ChangeItemValue('i', inductance);
+                std::cout << "\nInductance: " << Menu.GetItemValue('a') << "\n";
+                break;
+            case 'c':
                 std::cout << "Change in Current: ";
                 double delta_i;
                 std::cin >> delta_i;
@@ -323,12 +339,28 @@ namespace bbc {
                 BBCMenu.ChangeItemValue('m', delta_i);
                 BBCStuff.Add('m', delta_i);
                 break;
-            case 'c':
-                
             case 'd':
-                
+                double Delta_i;
+                Delta_i = BBCStuff.Calculus();
+                Delta_i = BBCMenu.GetItemValue('m');
+                Menu.ChangeItemValue('c', l);
+                BBCMenu.ChangeItemValue('m', l);
+                break;
             case 'e':
-
+                std::cout << "Switching Frequency: ";
+                double f_switch;
+                std::cin >> f_switch;
+                Menu.ChangeItemValue('c', f_switch);
+                BBCMenu.ChangeItemValue('k', f_switch);
+                BBCStuff.Add('k', f_switch);
+                break;
+            case 'f':
+                double F_switch;
+                F_switch = BBCStuff.CalcFs();
+                F_switch = BBCMenu.GetItemValue('k');
+                Menu.ChangeItemValue('c', F_switch);
+                BBCMenu.ChangeItemValue('k', F_switch);
+                break;
             case 'x':
                 loop = 0;
                 break;

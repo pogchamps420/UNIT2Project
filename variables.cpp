@@ -145,6 +145,14 @@ double bbc::CONVERTERS::CalcVlOFF()
 	return _values.Vl;
 }
 
+double bbc::CONVERTERS::CalcFs()
+{
+	if (_values.Fs == 0) {
+		_values.Fs = ( 1 / _values.Ts );
+	}
+	return _values.Fs;
+}
+
 void bbc::CONVERTERS::Calculus()
 {
 	std::string expression;

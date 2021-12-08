@@ -40,6 +40,7 @@ namespace bbc
 		double CalcRl();
 		double CalcVlON();
 		double CalcVlOFF();
+		double CalcFs();
 		//separate implementation for delta i and delta output voltage
 		void Calculus();
 		void ClearValues();
