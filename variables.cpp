@@ -129,6 +129,21 @@ double bbc::CONVERTERS::CalcPo()
 	return _values.Po;
 }
 
+double bbc::CONVERTERS::CalcVlON()
+{
+	if (_values.Vl == 0) {
+		_values.Vl = (_values.L) * ((_values.delta_i) / (_values.K * _values.Ts));
+	}
+	return _values.Vl;
+}
+
+double bbc::CONVERTERS::CalcVlOFF()
+{
+	if (_values.Vl == 0) {
+		_values.Vl = (_values.L) * ((_values.delta_i) / ((1 - _values.K) * _values.Ts));
+	}
+	return _values.Vl;
+}
 
 
 void bbc::CONVERTERS::ClearValues()

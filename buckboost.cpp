@@ -109,7 +109,7 @@ namespace bbc {
             BuckBoostConverters(BBCStuff, BBCMenu);
             break;
         case 'd':
-            PDMenu = ChangeValues(PDiss, PDMenu);
+            BBCMenu = ChangeValues(PDiss, BBCMenu);
             break;
         case 'e':
             PDiss.ClearValues();
@@ -124,46 +124,10 @@ namespace bbc {
         }
     }
 
-        /*
+        
 
     }
-    void Tise::PowerDissipation(T::PD PDiss, Menu PDMenu)
-    {
-        PDMenu = UpdatePDValues(PDiss, PDMenu);
-        PDMenu.PrintMenu();
-
-        char Option = PDMenu.ChooseOption();
-        switch (Option)
-        {
-        case 'a':
-            PDISS(PDiss, PDMenu);
-            PowerDissipation(PDiss, PDMenu);
-            break;
-        case 'b':
-            PS(PDiss, PDMenu, 'a');
-            PowerDissipation(PDiss, PDMenu);
-            break;
-        case 'c':
-            PON(PDiss, PDMenu, 'a');
-            PowerDissipation(PDiss, PDMenu);
-            break;
-        case 'd':
-            PDMenu = ChangeValues(PDiss, PDMenu);
-            break;
-        case 'e':
-            PDiss.ClearValues();
-            PowerDissipation(PDiss, PDMenu);
-            break;
-        case 'x':
-            TiseMenu();
-            break;
-        default:
-            PowerDissipation(PDiss, PDMenu);
-            break;
-        }
-    }
-
-
+    
     Menu CONVERTERS::ChangeValues(bbc::CONVERTERS Pdiss, Menu BBCMenu)
     {
         std::cout << "\nEnter the number of the value you want to add/change: ";
@@ -495,6 +459,7 @@ namespace bbc {
         }
         PDISS(PDiss, PDMenu);
     }
+
     // Ps + sub calcs
     void Tise::PS(T::PD PDiss, Menu PDMenu, char parent)
     {

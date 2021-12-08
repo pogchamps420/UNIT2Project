@@ -16,8 +16,8 @@ namespace bbc
 			BUCKBOOST();
 
 			void InitMenu();
-			void BuckBoostConverters(CONVERTERS PDiss, Menu PDMenu);
-			/* Menu ChangeValues(PD Pdiss, Menu PDMenu);
+			void BuckBoostConverters(CONVERTERS BBCStuff, Menu BBCMenu);
+			Menu ChangeValues(PD Pdiss, Menu BBCMenu);
 			Menu UpdatePDValues(PD Pdiss, Menu PDMenu);
 			void PDISS(PD Pdiss, Menu& PDMenu);
 			void PS(PD PDiss, Menu PDMenu, char parent);

@@ -38,6 +38,8 @@ namespace bbc
 		double CalcPi();
 		double CalcPo();
 		double CalcRl();
+		double CalcVlON();
+		double CalcVlOFF();
 		void ClearValues();
 
 		void Add(char option, double value);
