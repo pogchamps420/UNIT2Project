@@ -13,9 +13,10 @@
 
 namespace bbc
 {
-	struct Values
+	class Values
 	{
-		//Values();
+	public:
+		Values();
 		double Vin;
 		double Vout;
 		double Vl;
@@ -33,9 +34,8 @@ namespace bbc
 		double Pi;
 		double Po;
 		double Ts;
-
-
 	};
+
 	class CONVERTERS
 	{
 		
@@ -72,14 +72,14 @@ namespace bbc
 		BUCK();
 		BUCK(Values values);
 		//Values ShowValues();
-		void AddValues(Values _values);
+		//void AddValues(Values _values);
 		double CalcVout();
 		double CalcK();
 		double CalcIi();
 		double CalcIo();
 		double CalcL();
 		double CalcC();
-		Values _values;
+		//Values _values;
 	};
 
 	class BOOST: public CONVERTERS
@@ -88,14 +88,14 @@ namespace bbc
 		BOOST();
 		BOOST(Values values);
 		//Values ShowValues();
-		void AddValues(Values _values);
+		//void AddValues(Values _values);
 		double CalcVout();
 		double CalcK();
 		double CalcIi();
 		double CalcIo();
 		double CalcL();
 		double CalcC();
-		Values _values;
+		//Values _values;
 	};
 }
 

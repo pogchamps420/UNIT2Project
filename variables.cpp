@@ -1,30 +1,65 @@
 #include "variables.h"
 
 
-bbc::CONVERTERS::CONVERTERS()
-	: _values() {}
+
+
+
+bbc::CONVERTERS::CONVERTERS() {}
 bbc::CONVERTERS::CONVERTERS(Values values)
 	: _values(values) {}
 
-bbc::BOOST::BOOST()
-	: _values() {}
+//bbc::BOOST::BOOST()
+//	: _values() {}
+//
+//bbc::BUCK::BUCK()
+//	: _values() {}
+//
+//bbc::BOOST::BOOST(Values values)
+//	: _values(values) {}
+//
+//bbc::BUCK::BUCK(Values values)
+//	: _values(values) {}
 
-bbc::BUCK::BUCK()
-	: _values() {}
+bbc::BOOST::BOOST() : CONVERTERS() {};
+bbc::BOOST::BOOST(Values values) : CONVERTERS(values) {};
 
-bbc::BOOST::BOOST(Values values)
-	: _values(values) {}
-
-bbc::BUCK::BUCK(Values values)
-	: _values(values) {}
+bbc::BUCK::BUCK() : CONVERTERS() {};
+bbc::BUCK::BUCK(Values values) : CONVERTERS(values) {};
 
 
+bbc::Values::Values()
+{
+	Vin = 0;
+	Vout = 0;
+	Vl = 0;
+	K = 0;
+	Ii = 0;
+	Io = 0;
+	Il = 0;
+	Fs = 0;
+	L = 0;
+	delta_vo = 0;
+	delta_i = 0;
+	Rl = 0;
+	Ro = 0;
+	C = 0;
+	Pi = 0;
+	Po = 0;
+	Ts = 0;
+}
 
 void bbc::CONVERTERS::AddValues(Values values) { _values = values; }
-//bbc::CONVERTERS::Values bbc::CONVERTERS::ShowValues() { return _values; }
+bbc::Values bbc::CONVERTERS::ShowValues() { return _values; }
 
-void bbc::BOOST::AddValues(Values values) { _values = values; }
-void bbc::BUCK::AddValues(Values values) { _values = values; }
+void tempfunc()
+{
+	bbc::Values emptyValues;
+	bbc::BUCK myBuck(emptyValues);
+	myBuck.ShowValues();
+}
+
+//void bbc::BOOST::AddValues(Values values) { _values = values; }
+//void bbc::BUCK::AddValues(Values values) { _values = values; }
 
 //void bbc::BOOST::Values bbc::BOOST::ShowValues() { return _values; }
 //void bbc::BUCK::Values bbc::BUCK::ShowValues() { return _values; }
