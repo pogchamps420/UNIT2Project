@@ -7,7 +7,6 @@ namespace T
     void Tise::TiseMenu()
     {
         System::Clear();
-
         //Define user-selectable options
         std::vector<MenuOption> TMenuOptions
         {
@@ -217,6 +216,7 @@ namespace T
 
     void Tise::PDISS(T::PD PDiss, Menu& PDMenu)
     {
+        System::Clear();
         PDMenu = UpdatePDValues(PDiss, PDMenu);
         std::vector<MenuOption> MenuOptions
         {
@@ -297,6 +297,7 @@ namespace T
     //Pon + sub calcs
     void Tise::PON(T::PD PDiss, Menu PDMenu, char parent)
     {
+        System::Clear();
         PDMenu = UpdatePDValues(PDiss, PDMenu);
         std::vector<MenuOption> MenuOptions
         {
@@ -528,6 +529,7 @@ namespace T
     // Ps + sub calcs
     void Tise::PS(T::PD PDiss, Menu PDMenu, char parent)
     {
+        System::Clear();
         PDMenu = UpdatePDValues(PDiss, PDMenu);
         std::vector<MenuOption> MenuOptions
         {

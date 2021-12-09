@@ -26,7 +26,6 @@ Menu::Menu(std::string name, std::vector<MenuOption> options, std::vector<MenuIt
 void Menu::PrintMenu()
 {
 	//Displaying the menu's name
-	System::Clear();
 	std::cout << "-----------------------\n";
 	std::cout << _name << '\n';
 	std::cout << "-----------------------\n";
