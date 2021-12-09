@@ -12,12 +12,6 @@ int main()
     //intro title
     System::Clear();
     std::cout << "Welcome to our sandbox\n\Project by Tise Olayinka, Delilah Hague, Rafal Kalisz\nGroup 35\tELEC2645\n" << std::endl;
-    System::Sleep(1);
-    std::cout << "Enter any key to start. ";
-    char Start;
-    std::cin >> Start;
-    System::Buffer();
-    System::Sleep(1);
 
     //Display menu
     T::Tise TMenu;
@@ -139,8 +133,5 @@ int main()
     //outro sequence
     std::cout << "\n\nThank you for using our Sandbox\n\Project by Tise Olayinka, Delilah Hague, Rafal Kalisz\nGroup 35\tELEC2645" << std::endl;
     System::Sleep(3);
-    System::Buffer();
-    System::Sleep(3);
     std::cout << "\n\tBye <3";
-    System::Sleep(1);
 }

@@ -30,7 +30,6 @@ void Menu::PrintMenu()
 	std::cout << "-----------------------\n";
 	std::cout << _name << '\n';
 	std::cout << "-----------------------\n";
-	System::Sleep(1);
 
 	//Displaying all items
 
@@ -56,7 +55,6 @@ void Menu::PrintMenu()
 
 char Menu::ChooseOption()
 {
-	System::Sleep(1);
 	char inputChar;
 	std::cout << "Choose an option from above list: ";
 	std::cin >> inputChar;
