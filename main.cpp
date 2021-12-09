@@ -7,6 +7,8 @@
 #include "eseries.h"
 #include "componentmatch.h"
 #include "potentialdivider.h"
+#include "System.h"
+#include "rafal.h"
 
 int main()
 {
@@ -18,8 +20,49 @@ int main()
     while (std::cin.get() != '\n');
 
     //Display menu
-    T::Tise TMenu;
-    TMenu.TiseMenu();
+
+    while (true)
+    {
+        System::Clear();
+
+        std::vector<MenuItem> mainItems{};
+        std::vector<MenuOption> mainOptions
+        {
+            MenuOption('T', "Tise's menu"),
+            MenuOption('D', "Delilah's menu"),
+            MenuOption('R', "Rafal's menu"),
+            MenuOption('x', "Exit the application")
+        };
+
+        Menu mainMenu("Main Menu", mainOptions, mainItems);
+        mainMenu.PrintMenu();
+        char chosenOption = mainMenu.ChooseOption();
+
+        T::Tise TMenu;
+
+        switch (chosenOption)
+        {
+        
+        case 'T':
+            TMenu.TiseMenu();
+            break;
+        
+        case 'R':
+            rafal::Rafal();
+            break;
+        
+        case 'x':
+            goto break_main_while;
+            break;
+        }
+    }
+break_main_while:;
+
+
+    
+
+    
+    
 
     // D's stuff - transfer to Tise.cpp
     /*

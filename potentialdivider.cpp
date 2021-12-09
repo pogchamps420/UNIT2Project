@@ -105,6 +105,8 @@ namespace potdiv
 		Menu dividerMenu("Resistor potential divider calculator", dividerOptions, dividerItems);
 		while(true)
 		{
+			System::Clear();
+
 			dividerMenu.PrintMenu();
 			char ident = dividerMenu.ChooseOption();
 			int E;
@@ -190,7 +192,7 @@ namespace potdiv
 				goto exit_pot_div;
 				break;
 			}
-			std::system("cls");
+			System::Clear();
 		}
 	exit_pot_div:;
 	}

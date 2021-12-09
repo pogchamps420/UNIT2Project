@@ -6,6 +6,7 @@
 #include "menuelement.h"
 #include "eseries.h"
 #include "componentmatch.h"
+#include "System.h"
 #include <vector>
 #include <iostream>
 
