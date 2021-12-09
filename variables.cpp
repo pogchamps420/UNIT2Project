@@ -303,8 +303,9 @@ std::string bbc::CONVERTERS::Calculus()
 	}
 	default:
 		std::cout << "oops";
-		return 0;
+		return "";
 	} 
+	//return "";
 }
 
 
