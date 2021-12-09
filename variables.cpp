@@ -212,6 +212,12 @@ void bbc::CONVERTERS::Calculus()
 				std::cout << new_power << "\n";
 
 				std::cout << result << "x^" << new_power;
+
+				//return value
+				std::string new_expression = result + "x^" + new_power;
+				std::cout << new_expression;
+
+				
 			}
 			else {
 				std::cout << "It's a term with a linear coefficient\n";

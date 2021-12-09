@@ -106,28 +106,28 @@ namespace bbc {
         {
         case 'a':
             VOLT_INDUCT(BBCStuff, BuckStuff, BoostStuff, BBCMenu);
-            BuckBoostConverters(BBCStuff, BBCMenu);
+            BuckBoostConverters(BBCStuff, BuckStuff, BoostStuff, BBCMenu);
             break;
         case 'b':
-            SEL_INDUCT(BBCStuff, BBCMenu);
-            BuckBoostConverters(BBCStuff, BBCMenu);
+            SEL_INDUCT(BBCStuff, BuckStuff, BoostStuff, BBCMenu);
+            BuckBoostConverters(BBCStuff, BuckStuff, BoostStuff, BBCMenu);
             break;
         case 'c':
-            SEL_CAP(BBCStuff, BBCMenu);
-            BuckBoostConverters(BBCStuff, BBCMenu);
+            SEL_CAP(BBCStuff, BuckStuff, BoostStuff, BBCMenu);
+            BuckBoostConverters(BBCStuff, BuckStuff, BoostStuff, BBCMenu);
             break;
         case 'd':
             BBCMenu = ChangeValues(BBCStuff, BBCMenu);
             break;
         case 'e':
             BBCStuff.ClearValues();
-            BuckBoostConverters(BBCStuff, BBCMenu);
+            BuckBoostConverters(BBCStuff, BuckStuff, BoostStuff, BBCMenu);
             break;
         case 'x':
             //TiseMenu();
             break;
         default:
-            BuckBoostConverters(BBCStuff, BBCMenu);
+            BuckBoostConverters(BBCStuff, BuckStuff, BoostStuff, BBCMenu);
             break;
         }
         
@@ -277,7 +277,7 @@ namespace bbc {
                 break;
             }
         }
-        BuckBoostConverters(BBCStuff, BBCMenu);
+        BuckBoostConverters(BBCStuff, BuckStuff, BoostStuff, BBCMenu);
     }
 
     void BUCKBOOST::SEL_INDUCT(CONVERTERS BBCStuff, BUCK BuckStuff, BOOST BoostStuff, Menu& BBCMenu)
@@ -366,7 +366,7 @@ namespace bbc {
                 break;
             }
         }
-        BuckBoostConverters(BBCStuff, BBCMenu);
+        BuckBoostConverters(BBCStuff, BuckStuff, BoostStuff, BBCMenu);
     }
 
     void BUCKBOOST::SEL_CAP(CONVERTERS BBCStuff, BUCK BuckStuff, BOOST BoostStuff, Menu& BBCMenu)
@@ -457,7 +457,7 @@ namespace bbc {
                 break;
             }
         }
-        BuckBoostConverters(BBCStuff, BBCMenu);
+        BuckBoostConverters(BBCStuff, BuckStuff, BoostStuff, BBCMenu);
     }
 }
 
