@@ -2,19 +2,23 @@
 #define COMPONENTMATCH_H
 
 #include <vector>
+#include <iostream>
 
 namespace npv
 {
 	class ComponentMatch
 	{
 	public:
-		ComponentMatch(std::vector<float> values, float deviationNumerical, float target);
+		ComponentMatch(std::pair<double, double> values, double calcValue, double target, std::string unit, std::string resultUnit);
 		
 		void printMatch();
 	private:
-		std::vector<float> _values;
-		float _deviationNumerical;
+		std::pair<double, double> _values;
+		double _deviationNumerical;
+		double _calculatedValue;
 		float _deviationPercent;
+		std::string _unit;
+		std::string _resultUnit;
 	};
 }
 

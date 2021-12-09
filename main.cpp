@@ -6,11 +6,12 @@
 #include "Tise.h"
 #include "eseries.h"
 #include "componentmatch.h"
+#include "potentialdivider.h"
 
 int main()
 {
     
-    npv::Eseries E6(6);
+    /*npv::Eseries E6(6);
     std::cout << E6.FindNearest(0.5).first << ' ' << E6.FindNearest(0.5).second << '\n';
     std::cout << E6.FindNearest(1).first << ' ' << E6.FindNearest(1).second << '\n';
     std::cout << E6.FindNearest(3.3).first << ' ' << E6.FindNearest(3.3).second << '\n';
@@ -18,7 +19,15 @@ int main()
     std::cout << E6.FindNearest(9.5).first << ' ' << E6.FindNearest(9.5).second << '\n';
     std::cout << E6.FindNearest(6.8).first << ' ' << E6.FindNearest(6.8).second << '\n';
     std::cout << E6.FindNearest(10).first << ' ' << E6.FindNearest(10).second << '\n';
-    std::cout << E6.FindNearest(95).first << ' ' << E6.FindNearest(95).second << '\n';
+    std::cout << E6.FindNearest(95).first << ' ' << E6.FindNearest(95).second << '\n';*/
+
+    
+
+    /*std::vector<npv::ComponentMatch> testMatches = E6.MatchPair(0.75, 100, potdiv::Ratio, potdiv::RbFromRatio, "Ohms", "Volts");
+    for(auto testMatch : testMatches)
+        testMatch.printMatch();*/
+    
+    potdiv::RunDividerCalculator();
 
     //Define user-selectable options
     std::vector<MenuOption> mainMenuOptions
