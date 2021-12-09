@@ -4,11 +4,20 @@
 
 #include <string>
 #include <iostream>
+#include <fstream>
+#include <filesystem>
+#include <type_traits>
 #include "PD.h"
 #include "menu.h"
+#include "System.h"
 
 namespace T
 {
+	struct Data
+	{
+		std::string Name;
+		int Values = 0;
+	};
 	class Tise
 	{
 		public:
@@ -25,6 +34,8 @@ namespace T
 			void WCOFF(PD PDiss, Menu PDMenu, char parent);
 			void TSFS(PD PDiss, Menu PDMenu, char parent);
 			void WON(PD PDiss, Menu PDMenu, char parent);
+			void ExportData(PD PDiss, bool newfile);
+			PD ImportData(PD PDiss);
 
 		private:
 	};

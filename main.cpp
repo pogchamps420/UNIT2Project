@@ -10,58 +10,22 @@
 
 int main()
 {
-    
-    /*npv::Eseries E6(6);
-    std::cout << E6.FindNearest(0.5).first << ' ' << E6.FindNearest(0.5).second << '\n';
-    std::cout << E6.FindNearest(1).first << ' ' << E6.FindNearest(1).second << '\n';
-    std::cout << E6.FindNearest(3.3).first << ' ' << E6.FindNearest(3.3).second << '\n';
-    std::cout << E6.FindNearest(4.0).first << ' ' << E6.FindNearest(4.0).second << '\n';
-    std::cout << E6.FindNearest(9.5).first << ' ' << E6.FindNearest(9.5).second << '\n';
-    std::cout << E6.FindNearest(6.8).first << ' ' << E6.FindNearest(6.8).second << '\n';
-    std::cout << E6.FindNearest(10).first << ' ' << E6.FindNearest(10).second << '\n';
-    std::cout << E6.FindNearest(95).first << ' ' << E6.FindNearest(95).second << '\n';*/
 
-    
+    //intro title
+    System::Clear();
+    std::cout << "Welcome to our sandbox\n\Project by Tise Olayinka, Delilah Hague, Rafal Kalisz\nGroup 35\tELEC2645\n" << std::endl;
+    System::Sleep(1);
+    std::cout << "Enter any key to start. ";
+    char Start;
+    std::cin >> Start;
+    System::Buffer();
+    System::Sleep(1);
 
-    /*std::vector<npv::ComponentMatch> testMatches = E6.MatchPair(0.75, 100, potdiv::Ratio, potdiv::RbFromRatio, "Ohms", "Volts");
-    for(auto testMatch : testMatches)
-        testMatch.printMatch();*/
-    
-    potdiv::RunDividerCalculator();
-
-    //Define user-selectable options
-    std::vector<MenuOption> mainMenuOptions
-    {
-        MenuOption('1', "Option A"),
-        MenuOption('2', "Option B"),
-        MenuOption('3', "Option C"),
-        MenuOption('0', "Tise")
-    };
-
-    //Define items to be displayed, value can be either a string or an int
-    std::vector<MenuItem> mainMenuItems
-    {
-        MenuItem('a', "Item one", 69),
-        MenuItem('b', "Item two", 420)
-    };
-                                                                                                                                                                                                                                                                                                
-    //Initialise menu
-    Menu mainMenu("Main menu", mainMenuOptions, mainMenuItems);
-    
     //Display menu
-    mainMenu.PrintMenu();
-
-    char chosenOption = mainMenu.ChooseOption();
     T::Tise TMenu;
-    switch (chosenOption)
-    {
-        case '0':
-            TMenu.TiseMenu();
-            break;
-        default:
-            break;
-    }
-    
+    TMenu.TiseMenu();
+
+    // D's stuff - transfer to Tise.cpp
     /*
     std::string expression;
     std::cin >> expression;
@@ -129,7 +93,7 @@ int main()
         }
         // Integration
         case '2': {
-            
+
             if (is_number(expression)) {
                 std::cout << "It's a constant.\n";
                 //return the constant plus the variable
@@ -174,7 +138,11 @@ int main()
         std::cout << "oops";
     } */
 
-    //Adhoc fix for debug window closing immediately after entering input
-    char temp;
-    std::cin >> temp;
+    //outro sequence
+    std::cout << "\n\nThank you for using our Sandbox\n\Project by Tise Olayinka, Delilah Hague, Rafal Kalisz\nGroup 35\tELEC2645" << std::endl;
+    System::Sleep(3);
+    System::Buffer();
+    System::Sleep(3);
+    std::cout << "\n\tBye <3";
+    System::Sleep(1);
 }
