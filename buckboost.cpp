@@ -133,7 +133,7 @@ namespace bbc {
         
     }
     
-    Menu CONVERTERS::ChangeValues(bbc::CONVERTERS BuckBoost, Menu BBCMenu)
+    Menu BUCKBOOST::ChangeValues(bbc::CONVERTERS BuckBoost, Menu BBCMenu)
     {
         std::cout << "\nEnter the number of the value you want to add/change: ";
         char option;
@@ -149,7 +149,7 @@ namespace bbc {
         return BBCMenu;
     }
 
-    Menu CONVERTERS::UpdateBBCValues(bbc::CONVERTERS BuckBoost, Menu BBCMenu)
+    Menu BUCKBOOST::UpdateBBCValues(bbc::CONVERTERS BuckBoost, Menu BBCMenu)
     {
         BuckBoost.CalcPi();
         BBCMenu.ChangeItemValue('q', BuckBoost.CalcPi());
@@ -161,11 +161,11 @@ namespace bbc {
         BBCMenu.ChangeItemValue('c', BuckBoost.CalcVlON());
         BuckBoost.CalcVlOFF();
         BBCMenu.ChangeItemValue('c', BuckBoost.CalcVlOFF());
-        BuckBoost.CalcVout();
+        //BuckBoost.CalcVout();
         return BBCMenu;
     }
 
-    Menu CONVERTERS::UpdateBBCValues(bbc::CONVERTERS Buck, Menu BBCMenu)
+    Menu BUCKBOOST::UpdateBBCValues(bbc::BUCK Buck, Menu BBCMenu)
     {
         Buck.CalcK();
         BBCMenu.ChangeItemValue('d', Buck.CalcK());
@@ -180,7 +180,7 @@ namespace bbc {
         return BBCMenu;
     }
 
-    Menu CONVERTERS::UpdateBBCValues(bbc::CONVERTERS Boost, Menu BBCMenu)
+    Menu BUCKBOOST::UpdateBBCValues(bbc::BOOST Boost, Menu BBCMenu)
     {
         Boost.CalcK();
         BBCMenu.ChangeItemValue('d', Boost.CalcK());
@@ -195,7 +195,7 @@ namespace bbc {
         return BBCMenu;
     }
 
-    void BUCKBOOST::VOLT_INDUCT(bbc::CONVERTERS BBCStuff, Menu& BBCMenu)
+    void BUCKBOOST::VOLT_INDUCT(bbc::CONVERTERS BBCStuff, bbc::BUCK BuckStuff, bbc::BOOST BoostStuff, Menu& BBCMenu)
     {
         BBCMenu = UpdateBBCValues(BBCStuff, BBCMenu);
         std::vector<MenuOption> MenuOptions
@@ -230,14 +230,14 @@ namespace bbc {
             switch (Option)
             {
             case 'a':
-                double volt_induct;
+                double vl_switch_on;
                 vl_switch_on = BBCStuff.CalcVlON();
                 Menu.ChangeItemValue('a', vl_switch_on);
                 BBCMenu.ChangeItemValue('c', vl_switch_on);
                 std::cout << "\nInductor Voltage: " << Menu.GetItemValue('a') << "\n";
                 break;
             case 'b':
-                double volt_induct;
+                double vl_switch_off;
                 vl_switch_off = BBCStuff.CalcVlOFF();
                 Menu.ChangeItemValue('b', vl_switch_off);
                 BBCMenu.ChangeItemValue('c', vl_switch_off);
@@ -317,17 +317,17 @@ namespace bbc {
             switch (Option)
             {
             case 'a':
-                double inductance;
-                inductance = BuckStuff.CalcL();
-                Menu.ChangeItemValue('a', inductance);
-                BBCMenu.ChangeItemValue('i', inductance);
+                double buck_inductance;
+                buck_inductance = BuckStuff.CalcL();
+                Menu.ChangeItemValue('a', buck_inductance);
+                BBCMenu.ChangeItemValue('i', buck_inductance);
                 std::cout << "\nInductance: " << Menu.GetItemValue('a') << "\n";
                 break;
             case 'b':
-                double inductance;
-                inductance = BoostStuff.CalcL();
-                Menu.ChangeItemValue('a', inductance);
-                BBCMenu.ChangeItemValue('i', inductance);
+                double boost_inductance;
+                boost_inductance = BoostStuff.CalcL();
+                Menu.ChangeItemValue('a', boost_inductance);
+                BBCMenu.ChangeItemValue('i', boost_inductance);
                 std::cout << "\nInductance: " << Menu.GetItemValue('a') << "\n";
                 break;
             case 'c':

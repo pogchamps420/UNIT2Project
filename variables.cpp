@@ -156,6 +156,11 @@ double bbc::CONVERTERS::CalcFs()
 
 void bbc::CONVERTERS::Calculus()
 {
+
+	bool is_number(const std::string & word) {
+		return !word.empty() && std::all_of(word.begin(), word.end(), ::isdigit);
+	}
+
 	std::string expression;
 	std::cin >> expression;
 	std::string exponent("^");
