@@ -19,8 +19,9 @@ namespace bbc
 			void BuckBoostConverters(CONVERTERS BBCStuff, Menu BBCMenu);
 			Menu ChangeValues(CONVERTERS BBCStuff, Menu BBCMenu);
 			Menu UpdateBBCValues(CONVERTERS BBCStuff, Menu BBCMenu);
-			void VOLT_INDUCT(PD Pdiss, Menu& BBCMenu);
-			void SEL_INDUCT(PD PDiss, Menu PDMenu, char parent);
+			void VOLT_INDUCT(CONVERTERS BBCStuff, Menu& BBCMenu);
+			void SEL_INDUCT(CONVERTERS BBCStuff, Menu& BBCMenu);
+			void SEL_CAP(CONVERTERS BBCStuff, Menu& BBCMenu);
 			*/
 		private:
 	};
