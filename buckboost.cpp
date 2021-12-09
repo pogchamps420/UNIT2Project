@@ -261,7 +261,7 @@ namespace bbc {
                 break;
             case 'e':
                 double l;
-                l = BBCStuff.CalcL();
+                l = BuckStuff.CalcL();
                 Menu.ChangeItemValue('b', l);
                 BBCMenu.ChangeItemValue('i', l);
                 break;
@@ -280,7 +280,7 @@ namespace bbc {
         BuckBoostConverters(BBCStuff, BBCMenu);
     }
 
-    void BUCKBOOST::SEL_INDUCT(bbc::CONVERTERS BBCStuff, Menu& BBCMenu)
+    void BUCKBOOST::SEL_INDUCT(bbc::CONVERTERS BBCStuff, bbc::BUCK BuckStuff, bbc::BOOST BoostStuff, Menu& BBCMenu)
     {
         BBCMenu = UpdateBBCValues(BBCStuff, BBCMenu);
         //BuckMenu = UpdateBBCValues(BuckStuff, BuckMenu);
@@ -369,7 +369,7 @@ namespace bbc {
         BuckBoostConverters(BBCStuff, BBCMenu);
     }
 
-    void BUCKBOOST::SEL_CAP(bbc::CONVERTERS BBCStuff, Menu& BBCMenu)
+    void BUCKBOOST::SEL_CAP(bbc::CONVERTERS BBCStuff, bbc::BUCK BuckStuff, bbc::BOOST BoostStuff, Menu& BBCMenu)
     {
         BBCMenu = UpdateBBCValues(BBCStuff, BBCMenu);
         //BuckMenu = UpdateBBCValues(BuckStuff, BuckMenu);
@@ -407,17 +407,17 @@ namespace bbc {
             switch (Option)
             {
             case 'a':
-                double capacitance;
-                capacitance = BuckStuff.CalcC();
-                Menu.ChangeItemValue('a', inductance);
-                BBCMenu.ChangeItemValue('i', inductance);
+                double buck_capacitance;
+                buck_capacitance = BuckStuff.CalcC();
+                Menu.ChangeItemValue('a', buck_capacitance);
+                BBCMenu.ChangeItemValue('i', buck_capacitance);
                 std::cout << "\nInductance: " << Menu.GetItemValue('a') << "\n";
                 break;
             case 'b':
-                double capacitance;
-                capacitance = BoostStuff.CalcC();
-                Menu.ChangeItemValue('a', inductance);
-                BBCMenu.ChangeItemValue('i', inductance);
+                double boost_capacitance;
+                boost_capacitance = BoostStuff.CalcC();
+                Menu.ChangeItemValue('a', boost_capacitance);
+                BBCMenu.ChangeItemValue('i', boost_capacitance);
                 std::cout << "\nInductance: " << Menu.GetItemValue('a') << "\n";
                 break;
             case 'c':
@@ -441,16 +441,16 @@ namespace bbc {
                 BBCMenu.ChangeItemValue('b', Vout);
                 BBCStuff.Add('b', Vout);
             case 'f':
-                double VOut;
-                VOut = BuckStuff.CalcVout();
-                Menu.ChangeItemValue('b', Delta_vo);
-                BBCMenu.ChangeItemValue('j', Delta_vo);
+                double Buck_VOut;
+                Buck_VOut = BuckStuff.CalcVout();
+                Menu.ChangeItemValue('b', Buck_VOut);
+                BBCMenu.ChangeItemValue('j', Buck_VOut);
                 break;
             case 'g':
-                double VOut;
-                VOut = BoostStuff.CalcVout();
-                Menu.ChangeItemValue('b', Delta_vo);
-                BBCMenu.ChangeItemValue('j', Delta_vo);
+                double Boost_VOut;
+                Boost_VOut = BoostStuff.CalcVout();
+                Menu.ChangeItemValue('b', Boost_VOut);
+                BBCMenu.ChangeItemValue('j', Boost_VOut);
                 break;
             case 'x':
                 loop = 0;
