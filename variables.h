@@ -9,33 +9,39 @@
 
 //variables buck and boost have in common: Pi, Po
 //variables they differ on: Vout, Ii, Io, Vl, C, delta_vo, K, L
+
+
 namespace bbc
 {
+	struct Values
+	{
+		//Values();
+		double Vin;
+		double Vout;
+		double Vl;
+		double K;
+		double Ii;
+		double Io;
+		double Il;
+		double Fs;
+		double L;
+		double delta_vo;
+		double delta_i;
+		double Rl;
+		double Ro;
+		double C;
+		double Pi;
+		double Po;
+		double Ts;
+
+
+	};
 	class CONVERTERS
 	{
-		struct Values
-		{
-			double Vin;
-			double Vout;
-			double Vl;
-			double K;
-			double Ii;
-			double Io;
-			double Il;
-			double Fs;
-			double L;
-			double delta_vo;
-			double delta_i;
-			double Rl;
-			double Ro;
-			double C;
-			double Pi;
-			double Po;
-			double Ts;
-
-
-		};
+		
+		
 	public:
+		
 		CONVERTERS();
 		CONVERTERS(Values values);
 		
@@ -60,28 +66,34 @@ namespace bbc
 		
 	};
 
-	struct BUCK: public CONVERTERS
+	class BUCK: public CONVERTERS
 	{
-	//public:
+	public:
 		BUCK();
+		BUCK(Values values);
+		void AddValues(Values _values);
 		double CalcVout();
 		double CalcK();
 		double CalcIi();
 		double CalcIo();
 		double CalcL();
 		double CalcC();
+		Values _values;
 	};
 
-	struct BOOST: public CONVERTERS
+	class BOOST: public CONVERTERS
 	{
-	//public:
+	public:
 		BOOST();
+		BOOST(Values values);
+		void AddValues(Values _values);
 		double CalcVout();
 		double CalcK();
 		double CalcIi();
 		double CalcIo();
 		double CalcL();
 		double CalcC();
+		Values _values;
 	};
 }
 

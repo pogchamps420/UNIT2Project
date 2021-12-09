@@ -9,6 +9,8 @@
 //    return !word.empty() && std::all_of(word.begin(), word.end(), ::isdigit);
 //}
 
+
+
 namespace bbc {
     BUCKBOOST::BUCKBOOST() {}
 
@@ -31,10 +33,10 @@ namespace bbc {
         bbc::CONVERTERS BBCStuff({ 0 });
 
         //initialise stuff for buck converters
-        bbc::BUCK BuckStuff({});
+        bbc::BUCK BuckStuff({ 0 });
 
         //initialise stuff for buck converters
-        bbc::BOOST BoostStuff({});
+        bbc::BOOST BoostStuff({ 0 });
 
 
         std::vector<MenuOption> BBCMenuOptions
@@ -89,6 +91,7 @@ namespace bbc {
         }
 
     }
+
 
     void BUCKBOOST::BuckBoostConverters(CONVERTERS BBCStuff, BUCK BuckStuff, BOOST BoostStuff, Menu BBCMenu)
     {
@@ -188,7 +191,7 @@ namespace bbc {
         BBCMenu.ChangeItemValue('p', Boost.CalcC());
         return BBCMenu;
     }
-
+    
     void BUCKBOOST::VOLT_INDUCT(CONVERTERS BBCStuff, BUCK BuckStuff, BOOST BoostStuff, Menu& BBCMenu)
     {
         BBCMenu = UpdateBBCValues(BBCStuff, BuckStuff, BoostStuff, BBCMenu);
@@ -229,6 +232,7 @@ namespace bbc {
             double l;
             std::string Delta_i;
 
+            
             switch (Option)
             {
             case 'a':
@@ -278,6 +282,7 @@ namespace bbc {
                 loop = 0;
                 break;
             }
+            
         }
         BuckBoostConverters(BBCStuff, BuckStuff, BoostStuff, BBCMenu);
     }
@@ -323,7 +328,7 @@ namespace bbc {
             std::string Delta_i;
             double f_switch;
             double F_switch;
-
+            
 
             switch (Option)
             {
@@ -380,9 +385,12 @@ namespace bbc {
                 loop = 0;
                 break;
             }
+            
         }
         BuckBoostConverters(BBCStuff, BuckStuff, BoostStuff, BBCMenu);
     }
+
+    
 
     void BUCKBOOST::SEL_CAP(CONVERTERS BBCStuff, BUCK BuckStuff, BOOST BoostStuff, Menu& BBCMenu)
     {
@@ -428,6 +436,8 @@ namespace bbc {
             double Buck_VOut;
             double Boost_VOut;
 
+            
+
             switch (Option)
             {
             case 'a':
@@ -446,7 +456,7 @@ namespace bbc {
                 break;
             case 'c':
                 std::cout << "Output Voltage Ripple: ";
-                double delta_vo;
+                //double delta_vo;
                 std::cin >> delta_vo;
                 Menu.ChangeItemValue('b', delta_vo);
                 BBCMenu.ChangeItemValue('j', delta_vo);
@@ -480,10 +490,14 @@ namespace bbc {
                 loop = 0;
                 break;
             }
+            
         }
         BuckBoostConverters(BBCStuff, BuckStuff, BoostStuff, BBCMenu);
     }
+
+    
 }
+
 
 
 
