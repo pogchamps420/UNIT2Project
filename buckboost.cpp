@@ -37,10 +37,10 @@ namespace bbc {
         bbc::CONVERTERS BBCStuff({ 0 });
 
         //initialise stuff for buck converters
-        bbc::CONVERTERS BuckStuff({ 0 });
+        bbc::BUCK BuckStuff({ 0 });
 
         //initialise stuff for buck converters
-        bbc::CONVERTERS BoostStuff({ 0 });
+        bbc::BOOST BoostStuff({ 0 });
 
 
         std::vector<MenuOption> BBCMenuOptions
@@ -342,8 +342,8 @@ namespace bbc {
                 double Delta_i;
                 Delta_i = BBCStuff.Calculus();
                 Delta_i = BBCMenu.GetItemValue('m');
-                Menu.ChangeItemValue('c', l);
-                BBCMenu.ChangeItemValue('m', l);
+                Menu.ChangeItemValue('c', Delta_i);
+                BBCMenu.ChangeItemValue('m', Delta_i);
                 break;
             case 'e':
                 std::cout << "Switching Frequency: ";

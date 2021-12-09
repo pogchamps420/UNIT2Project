@@ -8,6 +8,12 @@ bbc::CONVERTERS::CONVERTERS()
 bbc::CONVERTERS::CONVERTERS(Values values)
 	: _values(values) {}
 
+bbc::BUCK::BUCK(Values values)
+	:  {_values = values; }
+
+bbc::BOOST::BOOST(Values values)
+	: {_values = values; }
+
 void bbc::CONVERTERS::AddValues(Values values) { _values = values; }
 bbc::CONVERTERS::Values bbc::CONVERTERS::ShowValues() { return _values; }
 
