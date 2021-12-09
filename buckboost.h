@@ -22,7 +22,7 @@ namespace bbc
 			void VOLT_INDUCT(CONVERTERS BBCStuff, Menu& BBCMenu);
 			void SEL_INDUCT(CONVERTERS BBCStuff, Menu& BBCMenu);
 			void SEL_CAP(CONVERTERS BBCStuff, Menu& BBCMenu);
-			*/
+			
 		private:
 	};
 }

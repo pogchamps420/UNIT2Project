@@ -37,10 +37,10 @@ namespace bbc {
         bbc::CONVERTERS BBCStuff({ 0 });
 
         //initialise stuff for buck converters
-        bbc::BUCK BuckStuff({ 0 });
+        bbc::CONVERTERS BuckStuff({ 0 });
 
         //initialise stuff for buck converters
-        bbc::BOOST BoostStuff({ 0 });
+        bbc::CONVERTERS BoostStuff({ 0 });
 
 
         std::vector<MenuOption> BBCMenuOptions
@@ -96,9 +96,9 @@ namespace bbc {
 
     }
 
-    void BUCKBOOST::BuckBoostConverters(bbc::CONVERTERS BuckBoostConverters, Menu BBCMenu)
+    void BUCKBOOST::BuckBoostConverters(bbc::CONVERTERS BBCStuff, Menu BBCMenu)
     {
-        BBCMenu = UpdateBBCValues(BuckBoostConverters, BBCMenu);
+        BBCMenu = UpdateBBCValues(BBCStuff, BBCMenu);
         BBCMenu.PrintMenu();
 
         char Option = BBCMenu.ChooseOption();
@@ -165,7 +165,7 @@ namespace bbc {
         return BBCMenu;
     }
 
-    Menu BUCK::UpdateBBCValues(bbc::BUCK Buck, Menu BBCMenu)
+    Menu CONVERTERS::UpdateBBCValues(bbc::CONVERTERS Buck, Menu BBCMenu)
     {
         Buck.CalcK();
         BBCMenu.ChangeItemValue('d', Buck.CalcK());
@@ -180,7 +180,7 @@ namespace bbc {
         return BBCMenu;
     }
 
-    Menu BOOST::UpdateBBCValues(bbc::BOOST Boost, Menu BBCMenu)
+    Menu CONVERTERS::UpdateBBCValues(bbc::CONVERTERS Boost, Menu BBCMenu)
     {
         Boost.CalcK();
         BBCMenu.ChangeItemValue('d', Boost.CalcK());

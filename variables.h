@@ -57,6 +57,7 @@ namespace bbc
 	struct BUCK: public CONVERTERS
 	{
 	//public:
+		//BUCK();
 		double CalcVout();
 		double CalcK();
 		double CalcIi();
@@ -68,6 +69,7 @@ namespace bbc
 	struct BOOST: public CONVERTERS
 	{
 	//public:
+		//BOOST();
 		double CalcVout();
 		double CalcK();
 		double CalcIi();
