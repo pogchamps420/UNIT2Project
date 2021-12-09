@@ -3,24 +3,28 @@
 namespace T
 {
     Tise::Tise() {}
-
+ 
     void Tise::TiseMenu()
     {
-        std::cout << "\n\n\tWelcome to my sandbox\n\tAspect of Project by Tise Olayinka\n\tELEC2645\tGroup 35\n\n" << std::endl;
+        System::Clear();
 
+        //Define user-selectable options
         std::vector<MenuOption> TMenuOptions
         {
             MenuOption('a', "Power Dissipation Calculator"),
-            MenuOption('x', "Option B"),
-            MenuOption('x', "Main Menu")
+            MenuOption('x', "Option Delilah"),
+            MenuOption('x', "Exit")
         };
-        std::vector<MenuItem> TMenuItems{};
+        //Define items to be displayed, value can be either a string or an int. In this case nothing since its just a normal menu.
+        std::vector<MenuItem> TMenuItems {};
 
+        //Initialise menu    
         Menu TMenu("Main menu", TMenuOptions, TMenuItems);
         TMenu.PrintMenu();
 
-        // initialise stuff for Power Dissipation
+        // initialise Menu for Power Dissipation
         T::PD PDiss({ 0 });
+        PDiss.Add('k', 1);
         std::vector<MenuOption> PDMenuOptions
         {
             MenuOption('a', "Average Power Dissipation"),
@@ -28,6 +32,8 @@ namespace T
             MenuOption('c', "Conduction Power Loss"),
             MenuOption('d', "Change Values"),
             MenuOption('e', "Clear Values"),
+            MenuOption('f', "Import Data"),
+            MenuOption('g', "Export Data"),
             MenuOption('x', "Back")
         };
         std::vector<MenuItem> PDMenuItems
@@ -42,8 +48,8 @@ namespace T
             MenuItem('h', "Wcoff", 0),
             MenuItem('i', "VDC", 0),
             MenuItem('j', "Io", 0),
-            MenuItem('k', "fs", 0),
-            MenuItem('l', "Ts", 0),
+            MenuItem('k', "fs", 1),
+            MenuItem('l', "Ts", 1),
             MenuItem('m', "Von", 0),
             MenuItem('n', "Won", 0),
             MenuItem('o', "Ton", 0),
@@ -53,13 +59,16 @@ namespace T
         };
         Menu PDMenu("Power Dissipation menu", PDMenuOptions, PDMenuItems);
 
-
         // Main Menu
         char Option = TMenu.ChooseOption();
+        System::Sleep(1);
         switch (Option)
         {
         case 'a':
             PowerDissipation(PDiss, PDMenu);
+            break;
+        case 'b':
+            // Insert D code
             break;
         case 'x':
             return;
@@ -68,46 +77,15 @@ namespace T
             TiseMenu();
             break;
         }
-
-        // to do later
-        /*          FOR LATER
-        //ypyoyoyoyo
-        std::cout << "welcome\nok\nlets do this\n\n" << std::endl;
-
-        //set up test proflie
-        Initiate setup;
-        setup.set_profile(0);
-         //get all the stuff from the profile into main
-        User tester = setup.get_user();
-
-        //tests
-        std::cout << tester.get_surname() << std::endl;
-        std::list<std::string> testmods = tester.get_modules();
-        for (std::string mod : testmods)
-        {
-            std::cout << mod << std::endl;
-            // trying to show formulas for specific modules ***********************************************
-            /*
-            Module mmm;
-            std::list<std::string> Formulas = tester.get_formulas();
-            for (std::string Formula : Formulas)
-            {
-                std::cout << mod << "\n :	" << Formula << std::endl;
-            }
-            //
-        }
-
-
-        //do stuff
-        //actual calculator
-        */
     }
-    void Tise::PowerDissipation(T::PD PDiss, Menu PDMenu)
+    void Tise::PowerDissipation(PD PDiss, Menu PDMenu)
     {
+        System::Clear();
         PDMenu = UpdatePDValues(PDiss, PDMenu);
         PDMenu.PrintMenu();
 
         char Option = PDMenu.ChooseOption();
+        System::Sleep(1);
         switch (Option)
         {
         case 'a':
@@ -129,6 +107,14 @@ namespace T
             PDiss.ClearValues();
             PowerDissipation(PDiss, PDMenu);
             break;
+        case 'f':
+            PDiss = ImportData(PDiss);
+            PowerDissipation(PDiss, PDMenu);
+            break;
+        case 'g':
+            ExportData(PDiss, false);
+            PowerDissipation(PDiss, PDMenu);
+            break;
         case 'x':
             TiseMenu();
             break;
@@ -139,21 +125,77 @@ namespace T
     }
     Menu Tise::ChangeValues(T::PD Pdiss, Menu PDMenu)
     {
-        std::cout << "\nEnter the number of the value you want to add/change: ";
+        bool ValidOption = 0, ValidValue = 0;
+        std::cout << "\nEnter the letter of the value you want to add/change: ";
         char option;
-        std::cin >> option;
-        std::cout << "\nEnter the value you want to use: ";
-        double value;
-        std::cin >> value;
-        Pdiss.Add(option, value);
-        PDMenu.ChangeItemValue(option, value);
+        try { std::cin >> option; }
+        catch (const std::exception&) 
+        {
+            System::Sleep(1);
+            std::cout << "\n\tInvalid input";
+            System::Sleep(1);
+            ChangeValues(Pdiss, PDMenu);
+        }
+        char AvailableLetters[] = { 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r' };
+        for (int i = 0; i < 18; i++)
+        {
+            if (AvailableLetters[i] == option) { ValidOption = 1; }
+        }
+        if (ValidOption)
+        {
+            bool loop = 1;
+            while (loop)
+            {
+                std::cout << "\nEnter the value you want to use: ";
+                double value;
+                try 
+                { 
+                    std::cin >> value; 
+                    if (std::is_floating_point<double>::value)
+                    {
+                        Pdiss.Add(option, value);
+                        PDMenu.ChangeItemValue(option, value);
 
-        std::cout << "\nItem changed.\n";
-        PowerDissipation(Pdiss, PDMenu);
-        return PDMenu;
+                        std::cout << "\nItem changed.\n";
+                        System::Sleep(1);
+                        PowerDissipation(Pdiss, PDMenu);
+                        return PDMenu;
+                    }
+                    else 
+                    { 
+                        std::cout << "\n\tInvalid value";
+                        System::Sleep(1);
+                    }
+                }
+                catch (const std::exception&) 
+                { 
+                    char exit;
+                    std::cin >> exit;
+                    if (exit == 'x') { loop = 0; }
+                    std::cout << "\n\tInvalid value";
+                    System::Sleep(1);
+                }
+            }
+        }
+        else
+        {
+            std::cout << "\n\tInvalid input";
+            System::Sleep(1);
+            ChangeValues(Pdiss, PDMenu);
+        }
     }
     Menu Tise::UpdatePDValues(T::PD Pdiss, Menu PDMenu)
     {
+        PDMenu.ChangeItemValue('a', Pdiss.Get('a'));
+        PDMenu.ChangeItemValue('b', Pdiss.Get('b'));
+        PDMenu.ChangeItemValue('d', Pdiss.Get('d'));
+        PDMenu.ChangeItemValue('e', Pdiss.Get('e'));
+        PDMenu.ChangeItemValue('i', Pdiss.Get('i'));
+        PDMenu.ChangeItemValue('j', Pdiss.Get('j'));
+        PDMenu.ChangeItemValue('k', Pdiss.Get('k'));
+        PDMenu.ChangeItemValue('l', Pdiss.Get('l'));
+        PDMenu.ChangeItemValue('m', Pdiss.Get('m'));
+        PDMenu.ChangeItemValue('o', Pdiss.Get('o'));
         Pdiss.CalcTcon();
         PDMenu.ChangeItemValue('c', Pdiss.CalcTcon());
         Pdiss.CalcTcoff();
@@ -168,7 +210,7 @@ namespace T
         PDMenu.ChangeItemValue('n', Pdiss.CalcWon());
         Pdiss.CalcPon();
         PDMenu.ChangeItemValue('q', Pdiss.CalcPon());
-        Pdiss.CalcPdis();
+        Pdiss.Add('r',Pdiss.CalcPdis());
         PDMenu.ChangeItemValue('r', Pdiss.CalcPdis());
         return PDMenu;
     }
@@ -201,6 +243,7 @@ namespace T
         {
             Menu.PrintMenu();
             char Option = Menu.ChooseOption();
+            System::Sleep(1);
             switch (Option)
             {
             case 'a':
@@ -210,6 +253,7 @@ namespace T
                 Menu.ChangeItemValue('c', pdiss);
                 PDMenu.ChangeItemValue('r', pdiss);
                 std::cout << "\nAverage Power Dissipation: " << Menu.GetItemValue('c') << "\n";
+                System::Sleep(2);
                 break;
             case 'b':
                 std::cout << "Ps: ";
@@ -244,6 +288,8 @@ namespace T
             case 'x':
                 loop = 0;
                 break;
+            default:
+                break;
             }
         }
         PowerDissipation(PDiss, PDMenu);
@@ -264,7 +310,7 @@ namespace T
         std::vector<MenuItem> MenuItems
         {
             MenuItem('a', "Won", 0),
-            MenuItem('b', "fs", 0),
+            MenuItem('b', "fs", 1),
             MenuItem('c', "Pon", 0)
         };
 
@@ -277,6 +323,7 @@ namespace T
         {
             Menu.PrintMenu();
             char Option = Menu.ChooseOption();
+            System::Sleep(1);
             switch (Option)
             {
             case 'a':
@@ -285,6 +332,7 @@ namespace T
                 Menu.ChangeItemValue('c', pon);
                 PDMenu.ChangeItemValue('q', pon);
                 std::cout << "\nConduction Power Loss: " << Menu.GetItemValue('c') << "\n";
+                System::Sleep(2);
                 break;
             case 'b':
                 std::cout << "Won: ";
@@ -318,6 +366,8 @@ namespace T
                 break;
             case 'x':
                 loop = 0;
+                break;
+            default:
                 break;
             }
         }
@@ -363,6 +413,7 @@ namespace T
         {
             Menu.PrintMenu();
             char Option = Menu.ChooseOption();
+            System::Sleep(1);
             switch (Option)
             {
             case 'a':
@@ -371,6 +422,7 @@ namespace T
                 Menu.ChangeItemValue('d', Won);
                 PDMenu.ChangeItemValue('n', Won);
                 std::cout << "\nEnergy dissipated during ON state time: " << Menu.GetItemValue('d') << "\n";
+                System::Sleep(2);
                 break;
             case 'b':
                 std::cout << "Von: ";
@@ -399,6 +451,8 @@ namespace T
             case 'x':
                 loop = 0;
                 break;
+            default:
+                break;
             }
         }
         PON(PDiss, PDMenu, parent);
@@ -414,8 +468,8 @@ namespace T
         };
         std::vector<MenuItem> MenuItems
         {
-            MenuItem('a', "Ts", 0),
-            MenuItem('b', "fs", 0)
+            MenuItem('a', "Ts", 1),
+            MenuItem('b', "fs", 1)
         };
 
         Menu Menu("Switching Period / Frequency", MenuOptions, MenuItems);
@@ -426,6 +480,7 @@ namespace T
         {
             Menu.PrintMenu();
             char Option = Menu.ChooseOption();
+            System::Sleep(1);
             switch (Option)
             {
             case 'a':
@@ -452,6 +507,8 @@ namespace T
                 break;
             case 'x':
                 loop = 0;
+                break;
+            default:
                 break;
             }
         }
@@ -487,7 +544,7 @@ namespace T
         {
             MenuItem('a', "Wcon", 0),
             MenuItem('b', "Wcoff", 0),
-            MenuItem('c', "fs", 0),
+            MenuItem('c', "fs", 1),
             MenuItem('d', "Ps", 0)
         };
 
@@ -501,6 +558,7 @@ namespace T
         {
             Menu.PrintMenu();
             char Option = Menu.ChooseOption();
+            System::Sleep(1);
             switch (Option)
             {
             case 'a':
@@ -509,6 +567,7 @@ namespace T
                 Menu.ChangeItemValue('d', ps);
                 PDMenu.ChangeItemValue('p', ps);
                 std::cout << "\nSwitching Power Loss: " << Menu.GetItemValue('d') << "\n";
+                System::Sleep(2);
                 break;
             case 'b':
                 std::cout << "Wcon: ";
@@ -558,6 +617,8 @@ namespace T
             case 'x':
                 loop = 0;
                 break;
+            default:
+                break;
             }
         }
         switch (parent)
@@ -602,6 +663,7 @@ namespace T
         {
             Menu.PrintMenu();
             char Option = Menu.ChooseOption();
+            System::Sleep(1);
             switch (Option)
             {
             case 'a':
@@ -610,6 +672,7 @@ namespace T
                 Menu.ChangeItemValue('d', Wcon);
                 PDMenu.ChangeItemValue('g', Wcon);
                 std::cout << "\nEnergy dissipated during ON state time: \n\n\t\t" << Menu.GetItemValue('d') << "\n";
+                System::Sleep(2);
                 break;
             case 'b':
                 std::cout << "VDC: ";
@@ -637,6 +700,8 @@ namespace T
                 break;
             case 'x':
                 loop = 0;
+                break;
+            default:
                 break;
             }
         }
@@ -671,6 +736,7 @@ namespace T
         {
             Menu.PrintMenu();
             char Option = Menu.ChooseOption();
+            System::Sleep(1);
             switch (Option)
             {
             case 'a':
@@ -679,6 +745,7 @@ namespace T
                 Menu.ChangeItemValue('d', Wcoff);
                 PDMenu.ChangeItemValue('h', Wcoff);
                 std::cout << "\nEnergy dissipated during OFF state time: \n\n\t\t\t" << Menu.GetItemValue('d') << "\n";
+                System::Sleep(2);
                 break;
             case 'b':
                 std::cout << "VDC: ";
@@ -707,8 +774,122 @@ namespace T
             case 'x':
                 loop = 0;
                 break;
+            default:
+                break;
             }
         }
         PS(PDiss, PDMenu, parent);
+    }
+    // Outside data
+    void Tise::ExportData(PD PDiss, bool newfile)
+    {
+        if (!newfile)
+        {
+            // Save to file
+            std::cout << "\n\tExporting.";
+            std::ofstream SaveFile;
+            SaveFile.open("PowerDissipationData.csv");
+            SaveFile << "tri," << PDiss.Get('a');
+            SaveFile << "\ntfv," << PDiss.Get('b');
+            SaveFile << "\ntcon," << PDiss.CalcTcon();
+            SaveFile << "\ntrv," << PDiss.Get('d');
+            SaveFile << "\ntfi," << PDiss.Get('e');
+            SaveFile << "\ntcoff," << PDiss.CalcTcoff();
+            SaveFile << "\nWcon," << PDiss.CalcWcon();
+            SaveFile << "\nWcoff," << PDiss.CalcWcoff();
+            SaveFile << "\nVDC," << PDiss.Get('i');
+            SaveFile << "\nIo," << PDiss.Get('j');
+            SaveFile << "\nfs," << PDiss.Get('k');
+            SaveFile << "\nTs," << PDiss.Get('l');
+            SaveFile << "\nVon," << PDiss.Get('m');
+            SaveFile << "\nWon," << PDiss.CalcWon();
+            SaveFile << "\nTon," << PDiss.Get('o');
+            SaveFile << "\nPs," << PDiss.CalcPs();
+            SaveFile << "\nPon," << PDiss.CalcPon();
+            SaveFile << "\nPdis," << PDiss.CalcPdis();
+            SaveFile.close();
+            System::Buffer();
+            std::cout << "\n\tSaved as 'PowerDissipationData'\n\n";
+            System::Sleep(1);
+        }
+        else
+        {
+            // Create new file
+            std::cout << "\n\tCreating new Data file: 'PowerDissipationData'.";
+            std::ofstream SaveFile;
+            SaveFile.open("PowerDissipationData.csv");
+            SaveFile << "tri,0";
+            SaveFile << "\ntfv,0";
+            SaveFile << "\ntcon,0";
+            SaveFile << "\ntrv,0";
+            SaveFile << "\ntfi,0";
+            SaveFile << "\ntcoff,0";
+            SaveFile << "\nWcon,0";
+            SaveFile << "\nWcoff,0";
+            SaveFile << "\nVDC,0";
+            SaveFile << "\nIo,0";
+            SaveFile << "\nfs,1";
+            SaveFile << "\nTs,1";
+            SaveFile << "\nVon,0";
+            SaveFile << "\nWon,0";
+            SaveFile << "\nTon,0";
+            SaveFile << "\nPs,0";
+            SaveFile << "\nPon,0";
+            SaveFile << "\nPdis,0";
+            SaveFile.close();
+            System::Buffer();
+            std::cout << "\n\tNew Data file created: 'PowerDissipationData'\n\n";
+            System::Sleep(1);
+        }
+    }
+    PD Tise::ImportData(PD PDiss)
+    {
+        std::ifstream ReadFile;
+        std::cout << "\n\nNote: Make sure data is added to this file before importing.\nImporting data from 'PowerDissipationData'.";
+        System::Buffer();
+        ReadFile.open("PowerDissipationData.csv");
+        std::string empty = "";
+        std::getline(ReadFile, empty);
+        if (empty == "")
+        {
+            std::cout << "\nError: No file found.\nCreating new blank file.\nImporting blank data.\n";
+            System::Sleep(1);
+            ExportData(PDiss, true);
+        }
+        std::string temp;
+        T::Data *Values = new T::Data[18]{"",0};
+        ReadFile.close();
+        ReadFile.open("PowerDissipationData.csv");
+        for (int i = 0; i < 18; i++)
+        {
+            std::getline(ReadFile, temp, ',');
+            Values[i].Name = temp;
+            std::getline(ReadFile, temp);
+            if (temp == "inf") { temp = "0"; }
+            Values[i].Values = std::stoi(temp);
+        }
+        // add to menu
+        PDiss.Add('a', Values[0].Values);
+        PDiss.Add('b', Values[1].Values);
+        PDiss.Add('c', Values[2].Values);
+        PDiss.Add('d', Values[3].Values);
+        PDiss.Add('e', Values[4].Values);
+        PDiss.Add('f', Values[5].Values);
+        PDiss.Add('g', Values[6].Values);
+        PDiss.Add('h', Values[7].Values);
+        PDiss.Add('i', Values[8].Values);
+        PDiss.Add('j', Values[9].Values);
+        PDiss.Add('k', Values[10].Values);
+        PDiss.Add('m', Values[12].Values);
+        PDiss.Add('n', Values[13].Values);
+        PDiss.Add('o', Values[14].Values);
+        PDiss.Add('p', Values[15].Values);
+        PDiss.Add('q', Values[16].Values);
+        PDiss.Add('r', Values[17].Values);
+        ReadFile.close();
+
+        std::cout << "Data Imported\n";
+        System::Sleep(1);
+        return PDiss;
     }
 }
