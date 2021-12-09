@@ -71,6 +71,7 @@ namespace bbc
 	public:
 		BUCK();
 		BUCK(Values values);
+		//Values ShowValues();
 		void AddValues(Values _values);
 		double CalcVout();
 		double CalcK();
@@ -86,6 +87,7 @@ namespace bbc
 	public:
 		BOOST();
 		BOOST(Values values);
+		//Values ShowValues();
 		void AddValues(Values _values);
 		double CalcVout();
 		double CalcK();

@@ -21,13 +21,13 @@ bbc::BUCK::BUCK(Values values)
 
 
 void bbc::CONVERTERS::AddValues(Values values) { _values = values; }
-bbc::CONVERTERS::Values bbc::CONVERTERS::ShowValues() { return _values; }
+//bbc::CONVERTERS::Values bbc::CONVERTERS::ShowValues() { return _values; }
 
 void bbc::BOOST::AddValues(Values values) { _values = values; }
 void bbc::BUCK::AddValues(Values values) { _values = values; }
 
-bbc::BOOST::Values bbc::BOOST::ShowValues() { return _values; }
-bbc::BUCK::Values bbc::BUCK::ShowValues() { return _values; }
+//void bbc::BOOST::Values bbc::BOOST::ShowValues() { return _values; }
+//void bbc::BUCK::Values bbc::BUCK::ShowValues() { return _values; }
 
 double bbc::BUCK::CalcVout()
 {
