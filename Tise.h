@@ -33,6 +33,7 @@ namespace T
 			void WCOFF(PD PDiss, Menu PDMenu, char parent);
 			void TSFS(PD PDiss, Menu PDMenu, char parent);
 			void WON(PD PDiss, Menu PDMenu, char parent);
+			double GetDataInput();
 			void ExportData(PD PDiss, bool newfile);
 			PD ImportData(PD PDiss);
 

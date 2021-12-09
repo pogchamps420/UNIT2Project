@@ -108,6 +108,7 @@ namespace T
             break;
         case 'e':
             PDiss.ClearValues();
+            PDiss.Add('k', 1);
             PowerDissipation(PDiss, PDMenu);
             break;
         case 'f':
@@ -147,39 +148,17 @@ namespace T
         }
         if (ValidOption)
         {
-            bool loop = 1;
-            while (loop)
-            {
-                std::cout << "\nEnter the value you want to use: ";
-                double value;
-                try 
-                { 
-                    std::cin >> value; 
-                    if (std::is_floating_point<double>::value)
-                    {
-                        Pdiss.Add(option, value);
-                        PDMenu.ChangeItemValue(option, value);
+            std::cout << "\nEnter the value you want to use: ";
+            double value;
 
-                        std::cout << "\nItem changed.\n";
-                        System::Sleep(1);
-                        PowerDissipation(Pdiss, PDMenu);
-                        return PDMenu;
-                    }
-                    else 
-                    { 
-                        std::cout << "\n\tInvalid value";
-                        System::Sleep(1);
-                    }
-                }
-                catch (const std::exception&) 
-                { 
-                    char exit;
-                    std::cin >> exit;
-                    if (exit == 'x') { loop = 0; }
-                    std::cout << "\n\tInvalid value";
-                    System::Sleep(1);
-                }
-            }
+            value = GetDataInput();
+            Pdiss.Add(option, value);
+            PDMenu.ChangeItemValue(option, value);
+
+            std::cout << "\nItem changed.\n";
+            System::Sleep(1);
+            PowerDissipation(Pdiss, PDMenu);
+            return PDMenu;
         }
         else
         {
@@ -264,7 +243,7 @@ namespace T
             case 'b':
                 std::cout << "Ps: ";
                 double Ps;
-                std::cin >> Ps;
+                Ps = GetDataInput();
                 Menu.ChangeItemValue('a', Ps);
                 PDMenu.ChangeItemValue('p', Ps);
                 PDiss.Add('p', Ps);
@@ -272,7 +251,7 @@ namespace T
             case 'c':
                 std::cout << "Pon: ";
                 double Pon;
-                std::cin >> Pon;
+                Pon = GetDataInput();
                 Menu.ChangeItemValue('b', Pon);
                 PDMenu.ChangeItemValue('q', Pon);
                 PDiss.Add('q', Pon);
@@ -347,7 +326,7 @@ namespace T
             case 'b':
                 std::cout << "Won: ";
                 double Won;
-                std::cin >> Won;
+                Won = GetDataInput();
                 Menu.ChangeItemValue('a', Won);
                 PDMenu.ChangeItemValue('n', Won);
                 PDiss.Add('n', Won);
@@ -355,7 +334,7 @@ namespace T
             case 'c':
                 std::cout << "fs: ";
                 double fs;
-                std::cin >> fs;
+                fs = GetDataInput();
                 Menu.ChangeItemValue('b', fs);
                 PDMenu.ChangeItemValue('k', fs);
                 PDiss.Add('k', fs);
@@ -440,7 +419,7 @@ namespace T
             case 'b':
                 std::cout << "Von: ";
                 double Von;
-                std::cin >> Von;
+                Von = GetDataInput();
                 Menu.ChangeItemValue('a', Von);
                 PDMenu.ChangeItemValue('m', Von);
                 PDiss.Add('m', Von);
@@ -448,7 +427,7 @@ namespace T
             case 'c':
                 std::cout << "Io: ";
                 double Io;
-                std::cin >> Io;
+                Io = GetDataInput();
                 Menu.ChangeItemValue('b', Io);
                 PDMenu.ChangeItemValue('j', Io);
                 PDiss.Add('j', Io);
@@ -456,7 +435,7 @@ namespace T
             case 'd':
                 std::cout << "Ton: ";
                 double Ton;
-                std::cin >> Ton;
+                Ton = GetDataInput();
                 Menu.ChangeItemValue('c', Ton);
                 PDMenu.ChangeItemValue('o', Ton);
                 PDiss.Add('o', Ton);
@@ -500,7 +479,7 @@ namespace T
             case 'a':
                 std::cout << "Ts: ";
                 double Ts, fs;
-                std::cin >> Ts;
+                Ts = GetDataInput();
                 Menu.ChangeItemValue('a', Ts);
                 PDMenu.ChangeItemValue('l', Ts);
                 PDiss.Add('l', Ts);
@@ -511,7 +490,7 @@ namespace T
             case 'b':
                 std::cout << "fs: ";
                 double _fs, ts;
-                std::cin >> _fs;
+                _fs = GetDataInput();
                 Menu.ChangeItemValue('b', _fs);
                 PDMenu.ChangeItemValue('k', _fs);
                 PDiss.Add('k', _fs);
@@ -588,7 +567,7 @@ namespace T
             case 'b':
                 std::cout << "Wcon: ";
                 double Wcon;
-                std::cin >> Wcon;
+                Wcon = GetDataInput();
                 Menu.ChangeItemValue('a', Wcon);
                 PDMenu.ChangeItemValue('g', Wcon);
                 PDiss.Add('g', Wcon);
@@ -596,7 +575,7 @@ namespace T
             case 'c':
                 std::cout << "Wcoff: ";
                 double Wcoff;
-                std::cin >> Wcoff;
+                Wcoff = GetDataInput();
                 Menu.ChangeItemValue('b', Wcoff);
                 PDMenu.ChangeItemValue('h', Wcoff);
                 PDiss.Add('h', Wcoff);
@@ -697,7 +676,7 @@ namespace T
             case 'b':
                 std::cout << "VDC: ";
                 double VDC;
-                std::cin >> VDC;
+                VDC = GetDataInput();
                 Menu.ChangeItemValue('a', VDC);
                 PDMenu.ChangeItemValue('i', VDC);
                 PDiss.Add('i', VDC);
@@ -705,7 +684,7 @@ namespace T
             case 'c':
                 std::cout << "Io: ";
                 double Io;
-                std::cin >> Io;
+                Io = GetDataInput();
                 Menu.ChangeItemValue('b', Io);
                 PDMenu.ChangeItemValue('j', Io);
                 PDiss.Add('j', Io);
@@ -713,7 +692,7 @@ namespace T
             case 'd':
                 std::cout << "tcon: ";
                 double tcon;
-                std::cin >> tcon;
+                tcon = GetDataInput();
                 Menu.ChangeItemValue('c', tcon);
                 PDMenu.ChangeItemValue('c', tcon);
                 PDiss.Add('c', tcon);
@@ -771,7 +750,7 @@ namespace T
             case 'b':
                 std::cout << "VDC: ";
                 double VDC;
-                std::cin >> VDC;
+                VDC = GetDataInput();
                 Menu.ChangeItemValue('a', VDC);
                 PDMenu.ChangeItemValue('i', VDC);
                 PDiss.Add('i', VDC);
@@ -779,7 +758,7 @@ namespace T
             case 'c':
                 std::cout << "Io: ";
                 double Io;
-                std::cin >> Io;
+                Io = GetDataInput();
                 Menu.ChangeItemValue('b', Io);
                 PDMenu.ChangeItemValue('j', Io);
                 PDiss.Add('j', Io);
@@ -787,7 +766,7 @@ namespace T
             case 'd':
                 std::cout << "tcon: ";
                 double tcon;
-                std::cin >> tcon;
+                tcon = GetDataInput();
                 Menu.ChangeItemValue('c', tcon);
                 PDMenu.ChangeItemValue('f', tcon);
                 PDiss.Add('f', tcon);
@@ -800,6 +779,25 @@ namespace T
             }
         }
         PS(PDiss, PDMenu, parent);
+    }
+    // validate input
+    double Tise::GetDataInput()
+    {
+        double value;
+        std::string input;
+        std::cin >> input;
+
+        value = atof(input.c_str());
+        if (value > 0 || value < 0)
+        {
+            return value;
+        }
+        else
+        {
+            std::cout << "Error: Invalid input\nEnter a non zero value: ";
+            return GetDataInput();
+
+        }
     }
     // Outside data
     void Tise::ExportData(PD PDiss, bool newfile)
