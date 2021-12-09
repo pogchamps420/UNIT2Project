@@ -17,15 +17,10 @@ namespace bbc
 
 			void InitMenu();
 			void BuckBoostConverters(CONVERTERS BBCStuff, Menu BBCMenu);
-			Menu ChangeValues(PD Pdiss, Menu BBCMenu);
-			Menu UpdatePDValues(PD Pdiss, Menu PDMenu);
-			void PDISS(PD Pdiss, Menu& PDMenu);
-			void PS(PD PDiss, Menu PDMenu, char parent);
-			void PON(PD PDiss, Menu PDMenu, char parent);
-			void WCON(PD PDiss, Menu PDMenu, char parent);
-			void WCOFF(PD PDiss, Menu PDMenu, char parent);
-			void TSFS(PD PDiss, Menu PDMenu, char parent);
-			void WON(PD PDiss, Menu PDMenu, char parent);
+			Menu ChangeValues(CONVERTERS BBCStuff, Menu BBCMenu);
+			Menu UpdateBBCValues(CONVERTERS BBCStuff, Menu BBCMenu);
+			void VOLT_INDUCT(PD Pdiss, Menu& BBCMenu);
+			void SEL_INDUCT(PD PDiss, Menu PDMenu, char parent);
 			*/
 		private:
 	};

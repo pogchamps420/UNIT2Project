@@ -113,7 +113,7 @@ namespace bbc {
             BuckBoostConverters(BBCStuff, BBCMenu);
             break;
         case 'c':
-            SEL_CAP(PDiss, PDMenu, 'a');
+            SEL_CAP(BBCStuff, BBCMenu);
             BuckBoostConverters(BBCStuff, BBCMenu);
             break;
         case 'd':
