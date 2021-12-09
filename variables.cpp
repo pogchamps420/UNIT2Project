@@ -2,17 +2,18 @@
 #include <iostream>
 #include <algorithm>
 #include <math.h>
+#include <string>
 
 bbc::CONVERTERS::CONVERTERS()
 	: _values() {}
 bbc::CONVERTERS::CONVERTERS(Values values)
 	: _values(values) {}
 
-bbc::BUCK::BUCK(Values values)
-	:  {_values = values; }
+//bbc::BUCK::BUCK(Values values)
+//	:  {_values = values; }
 
-bbc::BOOST::BOOST(Values values)
-	: {_values = values; }
+//bbc::BOOST::BOOST(Values values)
+//	: {_values = values; }
 
 void bbc::CONVERTERS::AddValues(Values values) { _values = values; }
 bbc::CONVERTERS::Values bbc::CONVERTERS::ShowValues() { return _values; }
@@ -165,7 +166,7 @@ bool is_number(const std::string& word) {
 		return !word.empty() && std::all_of(word.begin(), word.end(), ::isdigit);
 	}
 
-void bbc::CONVERTERS::Calculus()
+std::string bbc::CONVERTERS::Calculus()
 {
 
 	//bool is_number(const std::string & word) {
@@ -220,8 +221,11 @@ void bbc::CONVERTERS::Calculus()
 				std::cout << result << "x^" << new_power;
 
 				//return value
+				std::to_string(result);
+				std::to_string(new_power):
 				std::string new_expression = result + "x^" + new_power;
 				std::cout << new_expression;
+				return new_expression;
 
 				
 			}

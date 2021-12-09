@@ -37,10 +37,10 @@ namespace bbc {
         bbc::CONVERTERS BBCStuff({ 0 });
 
         //initialise stuff for buck converters
-        bbc::BUCK BuckStuff({ 0 });
+        bbc::BUCK BuckStuff({});
 
         //initialise stuff for buck converters
-        bbc::BOOST BoostStuff({ 0 });
+        bbc::BOOST BoostStuff({});
 
 
         std::vector<MenuOption> BBCMenuOptions
@@ -98,7 +98,7 @@ namespace bbc {
 
     void BUCKBOOST::BuckBoostConverters(CONVERTERS BBCStuff, BUCK BuckStuff, BOOST BoostStuff, Menu BBCMenu)
     {
-        BBCMenu = UpdateBBCValues(BBCStuff, BBCMenu);
+        BBCMenu = UpdateBBCValues(BBCStuff, BuckStuff, BoostStuff, BBCMenu);
         BBCMenu.PrintMenu();
 
         char Option = BBCMenu.ChooseOption();
@@ -117,7 +117,7 @@ namespace bbc {
             BuckBoostConverters(BBCStuff, BuckStuff, BoostStuff, BBCMenu);
             break;
         case 'd':
-            BBCMenu = ChangeValues(BBCStuff, BBCMenu);
+            BBCMenu = ChangeValues(BBCStuff, BuckStuff, BoostStuff, BBCMenu);
             break;
         case 'e':
             BBCStuff.ClearValues();
@@ -133,7 +133,7 @@ namespace bbc {
         
     }
     
-    Menu BUCKBOOST::ChangeValues(CONVERTERS BuckBoost, Menu BBCMenu)
+    Menu BUCKBOOST::ChangeValues(CONVERTERS BuckBoost, BUCK Buck, BOOST Boost, Menu BBCMenu)
     {
         std::cout << "\nEnter the number of the value you want to add/change: ";
         char option;
@@ -145,11 +145,11 @@ namespace bbc {
         BBCMenu.ChangeItemValue(option, value);
 
         std::cout << "\nItem changed.\n";
-        BuckBoostConverters(BBCStuff, BBCMenu);
+        BuckBoostConverters(BuckBoost, Buck, Boost, BBCMenu);
         return BBCMenu;
     }
 
-    Menu BUCKBOOST::UpdateBBCValues(CONVERTERS BuckBoost, Menu BBCMenu)
+    Menu BUCKBOOST::UpdateBBCValues(CONVERTERS BuckBoost, BUCK Buck, BOOST Boost, Menu BBCMenu)
     {
         BuckBoost.CalcPi();
         BBCMenu.ChangeItemValue('q', BuckBoost.CalcPi());
@@ -165,7 +165,7 @@ namespace bbc {
         return BBCMenu;
     }
 
-    Menu BUCKBOOST::UpdateBBCValues(BUCK Buck, Menu BBCMenu)
+    Menu BUCKBOOST::UpdateBBCValues(BUCK Buck,  Menu BBCMenu)
     {
         Buck.CalcK();
         BBCMenu.ChangeItemValue('d', Buck.CalcK());
@@ -197,7 +197,7 @@ namespace bbc {
 
     void BUCKBOOST::VOLT_INDUCT(CONVERTERS BBCStuff, BUCK BuckStuff, BOOST BoostStuff, Menu& BBCMenu)
     {
-        BBCMenu = UpdateBBCValues(BBCStuff, BBCMenu);
+        BBCMenu = UpdateBBCValues(BBCStuff, BuckStuff, BoostStuff, BBCMenu);
         std::vector<MenuOption> MenuOptions
         {
             MenuOption('a', "Calculate Inductor Voltage - Switch ON"),
@@ -282,7 +282,7 @@ namespace bbc {
 
     void BUCKBOOST::SEL_INDUCT(CONVERTERS BBCStuff, BUCK BuckStuff, BOOST BoostStuff, Menu& BBCMenu)
     {
-        BBCMenu = UpdateBBCValues(BBCStuff, BBCMenu);
+        BBCMenu = UpdateBBCValues(BBCStuff, BuckStuff, BoostStuff, BBCMenu);
         //BuckMenu = UpdateBBCValues(BuckStuff, BuckMenu);
         //BoostMenu = UpdateBBCValues(BoostStuff, BoostMenu);
 
@@ -339,7 +339,7 @@ namespace bbc {
                 BBCStuff.Add('m', delta_i);
                 break;
             case 'd':
-                double Delta_i;
+                std::string Delta_i;
                 Delta_i = BBCStuff.Calculus();
                 Delta_i = BBCMenu.GetItemValue('m');
                 Menu.ChangeItemValue('c', Delta_i);
@@ -371,7 +371,7 @@ namespace bbc {
 
     void BUCKBOOST::SEL_CAP(CONVERTERS BBCStuff, BUCK BuckStuff, BOOST BoostStuff, Menu& BBCMenu)
     {
-        BBCMenu = UpdateBBCValues(BBCStuff, BBCMenu);
+        BBCMenu = UpdateBBCValues(BBCStuff, BuckStuff, BoostStuff, BBCMenu);
         //BuckMenu = UpdateBBCValues(BuckStuff, BuckMenu);
         //BoostMenu = UpdateBBCValues(BoostStuff, BoostMenu);
 
@@ -428,7 +428,7 @@ namespace bbc {
                 BBCMenu.ChangeItemValue('j', delta_vo);
                 BBCStuff.Add('j', delta_vo);
             case 'd':
-                double Delta_vo;
+                std::string Delta_vo;
                 Delta_vo = BBCStuff.Calculus();
                 Menu.ChangeItemValue('b', Delta_vo);
                 BBCMenu.ChangeItemValue('j', Delta_vo);
