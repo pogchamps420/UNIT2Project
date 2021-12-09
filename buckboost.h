@@ -20,8 +20,8 @@ namespace bbc
 			Menu ChangeValues(CONVERTERS BBCStuff, Menu BBCMenu);
 			Menu UpdateBBCValues(CONVERTERS BBCStuff, Menu BBCMenu);
 			void VOLT_INDUCT(CONVERTERS BBCStuff, BUCK BuckStuff, BOOST BoostStuff, Menu& BBCMenu);
-			void SEL_INDUCT(CONVERTERS BBCStuff, Menu& BBCMenu);
-			void SEL_CAP(CONVERTERS BBCStuff, Menu& BBCMenu);
+			void SEL_INDUCT(CONVERTERS BBCStuff, BUCK BuckStuff, BOOST BoostStuff, Menu& BBCMenu);
+			void SEL_CAP(CONVERTERS BBCStuff, BUCK BuckStuff, BOOST BoostStuff, Menu& BBCMenu);
 			
 		private:
 	};

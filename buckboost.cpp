@@ -20,7 +20,7 @@ namespace bbc {
 
     void BUCKBOOST::InitMenu()
     {
-        std::cout << "poggers" << std::endl;
+        //std::cout << "poggers" << std::endl;
 
         std::vector<MenuOption> BMenuOptions
         {
@@ -85,7 +85,7 @@ namespace bbc {
             //PowerDissipation(PDiss, PDMenu);
             break;
         case 'b':
-            BuckBoostConverters(BBCStuff, BBCMenu);
+            BuckBoostConverters(BBCStuff, BuckStuff, BoostStuff, BBCMenu);
         case 'x':
             return;
             break;
@@ -96,7 +96,7 @@ namespace bbc {
 
     }
 
-    void BUCKBOOST::BuckBoostConverters(bbc::CONVERTERS BBCStuff, Menu BBCMenu)
+    void BUCKBOOST::BuckBoostConverters(CONVERTERS BBCStuff, BUCK BuckStuff, BOOST BoostStuff, Menu BBCMenu)
     {
         BBCMenu = UpdateBBCValues(BBCStuff, BBCMenu);
         BBCMenu.PrintMenu();
@@ -105,7 +105,7 @@ namespace bbc {
         switch (Option)
         {
         case 'a':
-            VOLT_INDUCT(BBCStuff, BBCMenu);
+            VOLT_INDUCT(BBCStuff, BuckStuff, BoostStuff, BBCMenu);
             BuckBoostConverters(BBCStuff, BBCMenu);
             break;
         case 'b':
@@ -133,7 +133,7 @@ namespace bbc {
         
     }
     
-    Menu BUCKBOOST::ChangeValues(bbc::CONVERTERS BuckBoost, Menu BBCMenu)
+    Menu BUCKBOOST::ChangeValues(CONVERTERS BuckBoost, Menu BBCMenu)
     {
         std::cout << "\nEnter the number of the value you want to add/change: ";
         char option;
@@ -149,7 +149,7 @@ namespace bbc {
         return BBCMenu;
     }
 
-    Menu BUCKBOOST::UpdateBBCValues(bbc::CONVERTERS BuckBoost, Menu BBCMenu)
+    Menu BUCKBOOST::UpdateBBCValues(CONVERTERS BuckBoost, Menu BBCMenu)
     {
         BuckBoost.CalcPi();
         BBCMenu.ChangeItemValue('q', BuckBoost.CalcPi());
@@ -165,7 +165,7 @@ namespace bbc {
         return BBCMenu;
     }
 
-    Menu BUCKBOOST::UpdateBBCValues(bbc::BUCK Buck, Menu BBCMenu)
+    Menu BUCKBOOST::UpdateBBCValues(BUCK Buck, Menu BBCMenu)
     {
         Buck.CalcK();
         BBCMenu.ChangeItemValue('d', Buck.CalcK());
@@ -180,7 +180,7 @@ namespace bbc {
         return BBCMenu;
     }
 
-    Menu BUCKBOOST::UpdateBBCValues(bbc::BOOST Boost, Menu BBCMenu)
+    Menu BUCKBOOST::UpdateBBCValues(BOOST Boost, Menu BBCMenu)
     {
         Boost.CalcK();
         BBCMenu.ChangeItemValue('d', Boost.CalcK());
@@ -195,7 +195,7 @@ namespace bbc {
         return BBCMenu;
     }
 
-    void BUCKBOOST::VOLT_INDUCT(bbc::CONVERTERS BBCStuff, bbc::BUCK BuckStuff, bbc::BOOST BoostStuff, Menu& BBCMenu)
+    void BUCKBOOST::VOLT_INDUCT(CONVERTERS BBCStuff, BUCK BuckStuff, BOOST BoostStuff, Menu& BBCMenu)
     {
         BBCMenu = UpdateBBCValues(BBCStuff, BBCMenu);
         std::vector<MenuOption> MenuOptions
@@ -280,7 +280,7 @@ namespace bbc {
         BuckBoostConverters(BBCStuff, BBCMenu);
     }
 
-    void BUCKBOOST::SEL_INDUCT(bbc::CONVERTERS BBCStuff, bbc::BUCK BuckStuff, bbc::BOOST BoostStuff, Menu& BBCMenu)
+    void BUCKBOOST::SEL_INDUCT(CONVERTERS BBCStuff, BUCK BuckStuff, BOOST BoostStuff, Menu& BBCMenu)
     {
         BBCMenu = UpdateBBCValues(BBCStuff, BBCMenu);
         //BuckMenu = UpdateBBCValues(BuckStuff, BuckMenu);
@@ -369,7 +369,7 @@ namespace bbc {
         BuckBoostConverters(BBCStuff, BBCMenu);
     }
 
-    void BUCKBOOST::SEL_CAP(bbc::CONVERTERS BBCStuff, bbc::BUCK BuckStuff, bbc::BOOST BoostStuff, Menu& BBCMenu)
+    void BUCKBOOST::SEL_CAP(CONVERTERS BBCStuff, BUCK BuckStuff, BOOST BoostStuff, Menu& BBCMenu)
     {
         BBCMenu = UpdateBBCValues(BBCStuff, BBCMenu);
         //BuckMenu = UpdateBBCValues(BuckStuff, BuckMenu);

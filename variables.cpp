@@ -1,5 +1,6 @@
 #include "variables.h"
 #include <iostream>
+#include <algorithm>
 #include <math.h>
 
 bbc::CONVERTERS::CONVERTERS()
