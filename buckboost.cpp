@@ -48,9 +48,9 @@ namespace bbc {
             MenuOption('a', "Inductor Voltage"),
             MenuOption('b', "Selection of Inductor"),
             MenuOption('c', "Selection of Capacitor"),
-            MenuOption('d', "Duty Ratio/Cycle"),
-            MenuOption('e', "Change Values"),
-            MenuOption('f', "Clear Values"),
+            //MenuOption('d', "Duty Ratio/Cycle"),
+            MenuOption('d', "Change Values"),
+            MenuOption('e', "Clear Values"),
             MenuOption('x', "Back")
         };
 
@@ -113,7 +113,7 @@ namespace bbc {
             BuckBoostConverters(BBCStuff, BBCMenu);
             break;
         case 'c':
-            //PON(PDiss, PDMenu, 'a');
+            SEL_CAP(PDiss, PDMenu, 'a');
             BuckBoostConverters(BBCStuff, BBCMenu);
             break;
         case 'd':
@@ -124,7 +124,7 @@ namespace bbc {
             BuckBoostConverters(BBCStuff, BBCMenu);
             break;
         case 'x':
-            TiseMenu();
+            //TiseMenu();
             break;
         default:
             BuckBoostConverters(BBCStuff, BBCMenu);
