@@ -6,9 +6,11 @@
 #include "Tise.h"
 #include "eseries.h"
 #include "componentmatch.h"
+#include "potentialdivider.h"
 
 int main()
 {
+
     //intro title
     System::Clear();
     std::cout << "Welcome to our sandbox\n\Project by Tise Olayinka, Delilah Hague, Rafal Kalisz\nGroup 35\tELEC2645\n" << std::endl;
