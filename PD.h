@@ -30,8 +30,6 @@ namespace T
 			PD();
 			PD(Values values);
 
-
-
 			void AddValues(Values _values);
 			Values ShowValues();
 			double CalcTcon();

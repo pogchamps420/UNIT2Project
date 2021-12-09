@@ -2,23 +2,25 @@
 
 namespace T
 {
-    Tise::Tise() {}
+    Tise::Tise() { ExitMenu = 0; }
  
-    void Tise::TiseMenu()
+    void Tise::TiseMenu(bool _ExitMenu)
     {
+        _ExitMenu = ExitMenu;
+        if (ExitMenu) { return; }
         System::Clear();
         //Define user-selectable options
         std::vector<MenuOption> TMenuOptions
         {
             MenuOption('a', "Power Dissipation Calculator"),
-            MenuOption('x', "Option Delilah"),
+            //MenuOption('x', "Option Delilah"),
             MenuOption('x', "Exit")
         };
         //Define items to be displayed, value can be either a string or an int. In this case nothing since its just a normal menu.
         std::vector<MenuItem> TMenuItems {};
 
         //Initialise menu    
-        Menu TMenu("Main menu", TMenuOptions, TMenuItems);
+        Menu TMenu("Tise's menu", TMenuOptions, TMenuItems);
         TMenu.PrintMenu();
 
         // initialise Menu for Power Dissipation
@@ -70,15 +72,17 @@ namespace T
             // Insert D code
             break;
         case 'x':
+            ExitMenu = 1;
             return;
             break;
         default:
-            TiseMenu();
+            TiseMenu(0);
             break;
         }
     }
     void Tise::PowerDissipation(PD PDiss, Menu PDMenu)
     {
+        if (ExitMenu) { return; }
         System::Clear();
         PDMenu = UpdatePDValues(PDiss, PDMenu);
         PDMenu.PrintMenu();
@@ -115,12 +119,13 @@ namespace T
             PowerDissipation(PDiss, PDMenu);
             break;
         case 'x':
-            TiseMenu();
+            TiseMenu(1);
             break;
         default:
             PowerDissipation(PDiss, PDMenu);
             break;
         }
+    TiseMenu(1);
     }
     Menu Tise::ChangeValues(T::PD Pdiss, Menu PDMenu)
     {
@@ -216,6 +221,7 @@ namespace T
 
     void Tise::PDISS(T::PD PDiss, Menu& PDMenu)
     {
+        if (ExitMenu) { return; }
         System::Clear();
         PDMenu = UpdatePDValues(PDiss, PDMenu);
         std::vector<MenuOption> MenuOptions
@@ -274,6 +280,7 @@ namespace T
             case 'd':
                 double ps;
                 PS(PDiss, PDMenu, 'b');
+                if (ExitMenu) { return; }
                 ps = PDMenu.GetItemValue('p');
                 Menu.ChangeItemValue('a', ps);
                 PDMenu.ChangeItemValue('p', ps);
@@ -281,6 +288,7 @@ namespace T
             case 'e':
                 double pon;
                 PON(PDiss, PDMenu, 'b');
+                if (ExitMenu) { return; }
                 pon = PDMenu.GetItemValue('q');
                 Menu.ChangeItemValue('b', pon);
                 PDMenu.ChangeItemValue('q', pon);
@@ -297,6 +305,7 @@ namespace T
     //Pon + sub calcs
     void Tise::PON(T::PD PDiss, Menu PDMenu, char parent)
     {
+        if (ExitMenu) { return; }
         System::Clear();
         PDMenu = UpdatePDValues(PDiss, PDMenu);
         std::vector<MenuOption> MenuOptions
@@ -354,6 +363,7 @@ namespace T
             case 'd':
                 double won;
                 WON(PDiss, PDMenu, parent);
+                if (ExitMenu) { return; }
                 won = PDMenu.GetItemValue('n');
                 Menu.ChangeItemValue('a', won);
                 PDMenu.ChangeItemValue('n', won);
@@ -361,6 +371,7 @@ namespace T
             case 'e':
                 double Fs;
                 TSFS(PDiss, PDMenu, 'a');
+                if (ExitMenu) { return; }
                 Fs = PDMenu.GetItemValue('k');
                 Menu.ChangeItemValue('b', Fs);
                 PDMenu.ChangeItemValue('k', Fs);
@@ -387,6 +398,7 @@ namespace T
     }
     void Tise::WON(T::PD PDiss, Menu PDMenu, char parent)
     {
+        if (ExitMenu) { return; }
         PDMenu = UpdatePDValues(PDiss, PDMenu);
         std::vector<MenuOption> MenuOptions
         {
@@ -460,6 +472,7 @@ namespace T
     }
     void Tise::TSFS(T::PD PDiss, Menu PDMenu, char parent)
     {
+        if (ExitMenu) { return; }
         PDMenu = UpdatePDValues(PDiss, PDMenu);
         std::vector<MenuOption> MenuOptions
         {
@@ -529,6 +542,7 @@ namespace T
     // Ps + sub calcs
     void Tise::PS(T::PD PDiss, Menu PDMenu, char parent)
     {
+        if (ExitMenu) { return; }
         System::Clear();
         PDMenu = UpdatePDValues(PDiss, PDMenu);
         std::vector<MenuOption> MenuOptions
@@ -598,6 +612,7 @@ namespace T
             case 'e':
                 double wcon;
                 WCON(PDiss, PDMenu, parent);
+                if (ExitMenu) { return; }
                 wcon = PDMenu.GetItemValue('g');
                 Menu.ChangeItemValue('a', wcon);
                 PDMenu.ChangeItemValue('g', wcon);
@@ -605,6 +620,7 @@ namespace T
             case 'f':
                 double wcoff;
                 WCOFF(PDiss, PDMenu, parent);
+                if (ExitMenu) { return; }
                 wcoff = PDMenu.GetItemValue('h');
                 Menu.ChangeItemValue('b', wcoff);
                 PDMenu.ChangeItemValue('h', wcoff);
@@ -612,6 +628,7 @@ namespace T
             case 'g':
                 double Fs;
                 TSFS(PDiss, PDMenu, 'b');
+                if (ExitMenu) { return; }
                 Fs = PDMenu.GetItemValue('k');
                 Menu.ChangeItemValue('c', Fs);
                 PDMenu.ChangeItemValue('k', Fs);
@@ -638,6 +655,7 @@ namespace T
     }
     void Tise::WCON(T::PD PDiss, Menu PDMenu, char parent)
     {
+        if (ExitMenu) { return; }
         PDMenu = UpdatePDValues(PDiss, PDMenu);
         std::vector<MenuOption> MenuOptions
         {
@@ -711,6 +729,7 @@ namespace T
     }
     void Tise::WCOFF(T::PD PDiss, Menu PDMenu, char parent)
     {
+        if (ExitMenu) { return; }
         PDMenu = UpdatePDValues(PDiss, PDMenu);
         std::vector<MenuOption> MenuOptions
         {

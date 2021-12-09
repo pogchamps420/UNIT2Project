@@ -44,7 +44,7 @@ int main()
         {
         
         case 'T':
-            TMenu.TiseMenu();
+            TMenu.TiseMenu(0);
             break;
         
         case 'R':

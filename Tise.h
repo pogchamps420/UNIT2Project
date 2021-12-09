@@ -22,8 +22,7 @@ namespace T
 	{
 		public:
 			Tise();
-
-			void TiseMenu();
+			void TiseMenu(bool ExitMenu);
 			void PowerDissipation(PD PDiss, Menu PDMenu);
 			Menu ChangeValues(PD Pdiss, Menu PDMenu);
 			Menu UpdatePDValues(PD Pdiss, Menu PDMenu);
@@ -38,6 +37,7 @@ namespace T
 			PD ImportData(PD PDiss);
 
 		private:
+			bool ExitMenu;
 	};
 }
 #endif
