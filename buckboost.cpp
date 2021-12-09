@@ -1,11 +1,5 @@
 #include "buckboost.h"
 #include "variables.h"
-#include <iostream>
-#include <algorithm>
-#include <cassert>
-#include <cctype>
-#include <string>
-#include <stdlib.h>  
 
 /* Non - linear variables relating to buck / boost converters are the inductor voltage,
 *  inductor selection, capacitor selection, peak to peak output voltage ripple and change in charge
@@ -227,17 +221,25 @@ namespace bbc {
         {
             Menu.PrintMenu();
             char Option = Menu.ChooseOption();
+
+            double vl_switch_on;
+            double vl_switch_off;
+            double L;
+            double delta_i;
+            double l;
+            std::string Delta_i;
+
             switch (Option)
             {
             case 'a':
-                double vl_switch_on;
+                
                 vl_switch_on = BBCStuff.CalcVlON();
                 Menu.ChangeItemValue('a', vl_switch_on);
                 BBCMenu.ChangeItemValue('c', vl_switch_on);
                 std::cout << "\nInductor Voltage: " << Menu.GetItemValue('a') << "\n";
                 break;
             case 'b':
-                double vl_switch_off;
+                
                 vl_switch_off = BBCStuff.CalcVlOFF();
                 Menu.ChangeItemValue('b', vl_switch_off);
                 BBCMenu.ChangeItemValue('c', vl_switch_off);
@@ -245,7 +247,7 @@ namespace bbc {
                 break;
             case 'c':
                 std::cout << "L: ";
-                double L;
+               
                 std::cin >> L;
                 Menu.ChangeItemValue('b', L);
                 BBCMenu.ChangeItemValue('i', L);
@@ -253,7 +255,7 @@ namespace bbc {
                 break;
             case 'd':
                 std::cout << "Change in Current: ";
-                double delta_i;
+                
                 std::cin >> delta_i;
                 Menu.ChangeItemValue('c', delta_i);
                 BBCMenu.ChangeItemValue('m', delta_i);
@@ -266,11 +268,11 @@ namespace bbc {
                 BBCMenu.ChangeItemValue('i', l);
                 break;
             case 'f':
-                double Delta_i;
+                //double Delta_i;
                 Delta_i = BBCStuff.Calculus();
-                Delta_i = BBCMenu.GetItemValue('m');
-                Menu.ChangeItemValue('c', l);
-                BBCMenu.ChangeItemValue('m', l);
+                //Delta_i = BBCMenu.GetItemValue('m');
+                //Menu.ChangeItemValue('c', l);
+                //BBCMenu.ChangeItemValue('m', l);
                 break;
             case 'x':
                 loop = 0;
@@ -314,17 +316,26 @@ namespace bbc {
         {
             Menu.PrintMenu();
             char Option = Menu.ChooseOption();
+
+            double buck_inductance;
+            double boost_inductance;
+            double delta_i;
+            std::string Delta_i;
+            double f_switch;
+            double F_switch;
+
+
             switch (Option)
             {
             case 'a':
-                double buck_inductance;
+                
                 buck_inductance = BuckStuff.CalcL();
                 Menu.ChangeItemValue('a', buck_inductance);
                 BBCMenu.ChangeItemValue('i', buck_inductance);
                 std::cout << "\nInductance: " << Menu.GetItemValue('a') << "\n";
                 break;
             case 'b':
-                double boost_inductance;
+                
                 boost_inductance = BoostStuff.CalcL();
                 Menu.ChangeItemValue('a', boost_inductance);
                 BBCMenu.ChangeItemValue('i', boost_inductance);
@@ -332,29 +343,33 @@ namespace bbc {
                 break;
             case 'c':
                 std::cout << "Change in Current: ";
-                double delta_i;
+                
                 std::cin >> delta_i;
                 Menu.ChangeItemValue('c', delta_i);
                 BBCMenu.ChangeItemValue('m', delta_i);
                 BBCStuff.Add('m', delta_i);
                 break;
             case 'd':
-                std::string Delta_i;
+            {
+                
                 Delta_i = BBCStuff.Calculus();
-                Delta_i = BBCMenu.GetItemValue('m');
-                Menu.ChangeItemValue('c', Delta_i);
-                BBCMenu.ChangeItemValue('m', Delta_i);
+                //Delta_i = BBCMenu.GetItemValue('m');
+                //Menu.ChangeItemValue('c', Delta_i);
+                //BBCMenu.ChangeItemValue('m', Delta_i);
                 break;
+            }
             case 'e':
+            {
                 std::cout << "Switching Frequency: ";
-                double f_switch;
+                
                 std::cin >> f_switch;
                 Menu.ChangeItemValue('c', f_switch);
                 BBCMenu.ChangeItemValue('k', f_switch);
                 BBCStuff.Add('k', f_switch);
                 break;
+            }
             case 'f':
-                double F_switch;
+                
                 //add in input for Ts
                 F_switch = BBCStuff.CalcFs();
                 F_switch = BBCMenu.GetItemValue('k');
@@ -404,17 +419,26 @@ namespace bbc {
         {
             Menu.PrintMenu();
             char Option = Menu.ChooseOption();
+
+            double buck_capacitance;
+            double boost_capacitance;
+            double delta_vo;
+            std::string Delta_vo;
+            double Vout;
+            double Buck_VOut;
+            double Boost_VOut;
+
             switch (Option)
             {
             case 'a':
-                double buck_capacitance;
+                
                 buck_capacitance = BuckStuff.CalcC();
                 Menu.ChangeItemValue('a', buck_capacitance);
                 BBCMenu.ChangeItemValue('i', buck_capacitance);
                 std::cout << "\nInductance: " << Menu.GetItemValue('a') << "\n";
                 break;
             case 'b':
-                double boost_capacitance;
+                
                 boost_capacitance = BoostStuff.CalcC();
                 Menu.ChangeItemValue('a', boost_capacitance);
                 BBCMenu.ChangeItemValue('i', boost_capacitance);
@@ -428,26 +452,26 @@ namespace bbc {
                 BBCMenu.ChangeItemValue('j', delta_vo);
                 BBCStuff.Add('j', delta_vo);
             case 'd':
-                std::string Delta_vo;
+                
                 Delta_vo = BBCStuff.Calculus();
-                Menu.ChangeItemValue('b', Delta_vo);
-                BBCMenu.ChangeItemValue('j', Delta_vo);
+                //Menu.ChangeItemValue('b', Delta_vo);
+                //BBCMenu.ChangeItemValue('j', Delta_vo);
                 break;
             case 'e':
                 std::cout << "Output Voltage: ";
-                double Vout;
+               
                 std::cin >> Vout;
                 Menu.ChangeItemValue('c', Vout);
                 BBCMenu.ChangeItemValue('b', Vout);
                 BBCStuff.Add('b', Vout);
             case 'f':
-                double Buck_VOut;
+                
                 Buck_VOut = BuckStuff.CalcVout();
                 Menu.ChangeItemValue('b', Buck_VOut);
                 BBCMenu.ChangeItemValue('j', Buck_VOut);
                 break;
             case 'g':
-                double Boost_VOut;
+                
                 Boost_VOut = BoostStuff.CalcVout();
                 Menu.ChangeItemValue('b', Boost_VOut);
                 BBCMenu.ChangeItemValue('j', Boost_VOut);

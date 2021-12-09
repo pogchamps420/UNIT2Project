@@ -1,8 +1,5 @@
 #include "variables.h"
-#include <iostream>
-#include <algorithm>
-#include <math.h>
-#include <string>
+
 
 bbc::CONVERTERS::CONVERTERS()
 	: _values() {}
@@ -221,9 +218,9 @@ std::string bbc::CONVERTERS::Calculus()
 				std::cout << result << "x^" << new_power;
 
 				//return value
-				std::to_string(result);
-				std::to_string(new_power):
-				std::string new_expression = result + "x^" + new_power;
+				std::string first = std::to_string(result);
+				std::string last = std::to_string(new_power);
+				std::string new_expression = first + "x^" + last;
 				std::cout << new_expression;
 				return new_expression;
 
@@ -241,7 +238,10 @@ std::string bbc::CONVERTERS::Calculus()
 					}
 				}
 
-				std::cout << expression.substr(0, index);
+				std::string lin_result = expression.substr(0, index);
+				return lin_result;
+				//std::cout << expression.substr(0, index);
+
 			}
 		}
 		break;
@@ -282,15 +282,28 @@ std::string bbc::CONVERTERS::Calculus()
 				double result = new_coeff / new_power;
 				std::cout << result << "\n";
 				std::cout << result << "x^" << new_power << "\n";
+
+				//return value
+				std::string first = std::to_string(result);
+				std::string last = std::to_string(new_power);
+				std::string new_expression = first + "x^" + last;
+				std::cout << new_expression;
+				return new_expression;
 			}
 			else {
+
+				double half_coeff = new_coeff / 2;
+				std::string prefix = std::to_string(half_coeff);
 				std::cout << "It's a term with a linear coefficient\n";
-				std::cout << new_coeff / 2 << "x^2";
+				//std::cout << new_coeff / 2 << "x^2";
+				std::string linear_result = prefix + "x^2";
+				return linear_result;
 			}
 		}
 	}
 	default:
 		std::cout << "oops";
+		return 0;
 	} 
 }
 

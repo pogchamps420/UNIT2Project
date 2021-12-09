@@ -5,6 +5,12 @@
 #include <string>
 #include "variables.h"
 #include "menu.h"
+#include <algorithm>
+#include <cassert>
+#include <cctype>
+#include <string>
+#include <stdlib.h>  
+
 
 
 //class here pls, tie it all up

@@ -1,6 +1,12 @@
 #pragma once
 #ifndef VARIABLES_H
 #define VARIABLES_H 
+
+#include <string>
+#include <iostream>
+#include <algorithm>
+#include <math.h>
+
 //variables buck and boost have in common: Pi, Po
 //variables they differ on: Vout, Ii, Io, Vl, C, delta_vo, K, L
 namespace bbc
