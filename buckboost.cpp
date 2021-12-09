@@ -28,15 +28,17 @@ namespace bbc {
 
         Menu BMenu("Main menu", BMenuOptions, BMenuItems);
         BMenu.PrintMenu();
+        
+        bbc::Values emptyValues;
 
         // initialise general stuff for buck/boost converters
-        bbc::CONVERTERS BBCStuff({ 0 });
+        bbc::CONVERTERS BBCStuff(emptyValues);
 
         //initialise stuff for buck converters
-        bbc::BUCK BuckStuff({ 0 });
+        bbc::BUCK BuckStuff(emptyValues);
 
         //initialise stuff for buck converters
-        bbc::BOOST BoostStuff({ 0 });
+        bbc::BOOST BoostStuff(emptyValues);
 
 
         std::vector<MenuOption> BBCMenuOptions
