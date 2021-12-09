@@ -308,7 +308,7 @@ std::string bbc::CONVERTERS::Calculus()
 		std::cout << "oops";
 		return "";
 	} 
-	//return "";
+	return "";
 }
 
 

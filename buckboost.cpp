@@ -5,9 +5,9 @@
 *  inductor selection, capacitor selection, peak to peak output voltage ripple and change in charge
 */
 
-bool is_number(const std::string& word) {
-    return !word.empty() && std::all_of(word.begin(), word.end(), ::isdigit);
-}
+//bool is_number(const std::string& word) {
+//    return !word.empty() && std::all_of(word.begin(), word.end(), ::isdigit);
+//}
 
 namespace bbc {
     BUCKBOOST::BUCKBOOST() {}
