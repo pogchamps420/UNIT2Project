@@ -187,6 +187,7 @@ std::string bbc::CONVERTERS::Calculus()
 		if (is_number(expression)) {
 			//std::cout << "It's a constant.\n";
 			std::cout << "0";
+			return "";
 		}
 		else {
 			// it'll be a variable or exponent lol
@@ -252,7 +253,9 @@ std::string bbc::CONVERTERS::Calculus()
 		if (is_number(expression)) {
 			std::cout << "It's a constant.\n";
 			//return the constant plus the variable
+			std::string const_expression = expression + "x\n";
 			std::cout << expression << "x\n";
+			return const_expression;
 		}
 		else {
 			// it'll be a linear coefficient variable or exponent lol
