@@ -39,7 +39,6 @@ int main()
         char chosenOption = mainMenu.ChooseOption();
 
         T::Tise TMenu;
-        bbc::BUCKBOOST BMenu;
 
         switch (chosenOption)
         {
