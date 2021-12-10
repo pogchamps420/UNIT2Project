@@ -212,7 +212,139 @@ bool is_number(const std::string& word) {
 		return !word.empty() && std::all_of(word.begin(), word.end(), ::isdigit);
 	}
 
-std::string bbc::CONVERTERS::Calculus()
+
+std::vector<int> calculus() {
+	std::string expression;
+	//std::cin >> expression;
+	std::string exponent("^");
+
+	std::cout << "Please enter the number of coefficients: \n";
+	double n_coeff;
+	std::cin >> n_coeff;
+
+	std::cout << "Please enter the coefficients in consecutive order: \n";
+	double element;
+	std::vector<int> coeffs;
+	for (int b = 0; b < n_coeff; b++) {
+		std::cin >> element;
+		coeffs.push_back(element);
+	}
+	std::vector<int> return_coeffs;
+
+	//we need to account for calculus with a constant and of variables with exponents..
+	//first we should check if it is a constant using isdigit lmao
+
+	char CalcOption;
+	std::cout << "Please enter 1 for Differentiation or 2 for Integration: ";
+	std::cin >> CalcOption;
+
+	switch (CalcOption) {
+		// Differentiation
+	case '1': {
+		if (coeffs.size() == 1) {
+			//std::cout << "It's a constant.\n";
+			return_coeffs.push_back(0);
+			return return_coeffs;
+		}
+		else if (coeffs.size() == 2) {
+			//std::cout << "It's a term with a linear coefficient\n";
+			return_coeffs.push_back(coeffs.front());
+			for (int i : return_coeffs) {
+				std::cout << i << "\n";
+			}
+			return return_coeffs;
+
+		}
+		else {
+
+			int counter = 2;
+			std::vector <int> coeff_polynomials = std::vector <int>(coeffs.begin(), coeffs.end() - 2);
+			//for (int i : coeff_polynomials) {
+			//	std::cout << i << "\n";
+			//}
+
+			for (auto iterator = coeff_polynomials.rbegin(); iterator != coeff_polynomials.rend(); ++iterator) {
+				//std::cout << *iterator * counter << "\n";
+				return_coeffs.push_back(*iterator * counter);
+				counter++;
+			}
+			//for (int i : return_coeffs) {
+			//	std::cout << i << "\n";
+			//}
+			std::reverse(return_coeffs.begin(), return_coeffs.end());
+			for (int i : return_coeffs) {
+				std::cout << i << "\n";
+			}
+			return return_coeffs;
+
+		}
+		break;
+	}
+
+			// Integration
+	case '2': {
+
+		if (is_number(expression)) {
+			std::cout << "It's a constant.\n";
+			//return the constant plus the variable
+			std::string const_expression = expression + "x\n";
+			std::cout << expression << "x\n";
+			//return const_expression;
+		}
+		else {
+			// it'll be a linear coefficient variable or exponent lol
+			std::size_t found = exponent.find(expression);
+			found = expression.find("^");
+
+			std::string coeff = expression.substr(0, found);
+			std::cout << coeff << "\n";
+
+			double new_coeff = std::stod(coeff);
+			std::cout << typeid(new_coeff).name() << "\n";
+
+			if (found != std::string::npos) {
+				std::cout << "It's a power term";
+				// do the integration..
+				std::string power = expression.substr(found + 1);
+				std::cout << power << "\n";
+				//std::string new_coeff = coeff * power;
+				//std::cout << new_coeff;
+
+				double new_power = std::stod(power);
+				std::cout << typeid(new_power).name() << "\n";
+
+				new_power += 1;
+				std::cout << new_power << "\n";
+
+				double result = new_coeff / new_power;
+				std::cout << result << "\n";
+				std::cout << result << "x^" << new_power << "\n";
+
+				//return value
+				std::string first = std::to_string(result);
+				std::string last = std::to_string(new_power);
+				std::string new_expression = first + "x^" + last;
+				std::cout << new_expression;
+				//return new_expression;
+			}
+			else {
+
+				double half_coeff = new_coeff / 2;
+				std::string prefix = std::to_string(half_coeff);
+				std::cout << "It's a term with a linear coefficient\n";
+				//std::cout << new_coeff / 2 << "x^2";
+				std::string linear_result = prefix + "x^2";
+				//return linear_result;
+			}
+		}
+	}
+	default:
+		std::cout << "oops";
+		return {};
+	}
+	return {};
+}
+/*std::string bbc::CONVERTERS::Calculus()
 {
 
 	//bool is_number(const std::string & word) {
@@ -358,7 +490,7 @@ std::string bbc::CONVERTERS::Calculus()
 		return "";
 	} 
 	return "";
-}
+}*/
 
 
 void bbc::CONVERTERS::ClearValues()
