@@ -1,4 +1,3 @@
-#include "initiate.h"
 
 Initiate::Initiate()
 	: _profile(0) {}
@@ -60,3 +59,4 @@ void Initiate::testprofile()
 	//set info to user
 	//_user = testUser;
 }
+

@@ -1,11 +1,5 @@
 #include "menu.h"
 
-
-
-#include <iostream>
-#include <string>
-#include <set>
-
 //Definitions for the Menu class
 
 Menu::Menu() //Default constructor
@@ -32,7 +26,6 @@ Menu::Menu(std::string name, std::vector<MenuOption> options, std::vector<MenuIt
 void Menu::PrintMenu()
 {
 	//Displaying the menu's name
-
 	std::cout << "-----------------------\n";
 	std::cout << _name << '\n';
 	std::cout << "-----------------------\n";

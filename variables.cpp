@@ -1,9 +1,3 @@
-#include "variables.h"
-
-
-
-
-
 bbc::CONVERTERS::CONVERTERS() {}
 bbc::CONVERTERS::CONVERTERS(Values values)
 	: _values(values) {}
@@ -620,3 +614,4 @@ double bbc::CONVERTERS::Get(char option)
 		return 0;
 	}
 }
+

@@ -1,3 +1,4 @@
+
 #pragma once
 #ifndef VARIABLES_H
 #define VARIABLES_H 
@@ -102,3 +103,4 @@ namespace bbc
 }
 
 #endif
+

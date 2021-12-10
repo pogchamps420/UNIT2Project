@@ -1,5 +1,4 @@
-#ifndef INITIATE_H
-#define INITIATE_H
+
 
 #include <algorithm>
 #include <iostream>
