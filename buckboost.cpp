@@ -244,7 +244,7 @@ namespace bbc {
             double L;
             double delta_i;
             double l;
-            std::string Delta_i;
+            std::vector <int> Delta_i;
 
             
             switch (Option)
@@ -286,8 +286,8 @@ namespace bbc {
                 BBCMenu.ChangeItemValue('i', l);
                 break;
             case 'f':
-                //double Delta_i;
-                //Delta_i = BBCStuff.Calculus();
+                
+                BBCStuff.calculus();
                 //Delta_i = BBCMenu.GetItemValue('m');
                 //Menu.ChangeItemValue('c', l);
                 //BBCMenu.ChangeItemValue('m', l);
@@ -371,7 +371,7 @@ namespace bbc {
             case 'd':
             {
                 
-                //Delta_i = BBCStuff.Calculus();
+                BBCStuff.calculus();
                 //Delta_i = BBCMenu.GetItemValue('m');
                 //Menu.ChangeItemValue('c', Delta_i);
                 //BBCMenu.ChangeItemValue('m', Delta_i);
@@ -477,7 +477,7 @@ namespace bbc {
                 BBCStuff.Add('j', delta_vo);
             case 'd':
                 
-                //Delta_vo = BBCStuff.Calculus();
+                BBCStuff.calculus();
                 //Menu.ChangeItemValue('b', Delta_vo);
                 //BBCMenu.ChangeItemValue('j', Delta_vo);
                 break;

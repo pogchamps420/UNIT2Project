@@ -54,7 +54,7 @@ namespace bbc
 		double CalcVlOFF();
 		double CalcFs();
 		//separate implementation for delta i and delta output voltage
-		std::string Calculus();
+		std::vector <int> calculus();
 		void ClearValues();
 
 		void Add(char option, double value);

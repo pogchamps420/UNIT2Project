@@ -213,7 +213,8 @@ bool is_number(const std::string& word) {
 	}
 
 
-std::vector<int> calculus() {
+std::vector<int> bbc::CONVERTERS::calculus() {
+
 	std::string expression;
 	//std::cin >> expression;
 	std::string exponent("^");
@@ -232,7 +233,7 @@ std::vector<int> calculus() {
 	std::vector<int> return_coeffs;
 
 	//we need to account for calculus with a constant and of variables with exponents..
-	//first we should check if it is a constant using isdigit lmao
+	//first we should check if it is a constant using isdigit 
 
 	char CalcOption;
 	std::cout << "Please enter 1 for Differentiation or 2 for Integration: ";
