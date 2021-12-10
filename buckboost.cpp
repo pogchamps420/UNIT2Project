@@ -72,7 +72,8 @@ namespace bbc {
             MenuItem('p', "C", 0),
             MenuItem('q', "Pi", 0),
         };
-        Menu BBCMenu("Buck/Boost Converter menu", BMenuOptions, BMenuItems);
+
+        Menu BBCMenu("Buck/Boost Converter menu", BBCMenuOptions, BBCMenuItems);
 
         
         // Main Menu
@@ -222,7 +223,6 @@ namespace bbc {
         std::vector<MenuItem> MenuItems
         {
             MenuItem('a', "Vl", 0),
-            //MenuItem('b', "Vl", 0),
             MenuItem('b', "L", 0),
             MenuItem('c', "delta_i", 0)
         };
@@ -287,10 +287,13 @@ namespace bbc {
                 break;
             case 'f':
                 
-                BBCStuff.calculus();
-                //Delta_i = BBCMenu.GetItemValue('m');
-                //Menu.ChangeItemValue('c', l);
-                //BBCMenu.ChangeItemValue('m', l);
+                Delta_i = BBCStuff.calculus();
+               //or (int i : Delta_i) {
+                //td::cout << i << "\n";
+               //
+               // Delta_i = BBCMenu.GetItemValue('m');
+                Menu.ChangeItemValueVec('c', Delta_i);
+                BBCMenu.ChangeItemValueVec('m', Delta_i);
                 break;
             case 'x':
                 loop = 0;
@@ -339,7 +342,7 @@ namespace bbc {
             double buck_inductance;
             double boost_inductance;
             double delta_i;
-            std::string Delta_i;
+            std::vector <int> Delta_i;
             double f_switch;
             double F_switch;
             
@@ -371,10 +374,13 @@ namespace bbc {
             case 'd':
             {
                 
-                BBCStuff.calculus();
-                //Delta_i = BBCMenu.GetItemValue('m');
-                //Menu.ChangeItemValue('c', Delta_i);
-                //BBCMenu.ChangeItemValue('m', Delta_i);
+                Delta_i = BBCStuff.calculus();
+                for (int i : Delta_i) {
+                    std::cout << i << "\n";
+                }
+                // Delta_i = BBCMenu.GetItemValue('m');
+                Menu.ChangeItemValueVec('b', Delta_i);
+                BBCMenu.ChangeItemValueVec('m', Delta_i);
                 break;
             }
             case 'e':
@@ -445,7 +451,7 @@ namespace bbc {
             double buck_capacitance;
             double boost_capacitance;
             double delta_vo;
-            std::string Delta_vo;
+            std::vector <int> Delta_vo;
             double Vout;
             double Buck_VOut;
             double Boost_VOut;
@@ -477,9 +483,13 @@ namespace bbc {
                 BBCStuff.Add('j', delta_vo);
             case 'd':
                 
-                BBCStuff.calculus();
-                //Menu.ChangeItemValue('b', Delta_vo);
-                //BBCMenu.ChangeItemValue('j', Delta_vo);
+                Delta_vo = BBCStuff.calculus();
+                //for (int i : Delta_vo) {
+               //     std::cout << i << "\n";
+               // }
+                // Delta_i = BBCMenu.GetItemValue('m');
+                Menu.ChangeItemValueVec('d', Delta_vo);
+                BBCMenu.ChangeItemValueVec('j', Delta_vo);
                 break;
             case 'e':
                 std::cout << "Output Voltage: ";

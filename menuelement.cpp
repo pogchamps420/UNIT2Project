@@ -35,6 +35,10 @@ void MenuItem::ChangeValue(double newValue)
 {
 	this->_value = newValue;
 }
+void MenuItem::ChangeValueVec(std::vector <int> newVec)
+{
+	this->_vecvalue = newVec;
+}
 float MenuItem::GetValue()
 {
 	return _value;

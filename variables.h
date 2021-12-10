@@ -34,6 +34,7 @@ namespace bbc
 		double Pi;
 		double Po;
 		double Ts;
+		std::vector <int> return_coeffs;
 	};
 
 	class CONVERTERS
@@ -58,6 +59,7 @@ namespace bbc
 		void ClearValues();
 
 		void Add(char option, double value);
+		
 		double Get(char option);
 
 		Values _values;
