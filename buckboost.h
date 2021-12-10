@@ -23,7 +23,7 @@ namespace bbc
 
 			void InitMenu();
 			void BuckBoostConverters(CONVERTERS BBCStuff, BUCK BuckStuff, BOOST BoostStuff, Menu BBCMenu);
-			Menu ChangeValues(CONVERTERS BBCStuff, BUCK Buck, BOOST Boost, Menu BBCMenu);
+			void ChangeValues(Menu *menu);
 			Menu UpdateBBCValues(CONVERTERS BBCStuff, BUCK Buck, BOOST Boost, Menu BBCMenu);
 			Menu UpdateBBCValues(BOOST Boost, Menu BBCMenu);
 			Menu UpdateBBCValues(BUCK Buck, Menu BBCMenu);
