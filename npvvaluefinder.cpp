@@ -22,6 +22,7 @@ void npvfinder::RunNpvFinder()
 
 	while (npvwhile)
 	{
+		System::Clear();
 		npvMenu.PrintMenu();
 		char npvSelect = npvMenu.ChooseOption();
 		char caseSelect;

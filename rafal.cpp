@@ -21,6 +21,7 @@ namespace rafal
 		switch (rafalc)
 		{
 		case 'a':
+			npvfinder::RunNpvFinder();
 			break;
 		
 		case 'b':

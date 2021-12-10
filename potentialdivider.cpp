@@ -44,15 +44,17 @@ namespace potdiv
 		match2.printMatch();
 		std::cout << "------------------------------------\n";
 		char chosenMatch;
-	choose_match_err:;
-		std::cout << "Choose one of the given matches: ";
-		std::cin >> chosenMatch;
-		if (chosenMatch == '1')
-			return newRaPair.first;
-		else if (chosenMatch == '2')
-			return newRaPair.second;
-		else
-			goto choose_match_err;
+		while (true)
+		{
+			std::cout << "Choose one of the given matches: ";
+			std::cin >> chosenMatch;
+			if (chosenMatch == '1')
+				return newRaPair.first;
+			else if (chosenMatch == '2')
+				return newRaPair.second;
+			else
+				std::cout << "ERROR: incorrect match number\n"; 
+		}
 	}
 
 	double MakeResistorBNpv(int E, double ra, double vin, double targetVout)
@@ -72,15 +74,17 @@ namespace potdiv
 		match2.printMatch();
 		std::cout << "------------------------------------\n";
 		char chosenMatch;
-	choose_match_err:;
-		std::cout << "Choose one of the given matches: ";
-		std::cin >> chosenMatch;
-		if (chosenMatch == '1')
-			return newRbPair.first;
-		else if (chosenMatch == '2')
-			return newRbPair.second;
-		else
-			goto choose_match_err;
+		while (true)
+		{
+			std::cout << "Choose one of the given matches: ";
+			std::cin >> chosenMatch;
+			if (chosenMatch == '1')
+				return newRbPair.first;
+			else if (chosenMatch == '2')
+				return newRbPair.second;
+			else
+				std::cout << "ERROR: incorrect match number\n";
+		}
 	}
 
 	void RunDividerCalculator()
@@ -103,7 +107,8 @@ namespace potdiv
 		};
 
 		Menu dividerMenu("Resistor potential divider calculator", dividerOptions, dividerItems);
-		while(true)
+		char potdivwhile = true;
+		while(potdivwhile)
 		{
 			System::Clear();
 
@@ -116,71 +121,90 @@ namespace potdiv
 			switch (ident)
 			{
 			case 'a':
-			a_err:;
-				std::cout << "Choose the variable you wish to change: ";
-				std::cin >> chIdent;
-				if (chIdent != 'a' && chIdent != 'b' && chIdent != 'o' && chIdent != 'i')
-					goto a_err;
+				while (true)
+				{
+					std::cout << "Choose the variable you wish to change: ";
+					std::cin >> chIdent;
+					if (chIdent != 'a' && chIdent != 'b' && chIdent != 'o' && chIdent != 'i')
+						std::cout << "ERROR: incorrect variable selected\n";
+					else
+						break;
+				}
 				std::cout << "Enter new value: ";
 				std::cin >> chValue;
 				dividerMenu.ChangeItemValue(chIdent, chValue);
 				break;
-				
+
 			case 'b':
-			b_err:;
-				std::cout << "Choose the value you wish to calculate: ";
-				std::cin >> chIdent;
-				switch (chIdent)
+			{
+				char bwhile = true;
+				while (bwhile)
 				{
-				case 'a':
-					ratio = dividerMenu.GetItemValue('o') / dividerMenu.GetItemValue('i');
-					dividerMenu.ChangeItemValue('a', RaFromRatio(dividerMenu.GetItemValue('b'), ratio));
-					break;
-				case 'b':
-					ratio = dividerMenu.GetItemValue('o') / dividerMenu.GetItemValue('i');
-					dividerMenu.ChangeItemValue('b', RbFromRatio(dividerMenu.GetItemValue('a'), ratio));
-					break;
-				case 'o':
-					ratio = Ratio(dividerMenu.GetItemValue('a'), dividerMenu.GetItemValue('b'));
-					dividerMenu.ChangeItemValue('o', OutVoltage(dividerMenu.GetItemValue('i'), ratio));
-					break;
-				case 'i':
-					ratio = Ratio(dividerMenu.GetItemValue('a'), dividerMenu.GetItemValue('b'));
-					dividerMenu.ChangeItemValue('i', InVoltage(dividerMenu.GetItemValue('o'), ratio));
-					break;
-				default:
-					std::cout << "ERROR: invalid input\n";
-					goto b_err;
-					break;
+					std::cout << "Choose the value you wish to calculate: ";
+					std::cin >> chIdent;
+					switch (chIdent)
+					{
+					case 'a':
+						ratio = dividerMenu.GetItemValue('o') / dividerMenu.GetItemValue('i');
+						dividerMenu.ChangeItemValue('a', RaFromRatio(dividerMenu.GetItemValue('b'), ratio));
+						bwhile = false;
+						break;
+					case 'b':
+						ratio = dividerMenu.GetItemValue('o') / dividerMenu.GetItemValue('i');
+						dividerMenu.ChangeItemValue('b', RbFromRatio(dividerMenu.GetItemValue('a'), ratio));
+						bwhile = false;
+						break;
+					case 'o':
+						ratio = Ratio(dividerMenu.GetItemValue('a'), dividerMenu.GetItemValue('b'));
+						dividerMenu.ChangeItemValue('o', OutVoltage(dividerMenu.GetItemValue('i'), ratio));
+						bwhile = false;
+						break;
+					case 'i':
+						ratio = Ratio(dividerMenu.GetItemValue('a'), dividerMenu.GetItemValue('b'));
+						dividerMenu.ChangeItemValue('i', InVoltage(dividerMenu.GetItemValue('o'), ratio));
+						bwhile = false;
+						break;
+					default:
+						std::cout << "ERROR: invalid input\n";
+						break;
+					}
 				}
 				break;
+			}
 
 			case 'c':
-			ce_err:;
-				std::cout << "Enter the E value of the preferred value series: ";
-				std::cin >> E;
-				if (!npv::CheckENumber(E))
+				while (true)
 				{
-					std::cout << "ERROR: incvalid E number\n";
-					goto ce_err;
+					std::cout << "Enter the E value of the preferred value series: ";
+					std::cin >> E;
+					if (!npv::CheckENumber(E))
+					{
+						std::cout << "ERROR: incvalid E number\n";
+					}
+					else
+						break;
 				}
-			cr_err:;
-				std::cout << "Choose the resistor to change: ";
-				std::cin >> chIdent;
-				if (chIdent == 'a')
+				while (true)
 				{
-					chValue = MakeResistorANpv(E, dividerMenu.GetItemValue('b'), dividerMenu.GetItemValue('i'), dividerMenu.GetItemValue('o'));
-					dividerMenu.ChangeItemValue('a', chValue);
-				}
-				else if (chIdent == 'b')
-				{
-					chValue = MakeResistorBNpv(E, dividerMenu.GetItemValue('a'), dividerMenu.GetItemValue('i'), dividerMenu.GetItemValue('o'));
-					dividerMenu.ChangeItemValue('b', chValue);	
-				}
-				else
-				{
-					std::cout << "ERROR: not a valid resistor identifier\n";
-					goto cr_err;
+					std::cout << "Choose the resistor to change: ";
+					std::cin >> chIdent;
+
+					if (chIdent == 'a')
+					{
+						chValue = MakeResistorANpv(E, dividerMenu.GetItemValue('b'), dividerMenu.GetItemValue('i'), dividerMenu.GetItemValue('o'));
+						dividerMenu.ChangeItemValue('a', chValue);
+						break;
+					}
+					else if (chIdent == 'b')
+					{
+						chValue = MakeResistorBNpv(E, dividerMenu.GetItemValue('a'), dividerMenu.GetItemValue('i'), dividerMenu.GetItemValue('o'));
+						dividerMenu.ChangeItemValue('b', chValue);
+						break;
+					}
+					else
+					{
+						std::cout << "ERROR: not a valid resistor identifier\n";
+					}
 				}
 
 				ratio = Ratio(dividerMenu.GetItemValue('a'), dividerMenu.GetItemValue('b'));
@@ -189,11 +213,10 @@ namespace potdiv
 				break;
 
 			case 'x':
-				goto exit_pot_div;
+				potdivwhile = false;
 				break;
 			}
 			System::Clear();
 		}
-	exit_pot_div:;
 	}
 }
