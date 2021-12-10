@@ -1,12 +1,9 @@
 #include <iostream>
 #include <vector>
-#include <algorithm>
 #include "menu.h"
 #include "menuelement.h"
 #include "PD.h"
 #include "Tise.h"
-#include "buckboost.h"
-#include "variables.h"
 #include "eseries.h"
 #include "componentmatch.h"
 #include "potentialdivider.h"
@@ -15,14 +12,12 @@
 
 int main()
 {
-
     //intro title
     System::Clear();
     std::cout << "Welcome to our sandbox\n\Project by Tise Olayinka, Delilah Hague, Rafal Kalisz\nGroup 35\tELEC2645\n" << std::endl;
     System::Sleep(1);
     std::cout << "Press enter to start: ";
     while (std::cin.get() != '\n');
-
 
     //Display menu
 
@@ -51,13 +46,23 @@ int main()
         case 'T':
             TMenu.TiseMenu(0);
             break;
-        case '3':
-            BMenu.InitMenu();
+        
+        case 'R':
+            rafal::Rafal();
             break;
-        default:
+        
+        case 'x':
+            goto break_main_while;
             break;
+        }
     }
+break_main_while:;
 
+
+    
+
+    
+    
 
     //outro sequence
     std::cout << "\n\nThank you for using our Sandbox\n\Project by Tise Olayinka, Delilah Hague, Rafal Kalisz\nGroup 35\tELEC2645" << std::endl;
