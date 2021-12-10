@@ -6,7 +6,6 @@
 #include "menuelement.h"
 #include "potentialdivider.h"
 #include "System.h"
-#include "npvvaluefinderh.h"
 
 #include <vector>
 
