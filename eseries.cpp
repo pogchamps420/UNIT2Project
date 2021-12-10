@@ -18,6 +18,16 @@ namespace npv
 			_values.push_back(E24Values[i]);
 	}
 
+	void Eseries::PrintSeries()
+	{
+		std::cout << "Values in the E" << _E << "series: ";
+		for (auto it : _values)
+		{
+			std::cout << it << " ";
+		}
+		std::cout << '\n';
+	}
+
 	const std::vector<double> Eseries::E24Values = { 1.0,1.1,1.2,1.3,1.5,1.6,1.8,2.8,2.2,2.4,2.7,3.0,3.3,3.6,3.9,4.3,4.7,5.1,5.6,6.2,6.8,7.5,8.2,9.1 };	
 
 	std::pair<double,double> Eseries::FindNearest(double target)

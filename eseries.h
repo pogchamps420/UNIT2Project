@@ -17,6 +17,7 @@ namespace npv
 	public:
 
 		Eseries(int E);
+		void PrintSeries();
 		std::pair<double,double> FindNearest(double target);
 		/*std::vector<ComponentMatch> MatchPair(double target, double givenValue,
 			double (*Calc)(double, double), double (*InverseCalc)(double, double), std::string unit, std::string resultUnit);*/
