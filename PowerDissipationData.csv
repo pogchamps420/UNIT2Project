@@ -1,4 +1,4 @@
-tri,9
+tri,1
 tfv,2
 tcon,0
 trv,3
@@ -7,12 +7,12 @@ tcoff,0
 Wcon,0
 Wcoff,0
 VDC,5
-Io,6
+Io,7
 fs,1
 Ts,1
-Von,7
+Von,8
 Won,0
-Ton,8
+Ton,6
 Ps,0
 Pon,0
 Pdis,0
