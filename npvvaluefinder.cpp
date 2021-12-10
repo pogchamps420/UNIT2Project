@@ -11,7 +11,7 @@ void npvfinder::RunNpvFinder()
 	std::vector<MenuOption> npvOptions
 	{
 		MenuOption('a', "Change variable value"),
-		MenuOption('b', "Show the values in the E series"),
+		/*MenuOption('b', "Show the values in the E series"),*/
 		MenuOption('c', "Get nearest NPV value"),
 		MenuOption('x', "Exit")
 	};
@@ -33,23 +33,26 @@ void npvfinder::RunNpvFinder()
 
 		case 'a':
 		{
-			std::cout << "Choose variable to change: ";
-			std::cin >> caseSelect;
-			if (caseSelect == 'e' || caseSelect == 'v')
+			while (true)
 			{
-				std::cout << "Enter new value: ";
-				std::cin >> caseDouble;
-				npvMenu.ChangeItemValue(caseSelect, caseDouble);
-			}
-			else
-			{
-				std::cout << "ERROR: invalid variable identifier, press enter to continue...\n";
-				while (std::cin.get() != '\n');
+				std::cout << "Choose variable to change: ";
+				std::cin >> caseSelect;
+				if (caseSelect == 'e' || caseSelect == 'v')
+				{
+					std::cout << "Enter new value: ";
+					std::cin >> caseDouble;
+					npvMenu.ChangeItemValue(caseSelect, caseDouble);
+					break;
+				}
+				else
+				{
+					std::cout << "ERROR: invalid variable identifier\n";
+				}
 			}
 			break;
 		}
 
-		case 'b':
+		/*case 'b':
 		{
 			if (npv::CheckENumber(npvMenu.GetItemValue('v')))
 			{
@@ -58,11 +61,11 @@ void npvfinder::RunNpvFinder()
 			}
 			else
 			{
-				std::cout << "ERROR: invalid E series number, press enter to continue...\n";
+				std::cout << "ERROR: invalid E series number, press Enter to continue...\n";
 				while (std::cin.get() != '\n');
 			}
 			break;
-		}
+		}*/
 
 		case 'c':
 		{
@@ -78,26 +81,35 @@ void npvfinder::RunNpvFinder()
 				{
 					std::cout << "Option 1: " << foundValue.first << '\n';
 					std::cout << "Option 2: " << foundValue.second << '\n';
-					std::cout << "Choose the option: ";
-					std::cin >> caseSelect;
-					if (caseSelect == '1')
-						npvMenu.ChangeItemValue('v', foundValue.first);
-					else if (caseSelect == '2')
-						npvMenu.ChangeItemValue('v', foundValue.second);
-					else
+					while (true)
 					{
-						std::cout << "ERROR: incorrect option selected, press enter to continue...";
-						while (std::cin.get() != '\n');
+						std::cout << "Choose the option: ";
+						std::cin >> caseSelect;
+						if (caseSelect == '1')
+						{
+							npvMenu.ChangeItemValue('v', foundValue.first);
+							break;
+						}
+						else if (caseSelect == '2')
+						{
+							npvMenu.ChangeItemValue('v', foundValue.second);
+							break;
+						}
+						else
+						{
+							std::cout << "ERROR: incorrect option selected";
+						}
 					}
 				}
 			}
-			else
-			{
-				std::cout << "ERROR: invalid E series number, press enter to continue...\n";
-				while (std::cin.get() != '\n');
-			}
 			break;
 		}
+		case 'x':
+			npvwhile = false;
+			break;
+
+		default:
+			break;
 		}
 	}
 

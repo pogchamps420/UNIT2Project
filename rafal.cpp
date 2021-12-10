@@ -8,8 +8,8 @@ namespace rafal
 
 		std::vector<MenuOption> rafalOptions
 		{
-			MenuOption('a', "Run NPV value finder"),
-			MenuOption('b', "Run resistor potential divider calculator"),
+			//MenuOption('a', "Run NPV value finder"),
+			MenuOption('a', "Run resistor potential divider calculator"),
 			MenuOption('x', "Return to main menu")
 		};
 
@@ -20,11 +20,11 @@ namespace rafal
 
 		switch (rafalc)
 		{
-		case 'a':
+		//case 'a':
 			npvfinder::RunNpvFinder();
 			break;
 		
-		case 'b':
+		case 'a':
 			potdiv::RunDividerCalculator();
 			break;
 		
