@@ -132,7 +132,7 @@ namespace bbc {
         
     }
     
-    Menu BUCKBOOST::ChangeValues(CONVERTERS BuckBoost, BUCK Buck, BOOST Boost, Menu BBCMenu)
+   /* Menu BUCKBOOST::ChangeValues(CONVERTERS BuckBoost, BUCK Buck, BOOST Boost, Menu BBCMenu)
     {
         std::cout << "\nEnter the number of the value you want to add/change: ";
         char option;
@@ -146,6 +146,17 @@ namespace bbc {
         std::cout << "\nItem changed.\n";
         BuckBoostConverters(BuckBoost, Buck, Boost, BBCMenu);
         return BBCMenu;
+    }*/
+
+    void BUCKBOOST::ChangeValues(Menu *menu)
+    {
+        std::cout << "\nEnter the number of the value you want to add/change: ";
+        char option;
+        std::cin >> option;
+        std::cout << "\nEnter the value you want to use: ";
+        double value;
+        std::cin >> value;
+        menu->ChangeItemValue(option, value);
     }
 
     Menu BUCKBOOST::UpdateBBCValues(CONVERTERS BuckBoost, BUCK Buck, BOOST Boost, Menu BBCMenu)
