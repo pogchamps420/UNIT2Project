@@ -29,6 +29,7 @@ public:
 	void ChangeOptionDescription(char identifier, std::string newDescription);
   
 	void ChangeItemValue(char identifier, double newValue);
+	void ChangeItemValueVec(char identifier, std::vector <int> newVec);
 	void ChangeItemDescription(char identifier, std::string newDescription);
 
 private:

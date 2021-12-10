@@ -93,6 +93,11 @@ void Menu::ChangeItemValue(char identifier, double newValue)
 	_items[identifier].ChangeValue(newValue);
 }
 
+void Menu::ChangeItemValueVec(char identifier, std::vector<int> newVec)
+{
+	_items[identifier].ChangeValueVec(newVec);
+}
+
 void Menu::ChangeOptionDescription(char identifier, std::string newDescription)
 {
 	_options[identifier].ChangeDescription(newDescription);
